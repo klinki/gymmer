@@ -1,5 +1,19 @@
 # Gymmer
 
+## Gym training app
+
+Entities in system:
+- Exercise
+- Exercise Group
+  - Exercises grouped by body parts
+- Exercise Execution
+  - Exercise + additional parameters (weight, repetitions, number of series, variant, other params...)
+- Training plan (Routine)
+  - Training plan is basically named list of exercises.
+- Training
+  - Training is list of exercise executions at given time
+  - Has start and end time
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.5.
 
 ## Development server
