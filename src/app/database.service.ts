@@ -28,5 +28,18 @@ export interface Routine {}
 })
 export class DatabaseService {
 
+  currentSession: Training = {
+    startDate: new Date(),
+    endDate: new Date(),
+    exercises: [],
+  };
+
   constructor() { }
+
+  addExercise(exercise: ExerciseExecution): void {
+    this.currentSession.exercises = [
+      ...this.currentSession.exercises,
+      exercise,
+    ]
+  }
 }

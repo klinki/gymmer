@@ -1,1 +1,63 @@
-<p>exercise-detail works!</p>
+<h2>Cvik</h2>
+<table mat-table [dataSource]="exercise.series" class="mat-elevation-z8">
+  <!-- series Column -->
+  <ng-container matColumnDef="series">
+    <th mat-header-cell *matHeaderCellDef> Série </th>
+    <td mat-cell *matCellDef="let element"> {{element.series}} </td>
+  </ng-container>
+
+  <!-- weight Column -->
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef> Váha </th>
+    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+  </ng-container>
+
+  <!-- repetitions Column -->
+  <ng-container matColumnDef="repetitions">
+    <th mat-header-cell *matHeaderCellDef> Opakování </th>
+    <td mat-cell *matCellDef="let element"> {{element.repetitions}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<form class="example-form">
+  <div class="form-body">
+    <mat-form-field>
+      <mat-label>Váha</mat-label>
+      <input name="weight" type="number" matInput [(ngModel)]="currentValue.weight">
+      <span matTextSuffix>kg</span>
+    </mat-form-field>
+    <button (click)="currentValue.weight = (currentValue?.weight ?? 0) + 1" color="primary" mat-icon-button aria-label="Add weight">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button (click)="currentValue.weight = (currentValue?.weight ?? 0) - 1" color="primary" mat-icon-button aria-label="Remove weight">
+      <mat-icon>remove</mat-icon>
+    </button>
+
+    <mat-form-field>
+      <mat-label>Opakování</mat-label>
+      <input name="repetitions" type="number" matInput  [(ngModel)]="currentValue.repetitions">
+      <span matTextSuffix>x</span>
+    </mat-form-field>
+    <button (click)="currentValue.repetitions = (currentValue?.repetitions ?? 0) + 1" color="primary" mat-icon-button>
+      <mat-icon>add</mat-icon>
+    </button>
+    <button (click)="currentValue.repetitions = (currentValue?.repetitions ?? 0) - 1" color="primary" mat-icon-button>
+      <mat-icon>remove</mat-icon>
+    </button>
+
+    <mat-form-field>
+      <mat-label>Pozn.</mat-label>
+      <input name="note" type="text" matInput  [(ngModel)]="currentValue.note">
+    </mat-form-field>
+  </div>
+
+  <button (click)="add()" color="primary" mat-icon-button>
+    <mat-icon>check</mat-icon>
+  </button>
+
+  <button (click)="next()" color="primary" mat-icon-button>
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</form>
