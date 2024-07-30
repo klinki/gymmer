@@ -19,3 +19,13 @@
 .dashboard-card-content {
   text-align: center;
 }
+
+.fab-container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+mat-list-item:active {
+  background-color: grey;
+}

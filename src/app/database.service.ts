@@ -1,7 +1,9 @@
 import {Injectable, signal} from '@angular/core';
 import {TrainingPlansComponent} from "./training-plans/training-plans.component";
+import {Observable, of} from "rxjs";
 
 export interface Exercise {
+  id?: number;
   name: string;
 }
 
@@ -12,13 +14,15 @@ export interface ExerciseSeries {
   variant?: string;
 }
 
-export interface ExerciseExecution {
+export interface ExerciseExecution extends Exercise {
+  exerciseId?: number;
   series: ExerciseSeries[];
 }
 
 export interface Training {
-  startDate: Date;
-  endDate: Date;
+  name: string;
+  startDate: Date|null;
+  endDate: Date|null;
   exercises: ExerciseExecution[];
 }
 
@@ -36,11 +40,11 @@ export interface Routine {}
 export class DatabaseService {
 
   currentSession: Training = {
+    name: '',
     startDate: new Date(),
     endDate: new Date(),
     exercises: [],
   };
-
 
   trainingPlans = signal<TrainingPlan[]>(
     [
@@ -49,6 +53,7 @@ export class DatabaseService {
         name: 'Nohy',
         exercises: [
           {
+            id: 1,
             name: 'Mrtvý tah',
           },
           {
@@ -97,6 +102,11 @@ export class DatabaseService {
   );
 
   constructor() { }
+
+  getTrainingPlan(trainingPlanId: number): Observable<TrainingPlan|undefined> {
+    const training = this.trainingPlans().find(x => x.id === trainingPlanId);
+    return of(training);
+  }
 
   addExercise(exercise: ExerciseExecution): void {
     this.currentSession.exercises = [

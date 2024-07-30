@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import {DatabaseService, ExerciseSeries} from "../database.service";
+import {Component, inject, input, numberAttribute, signal} from '@angular/core';
+import {DatabaseService, ExerciseSeries, Training, TrainingPlan} from "../database.service";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-exercise-detail',
@@ -8,6 +9,13 @@ import {Router} from "@angular/router";
   styleUrls: ['./exercise-detail.component.scss']
 })
 export class ExerciseDetailComponent {
+  private location = inject(Location);
+
+  id = input<number, unknown>(0, { transform: numberAttribute });
+  training = signal<Training|null>(null);
+  trainingPlan = signal<TrainingPlan|null>(null);
+  loading = signal(true);
+
   displayedColumns = ['series', 'weight', 'repetitions'];
 
   exercise = {
@@ -21,7 +29,7 @@ export class ExerciseDetailComponent {
     note: '',
   };
 
-  constructor(private db: DatabaseService, private router: Router) {
+  constructor(private db: DatabaseService) {
 
   }
 
@@ -32,6 +40,6 @@ export class ExerciseDetailComponent {
 
   next() {
     this.db.addExercise(this.exercise);
-    this.router.navigate(['/training']);
+    this.location.back();
   }
 }

@@ -12,11 +12,16 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: DashboardComponent,
+        component: TrainingPlansComponent,
       },
       {
         path: 'training',
-        component: TrainingComponent,
+        children: [
+          {
+            path: ':id',
+            component: TrainingComponent,
+          }
+        ],
       },
       {
         path: 'training-plans',
@@ -24,7 +29,12 @@ const routes: Routes = [
       },
       {
         path: 'exercise',
-        component: ExerciseDetailComponent,
+        children: [
+          {
+            path: ':id',
+            component: ExerciseDetailComponent,
+          }
+        ],
       },
       {
         path: 'exercise-list',
@@ -35,7 +45,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    bindToComponentInputs: true,
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,0 +1,8 @@
+@use '@angular/material' as mat;
+
+$light-theme: mat.define-theme();
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark
+  )
+));
