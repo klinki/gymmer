@@ -1,4 +1,13 @@
-<!--
-
-
--->
+<mat-list>
+  <div mat-subheader>Training {{training.name}}</div>
+  @for (exercise of training.exercises; track exercise) {
+    <mat-list-item>
+      <mat-icon matListItemIcon>folder</mat-icon>
+      <div matListItemTitle>{{exercise.name}}</div>
+      <!--      <div matListItemLine>{{folder}}</div> -->
+    </mat-list-item>
+  }
+</mat-list>
+<button (click)="addExercise()" mat-fab>
+  <mat-icon>add</mat-icon>
+</button>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
-import {ExerciseExecution, ExerciseSeries} from "../database.service";
+import {DatabaseService, ExerciseSeries} from "../database.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-exercise-detail',
@@ -21,12 +21,17 @@ export class ExerciseDetailComponent {
     note: '',
   };
 
+  constructor(private db: DatabaseService, private router: Router) {
+
+  }
+
   add() {
     this.exercise.series = [ ...this.exercise.series, this.currentValue ];
     this.currentValue = { ...this.currentValue };
   }
 
   next() {
-
+    this.db.addExercise(this.exercise);
+    this.router.navigate(['/training']);
   }
 }

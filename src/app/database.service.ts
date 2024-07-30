@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from '@angular/core';
+import {TrainingPlansComponent} from "./training-plans/training-plans.component";
 
 export interface Exercise {
   name: string;
@@ -21,6 +22,12 @@ export interface Training {
   exercises: ExerciseExecution[];
 }
 
+export interface TrainingPlan {
+  id?: number;
+  name: string;
+  exercises: Exercise[];
+}
+
 export interface Routine {}
 
 @Injectable({
@@ -34,6 +41,61 @@ export class DatabaseService {
     exercises: [],
   };
 
+
+  trainingPlans = signal<TrainingPlan[]>(
+    [
+      {
+        id: 1,
+        name: 'Nohy',
+        exercises: [
+          {
+            name: 'Mrtvý tah',
+          },
+          {
+            name: 'Hack Squat',
+          },
+          {
+            name: 'Hack Squat Lýtka',
+          },
+          {
+            name: 'Leg Extension',
+          },
+          {
+            name: 'Leg Curl',
+          },
+          {
+            name: 'Leg Press',
+          },
+          {
+            name: 'Lower Back',
+          },
+          {
+            name: 'Sklapovačky',
+          },
+          {
+            name: 'Hack Leg Press',
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: 'Push',
+        exercises: [
+          {
+            name: 'Bench press'
+          }
+        ],
+      },
+      {
+        id: 3,
+        name: 'Pull',
+        exercises: [
+
+        ],
+      }
+    ]
+  );
+
   constructor() { }
 
   addExercise(exercise: ExerciseExecution): void {
@@ -41,5 +103,10 @@ export class DatabaseService {
       ...this.currentSession.exercises,
       exercise,
     ]
+  }
+
+  addTrainingPlan(trainingPlan: TrainingPlan): void {
+    const trainingPlans = [ ...this.trainingPlans(), trainingPlan ];
+    this.trainingPlans.set(trainingPlans);
   }
 }

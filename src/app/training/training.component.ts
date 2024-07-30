@@ -6,5 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./training.component.scss']
 })
 export class TrainingComponent {
+  training = {
+    name: 'Training',
+    hasStarted: false,
+    exercises: [] as any[]
+  };
+
+  start() {}
+
+  stop() {}
+
+  addExercise() {}
+
+  startExercise(exercise: any) {
+
+  }
 
 }

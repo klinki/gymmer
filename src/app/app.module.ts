@@ -30,6 +30,7 @@ import {
   MatTable
 } from "@angular/material/table";
 import {FormsModule} from "@angular/forms";
+import { TrainingPlansComponent } from './training-plans/training-plans.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {FormsModule} from "@angular/forms";
     ExerciseDetailComponent,
     TrainingComponent,
     AppNavigationComponent,
-    DashboardComponent
+    DashboardComponent,
+    TrainingPlansComponent
   ],
   imports: [
     BrowserModule,
