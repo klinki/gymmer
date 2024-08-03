@@ -1,0 +1,44 @@
+<mat-card class="shipping-card">
+  <mat-card-header>
+    <mat-card-title>Shipping Information</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>peerId</mat-label>
+          <input matInput placeholder="peerId" [(ngModel)]="peerId">
+          <button mat-icon-button matSuffix [cdkCopyToClipboard]="peerId()" >
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="join()">Join</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Friend peerId" [(ngModel)]="fPeerId">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="connect()">Connect</button>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <textarea matInput [(ngModel)]="msg"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>
+  </mat-card-actions>
+</mat-card>
+
+<p>synchronize-data works!</p>
+<ul>
+@for (msg of messages(); track $index) {
+  <li>{{msg}}</li>
+}
+</ul>
+
+

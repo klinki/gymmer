@@ -19,7 +19,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatFormField, MatLabel, MatPrefix, MatSuffix} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
+import {MatInput, MatInputModule} from "@angular/material/input";
 import {
   MatCell,
   MatCellDef,
@@ -29,13 +29,16 @@ import {
   MatRow, MatRowDef,
   MatTable
 } from "@angular/material/table";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { TrainingPlansComponent } from './training-plans/training-plans.component';
 import { ExerciseHistoryComponent } from './exercise-history/exercise-history.component';
 import {DurationPipe} from "./duration-pipe.pipe";
 import { TrainingCurrentComponent } from './training-current/training-current.component';
 import { TrainingHistoryComponent } from './training-history/training-history.component';
 import {TrainingDurationPipe} from "./training-duration.pipe";
+import { AddressFormComponent } from './address-form/address-form.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -85,6 +88,10 @@ import {TrainingDurationPipe} from "./training-duration.pipe";
     FormsModule,
     DurationPipe,
     TrainingDurationPipe,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    ReactiveFormsModule,
   ],
   providers: [
     provideAnimationsAsync(),

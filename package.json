@@ -26,6 +26,7 @@
     "@formatjs/intl-durationformat": "^0.2.4",
     "dexie": "^4.0.8",
     "dexie-observable": "^4.0.1-beta.13",
+    "peerjs": "^1.5.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "ulidx": "^2.4.0",

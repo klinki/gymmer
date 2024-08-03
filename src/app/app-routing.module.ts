@@ -7,6 +7,7 @@ import {TrainingPlansComponent} from "./training-plans/training-plans.component"
 import {TrainingCurrentComponent} from "./training-current/training-current.component";
 import {TrainingHistoryComponent} from "./training-history/training-history.component";
 import {TrainingPlanEditComponent} from "./training-plan-edit/training-plan-edit.component";
+import {SynchronizeDataComponent} from "./synchronize-data/synchronize-data.component";
 
 const routes: Routes = [
   {
@@ -58,6 +59,10 @@ const routes: Routes = [
       {
         path: 'exercise-list',
         component: ExerciseListComponent,
+      },
+      {
+        path: 'synchronize',
+        component: SynchronizeDataComponent,
       }
     ],
   }
