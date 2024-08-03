@@ -31,6 +31,11 @@ import {
 } from "@angular/material/table";
 import {FormsModule} from "@angular/forms";
 import { TrainingPlansComponent } from './training-plans/training-plans.component';
+import { ExerciseHistoryComponent } from './exercise-history/exercise-history.component';
+import {DurationPipe} from "./duration-pipe.pipe";
+import { TrainingCurrentComponent } from './training-current/training-current.component';
+import { TrainingHistoryComponent } from './training-history/training-history.component';
+import {TrainingDurationPipe} from "./training-duration.pipe";
 
 @NgModule({
   declarations: [
@@ -40,7 +45,10 @@ import { TrainingPlansComponent } from './training-plans/training-plans.componen
     TrainingComponent,
     AppNavigationComponent,
     DashboardComponent,
-    TrainingPlansComponent
+    TrainingPlansComponent,
+    ExerciseHistoryComponent,
+    TrainingCurrentComponent,
+    TrainingHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -75,9 +83,12 @@ import { TrainingPlansComponent } from './training-plans/training-plans.componen
     MatHeaderRowDef,
     MatHeaderCellDef,
     FormsModule,
+    DurationPipe,
+    TrainingDurationPipe,
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    DurationPipe,
   ],
   bootstrap: [AppComponent]
 })

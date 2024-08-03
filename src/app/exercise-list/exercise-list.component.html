@@ -1,13 +1,36 @@
-<mat-list>
-  <div mat-subheader>Exercises</div>
-  @for (exercise of exercises(); track exercise) {
-    <mat-list-item>
-      <mat-icon matListItemIcon>folder</mat-icon>
-      <div matListItemTitle>{{exercise.name}}</div>
-      <div matListItemLine>{{exercise.name}}</div>
-    </mat-list-item>
-  }
-</mat-list>
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input [(ngModel)]="searchText" matInput type="search" />
+  <button
+    mat-icon-button
+    matPrefix
+  >
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-form-field>
+@if (!showSelection()) {
+  <mat-selection-list>
+    <div mat-subheader>Exercises</div>
+    @for (exercise of filteredExercises(); track exercise) {
+      <mat-list-option>
+        <mat-icon matListItemIcon>folder</mat-icon>
+        <div matListItemTitle>{{exercise.name}}</div>
+        <div matListItemLine>{{exercise.name}}</div>
+      </mat-list-option>
+    }
+  </mat-selection-list>
+} @else {
+  <mat-list>
+    <div mat-subheader>Exercises</div>
+    @for (exercise of filteredExercises(); track exercise) {
+      <mat-list-item>
+        <mat-icon matListItemIcon>folder</mat-icon>
+        <div matListItemTitle>{{exercise.name}}</div>
+        <div matListItemLine>{{exercise.name}}</div>
+      </mat-list-item>
+    }
+  </mat-list>
+}
 <div class="fab-container">
   <button (click)="newExercise()" mat-fab>
     <mat-icon>add</mat-icon>

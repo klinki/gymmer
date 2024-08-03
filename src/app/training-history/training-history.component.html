@@ -1,0 +1,10 @@
+<mat-list>
+  <div mat-subheader>Training History</div>
+  @for (training of trainings(); track training.id) {
+    <mat-list-item>
+      <mat-icon matListItemIcon>folder</mat-icon>
+      <div matListItemTitle>{{training.name}}</div>
+      <div matListItemLine>Duration: {{ training | trainingDuration }}</div>
+    </mat-list-item>
+  }
+</mat-list>

@@ -59,14 +59,6 @@ export class DatabaseService extends Dexie {
   trainingPlanExercises!: Table<TrainingPlanExercise>;
   trainings!: Table<Training>;
 
-  currentSession: Training = {
-    id: '',
-    name: '',
-    startDate: new Date(),
-    endDate: new Date(),
-    exercises: [],
-  };
-
   constructor() {
     super('GymmerDB');
     this.version(1).stores({
@@ -108,13 +100,6 @@ export class DatabaseService extends Dexie {
 
   getTrainingPlan(trainingPlanId: string): Observable<TrainingPlan|undefined> {
     return fromPromise(this.trainingPlans.get(trainingPlanId));
-  }
-
-  addExerciseToCurrentTraining(exercise: ExerciseExecution): void {
-    this.currentSession.exercises = [
-      ...this.currentSession.exercises,
-      exercise,
-    ]
   }
 
   importFromJson(json: string) {

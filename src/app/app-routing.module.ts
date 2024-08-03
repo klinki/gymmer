@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {DashboardComponent} from "./dashboard/dashboard.component";
 import {TrainingComponent} from "./training/training.component";
 import {ExerciseDetailComponent} from "./exercise-detail/exercise-detail.component";
 import {ExerciseListComponent} from "./exercise-list/exercise-list.component";
 import {TrainingPlansComponent} from "./training-plans/training-plans.component";
+import {TrainingCurrentComponent} from "./training-current/training-current.component";
+import {TrainingHistoryComponent} from "./training-history/training-history.component";
+import {TrainingPlanEditComponent} from "./training-plan-edit/training-plan-edit.component";
 
 const routes: Routes = [
   {
@@ -18,6 +20,14 @@ const routes: Routes = [
         path: 'training',
         children: [
           {
+            path: '',
+            component: TrainingCurrentComponent,
+          },
+          {
+            path: 'history',
+            component: TrainingHistoryComponent,
+          },
+          {
             path: ':id',
             component: TrainingComponent,
           }
@@ -25,7 +35,16 @@ const routes: Routes = [
       },
       {
         path: 'training-plans',
-        component: TrainingPlansComponent,
+        children: [
+          {
+            path: '',
+            component: TrainingPlansComponent,
+          },
+          {
+            path: ':id/edit',
+            component: TrainingPlanEditComponent,
+          },
+        ]
       },
       {
         path: 'exercise',

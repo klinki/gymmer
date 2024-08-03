@@ -3,6 +3,7 @@ import {DatabaseService, Training, TrainingPlan} from "../database.service";
 import {Router} from "@angular/router";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";
+import {TrainingSessionService} from "../training-session.service";
 
 @Component({
   selector: 'app-training-plans',
@@ -12,6 +13,7 @@ import {liveQuery} from "dexie";
 export class TrainingPlansComponent {
   private database = inject(DatabaseService);
   private router = inject(Router);
+  private session = inject(TrainingSessionService);
   trainingPlans = toSignal<TrainingPlan[]>(liveQuery(() => this.database.trainingPlans.toArray()));
 
   newTrainingPlan() {
@@ -36,15 +38,15 @@ export class TrainingPlansComponent {
       name: name,
       startDate: null,
       endDate: null,
-      exercises: plan.exercises.map(x => ({...x, series: []})),
+      exercises: plan.exercises.map(x => ({ ...x, series: [], exerciseId: x.id, id: undefined,  })) as any,
       trainingPlanId: plan.id,
     };
 
     this.addAndStartTraining(training);
   }
 
-  editTrainingPlan(plan: any) {
-
+  editTrainingPlan(plan: TrainingPlan) {
+    this.router.navigate(['/training-plans', plan.id, 'edit']);
   }
 
   getFormattedCurrentTime() {
@@ -73,8 +75,10 @@ export class TrainingPlansComponent {
   }
 
   addAndStartTraining(training: Omit<Training, 'id'>) {
-    this.database.addTraining(training).subscribe(newTrainingId => {
-      this.router.navigate(['/training', newTrainingId]);
-    });
+    this.session.startTraining(training as any);
+    this.router.navigate(['/training']);
+    // this.database.addTraining(training).subscribe(newTrainingId => {
+    //   this.router.navigate(['/training', newTrainingId]);
+    // });
   }
 }

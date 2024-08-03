@@ -1,7 +1,8 @@
-import {Component, inject} from '@angular/core';
+import {Component, computed, inject, input, signal} from '@angular/core';
 import {DatabaseService, Exercise} from "../database.service";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";
+import {createComputed} from "@angular/core/primitives/signals";
 
 @Component({
   selector: 'app-exercise-list',
@@ -11,7 +12,17 @@ import {liveQuery} from "dexie";
 export class ExerciseListComponent {
   db = inject(DatabaseService);
 
+  showSelection = input();
+  searchText = signal<string>('');
   exercises = toSignal<Exercise[]>(liveQuery(() => this.db.exercises.toArray()));
+  filteredExercises = computed(() => {
+    if (this.searchText() == '') {
+      return this.exercises();
+    }
+
+    const regex = new RegExp(this.searchText(), 'iu');
+    return this.exercises()?.filter(x => x.name.match(regex));
+  });
 
   async newExercise() {
     const exerciseName = window.prompt('Add exercise name');

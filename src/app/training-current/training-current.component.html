@@ -1,13 +1,10 @@
-@if (loading()) {
-  Loading...
-}
 <mat-list *ngIf="training();let training;">
   <div mat-subheader>Training: {{training.name}}</div>
   @if (training.startDate != null) {
     <span>Training started at: {{ training.startDate | date: 'hh:mm:ss' }}</span>
     <span>Training running: {{ trainingRunningTime() | duration }}</span>
   }
-  @for (exercise of training.exercises; track exercise) {
+  @for (exercise of training.exercises; track $index) {
     <mat-list-item (click)="startExercise(exercise)">
       <mat-icon matListItemIcon>folder</mat-icon>
       <div matListItemTitle>{{exercise.name}}</div>
@@ -29,4 +26,7 @@
 }
 <button (click)="addExercise()" mat-fab>
   <mat-icon>add</mat-icon>
+</button>
+<button (click)="deleteCurrentSession()" [color]="'warn'" mat-fab>
+  <mat-icon>delete</mat-icon>
 </button>
