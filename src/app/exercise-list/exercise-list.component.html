@@ -1,10 +1,15 @@
 <mat-list>
   <div mat-subheader>Exercises</div>
-  @for (folder of ['test']; track folder) {
+  @for (exercise of exercises(); track exercise) {
     <mat-list-item>
       <mat-icon matListItemIcon>folder</mat-icon>
-      <div matListItemTitle>{{folder}}</div>
-      <div matListItemLine>{{folder}}</div>
+      <div matListItemTitle>{{exercise.name}}</div>
+      <div matListItemLine>{{exercise.name}}</div>
     </mat-list-item>
   }
 </mat-list>
+<div class="fab-container">
+  <button (click)="newExercise()" mat-fab>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

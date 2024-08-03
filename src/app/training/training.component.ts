@@ -1,5 +1,5 @@
-import {Component, effect, inject, input, Input, numberAttribute, signal} from '@angular/core';
-import {DatabaseService, ExerciseExecution, Training, TrainingPlan} from "../database.service";
+import {Component, effect, inject, input, signal} from '@angular/core';
+import {DatabaseService, ExerciseExecution, Training} from "../database.service";
 import {asapScheduler} from "rxjs";
 import {Router} from "@angular/router";
 
@@ -11,10 +11,8 @@ import {Router} from "@angular/router";
 export class TrainingComponent {
   private router = inject(Router);
 
-  // unknown needed because of https://github.com/angular/angular/issues/53969
-  id = input<number, unknown>(0, { transform: numberAttribute });
+  id = input<string>();
   training = signal<Training|null>(null);
-  trainingPlan = signal<TrainingPlan|null>(null);
   loading = signal(true);
 
   trainingRunningTime = signal(0);
@@ -25,20 +23,14 @@ export class TrainingComponent {
     this.loading.set(true);
 
     effect(() => {
-      const subscription = this.db.getTrainingPlan(this.id()).subscribe(trainingPlan => {
-        if (trainingPlan == null) { return; }
+      const id = this.id();
+      if (id == null) {return;}
+
+      const subscription = this.db.getTraining(id).subscribe(training => {
+        if (training == null) { return; }
         // https://github.com/ngrx/platform/issues/3932
         asapScheduler.schedule(() => {
-
-          const training: Training = {
-            name: trainingPlan.name,
-            startDate: null,
-            endDate: null,
-            exercises: trainingPlan.exercises.map(ex => ({...ex, series: []})),
-          };
-
           this.training.set(training);
-          this.trainingPlan.set(trainingPlan);
           this.loading.set(false);
         });
       });

@@ -1,5 +1,5 @@
 <mat-list>
-  <button>Free training</button>
+  <button (click)="startFreeTraining()">Free training</button>
 
   <div mat-subheader>Training Plans</div>
   @for (plan of trainingPlans(); track plan) {
@@ -16,7 +16,7 @@
   }
 </mat-list>
 <div class="fab-container">
-  <button (click)="newTraining()" mat-fab>
+  <button (click)="newTrainingPlan()" mat-fab>
     <mat-icon>add</mat-icon>
   </button>
 </div>

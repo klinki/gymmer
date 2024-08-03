@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0",
+    "start": "ng serve --host 0.0.0.0 --port 4300",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -21,8 +21,11 @@
     "@angular/platform-browser-dynamic": "^18.1.2",
     "@angular/router": "^18.1.2",
     "@angular/service-worker": "^18.1.2",
+    "dexie": "^4.0.8",
+    "dexie-observable": "^4.0.1-beta.13",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "ulidx": "^2.4.0",
     "zone.js": "~0.14.8"
   },
   "devDependencies": {
