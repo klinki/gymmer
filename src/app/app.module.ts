@@ -36,7 +36,6 @@ import {DurationPipe} from "./duration-pipe.pipe";
 import { TrainingCurrentComponent } from './training-current/training-current.component';
 import { TrainingHistoryComponent } from './training-history/training-history.component';
 import {TrainingDurationPipe} from "./training-duration.pipe";
-import { AddressFormComponent } from './address-form/address-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 
