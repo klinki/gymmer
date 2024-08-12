@@ -98,6 +98,10 @@ export class DatabaseService extends Dexie {
     this.trainingPlans.add(trainingPlan as TrainingPlan);
   }
 
+  updateTrainingPlan(trainingPlan: TrainingPlan): void {
+    this.trainingPlans.put(trainingPlan);
+  }
+
   getTrainingPlan(trainingPlanId: string): Observable<TrainingPlan|undefined> {
     return fromPromise(this.trainingPlans.get(trainingPlanId));
   }

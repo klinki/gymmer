@@ -1,6 +1,6 @@
 import {Component, effect, inject, input, signal} from '@angular/core';
 import {Router} from "@angular/router";
-import {DatabaseService, Exercise, ExerciseExecution, Training, TrainingPlan} from "../database.service";
+import {DatabaseService, Exercise, TrainingPlan} from "../database.service";
 import {asapScheduler, first} from "rxjs";
 import {DatePipe, NgIf} from "@angular/common";
 import {DurationPipe} from "../duration-pipe.pipe";
@@ -15,8 +15,9 @@ import {
   MatListSubheaderCssMatStyler
 } from "@angular/material/list";
 import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
-import {TrainingSessionService} from "../training-session.service";
 import {MatDialog} from "@angular/material/dialog";
+import {toSignal} from "@angular/core/rxjs-interop";
+import {liveQuery} from "dexie";
 
 @Component({
   selector: 'app-training-plan-edit',
@@ -43,28 +44,16 @@ export class TrainingPlanEditComponent {
   private dialog = inject(MatDialog);
 
   id = input<string>();
-  trainingPlan = signal<TrainingPlan|null>(null);
   loading = signal(true);
+  trainingPlan = toSignal<TrainingPlan|null|undefined>(liveQuery(() => this.db.trainingPlans.get(this.id())));
 
   constructor() {
-    this.loading.set(true);
-
     effect(() => {
-      const id = this.id();
-      if (id == null) {
-        return;
-      }
-
-      const subscription = this.db.getTrainingPlan(id).subscribe(trainingPlan => {
-        if (trainingPlan == null) { return; }
-        // https://github.com/ngrx/platform/issues/3932
+      if (this.trainingPlan() != null) {
         asapScheduler.schedule(() => {
-          this.trainingPlan.set(trainingPlan);
           this.loading.set(false);
         });
-      });
-
-      return () => subscription.unsubscribe();
+      }
     });
   }
 
@@ -89,6 +78,7 @@ export class TrainingPlanEditComponent {
 
     const newExercises = [ ...planExercises, ...exercisesArr ];
 
-    this.trainingPlan.set({ ...plan!, exercises: newExercises });
+    const updatedPlan = { ...plan!, exercises: newExercises };
+    this.db.updateTrainingPlan(updatedPlan);
   }
 }
