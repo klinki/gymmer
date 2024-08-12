@@ -1,10 +1,12 @@
 <mat-list>
-  <button (click)="startFreeTraining()">Free training</button>
-
   <div mat-subheader>Training Plans</div>
+  <mat-list-item (click)="startFreeTraining()">
+    <mat-icon matListItemIcon>accessibility_new</mat-icon>
+    <div matListItemTitle>Free Training</div>
+  </mat-list-item>
   @for (plan of trainingPlans(); track plan) {
     <mat-list-item (click)="startTrainingPlan(plan)">
-      <mat-icon matListItemIcon>folder</mat-icon>
+      <mat-icon matListItemIcon>fitness_center</mat-icon>
       <div matListItemTitle>{{plan.name}}</div>
 <!--      <div matListItemLine>{{folder}}</div> -->
       <div matListItemMeta>

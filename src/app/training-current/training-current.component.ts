@@ -2,6 +2,9 @@ import {Component, effect, inject, input, signal} from '@angular/core';
 import {Router} from "@angular/router";
 import {DatabaseService, ExerciseExecution, Training} from "../database.service";
 import {TrainingSessionService} from "../training-session.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-training-current',
@@ -12,6 +15,7 @@ export class TrainingCurrentComponent {
   private router = inject(Router);
   private db = inject(DatabaseService);
   private session = inject(TrainingSessionService);
+  private dialog = inject(MatDialog);
 
   training = this.session.currentSession;
   trainingRunningTime = signal(0);
@@ -65,7 +69,14 @@ export class TrainingCurrentComponent {
     }
   }
 
-  addExercise() {}
+  addExercise() {
+    const dialogRef = this.dialog.open(ExerciseListComponent);
+    dialogRef.beforeClosed().pipe(first()).subscribe(_ => {
+      const selection = dialogRef.componentInstance.selectedItems();
+      this.session.addExercisesToCurrentTraining(selection);
+    })
+    dialogRef.componentRef?.setInput('showSelection', true);
+  }
 
   startExercise(exercise: ExerciseExecution) {
     this.router.navigate(['/exercise', exercise.exerciseId])

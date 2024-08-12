@@ -2,6 +2,8 @@ import {Component, effect, inject, input, signal} from '@angular/core';
 import {DatabaseService, ExerciseExecution, Training} from "../database.service";
 import {asapScheduler} from "rxjs";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
 
 @Component({
   selector: 'app-training',
@@ -10,6 +12,7 @@ import {Router} from "@angular/router";
 })
 export class TrainingComponent {
   private router = inject(Router);
+  private dialog = inject(MatDialog);
 
   id = input<string>();
   training = signal<Training|null>(null);
@@ -62,7 +65,12 @@ export class TrainingComponent {
     clearInterval(this.interval);
   }
 
-  addExercise() {}
+  addExercise() {
+    const dialogRef = this.dialog.open(ExerciseListComponent);
+    this.dialog.afterOpened.subscribe(_ => {
+      dialogRef.componentRef?.setInput('showSelection', true);
+    });
+  }
 
   startExercise(exercise: ExerciseExecution) {
     this.router.navigate(['/exercise', exercise.id])

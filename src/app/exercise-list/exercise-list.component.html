@@ -1,18 +1,24 @@
-<mat-form-field>
+<mat-form-field class="search">
   <mat-label>Search</mat-label>
-  <input [(ngModel)]="searchText" matInput type="search" />
+  <input [(ngModel)]="searchText" matInput type="text" />
   <button
     mat-icon-button
     matPrefix
   >
     <mat-icon>search</mat-icon>
   </button>
+  <button (click)="searchText.set('')" [hidden]="searchText().length == 0"
+    mat-icon-button
+    matSuffix
+  >
+    <mat-icon>close</mat-icon>
+  </button>
 </mat-form-field>
-@if (!showSelection()) {
-  <mat-selection-list>
+@if (showSelection()) {
+  <mat-selection-list [(ngModel)]="selectedItems">
     <div mat-subheader>Exercises</div>
     @for (exercise of filteredExercises(); track exercise) {
-      <mat-list-option>
+      <mat-list-option [value]="exercise">
         <mat-icon matListItemIcon>folder</mat-icon>
         <div matListItemTitle>{{exercise.name}}</div>
         <div matListItemLine>{{exercise.name}}</div>

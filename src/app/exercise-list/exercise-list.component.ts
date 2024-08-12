@@ -1,8 +1,9 @@
-import {Component, computed, inject, input, signal} from '@angular/core';
-import {DatabaseService, Exercise} from "../database.service";
+import {Component, computed, inject, input, signal, TemplateRef, ViewChild} from '@angular/core';
+import {DatabaseService, Exercise, Training} from "../database.service";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";
 import {createComputed} from "@angular/core/primitives/signals";
+import {MatSelectionList} from "@angular/material/list";
 
 @Component({
   selector: 'app-exercise-list',
@@ -13,6 +14,8 @@ export class ExerciseListComponent {
   db = inject(DatabaseService);
 
   showSelection = input();
+  selectedItems = signal<Training[]>([]);
+
   searchText = signal<string>('');
   exercises = toSignal<Exercise[]>(liveQuery(() => this.db.exercises.toArray()));
   filteredExercises = computed(() => {

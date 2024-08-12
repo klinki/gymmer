@@ -62,7 +62,7 @@ export class ExerciseDetailComponent {
   }
 
   next() {
-    this.session.addExerciseToCurrentTraining(this.exercise!);
+    this.session.addExerciseExecutionToCurrentTraining(this.exercise!);
     this.location.back();
   }
 }
