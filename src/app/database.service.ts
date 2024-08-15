@@ -107,7 +107,20 @@ export class DatabaseService extends Dexie {
   }
 
   importFromJson(json: string) {
+    const data = JSON.parse(json);
+    const { exercises, trainingPlans, trainings } = data;
 
+    for (const exercise of exercises) {
+      this.addExercise(exercise);
+    }
+
+    for (const plan of trainingPlans) {
+      this.addTrainingPlan(plan);
+    }
+
+    for (const training of trainings) {
+      this.addTraining(training);
+    }
   }
 
   async exportDb() {

@@ -1,3 +1,6 @@
 <div>
   <button (click)="export()">Export</button>
+
+  <input type="file" (change)="onChange($event)">
+  <button (click)="import()">Import</button>
 </div>
