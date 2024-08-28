@@ -34,6 +34,11 @@ export class TrainingSessionService {
     localStorage.setItem('currentSession', JSON.stringify(this.currentSession()));
   }
 
+  stopTraining() {
+    this.currentSession.set(null);
+    localStorage.setItem('currentSession', "null");
+  }
+
   addExercisesToCurrentTraining(exercises: Exercise[]|Exercise): void {
     const session = this.currentSession()!;
 

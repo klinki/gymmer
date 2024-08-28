@@ -5,6 +5,7 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
+      <a mat-list-item [routerLink]="['/training']" i18n *ngIf="currentTraining() != null">Active Training</a>
       <a mat-list-item [routerLink]="['']" i18n>Training Plans</a>
       <a mat-list-item [routerLink]="['/exercise-list']" i18n>Exercise List</a>
       <a mat-list-item [routerLink]="['/training/history']" i18n>History</a>

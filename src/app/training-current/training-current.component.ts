@@ -64,6 +64,7 @@ export class TrainingCurrentComponent {
       this.session.updateTraining(training);
       clearInterval(this.interval);
       this.interval = null;
+      this.session.stopTraining();
       this.db.addTraining(training);
       this.router.navigate(['/']);
     }
