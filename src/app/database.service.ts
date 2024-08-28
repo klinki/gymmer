@@ -9,17 +9,38 @@ type ExerciseId = string;
 type TrainingPlanId = string;
 type TrainingId = string;
 
+type ExerciseType = 'weighted' | 'duration' | 'repetitions' | 'distance';
+
 export interface Exercise {
   id: ExerciseId;
+  type?: ExerciseType;
   name: string;
 }
 
-export interface ExerciseSeries {
-  weight?: number;
-  repetitions?: number;
+export interface ExerciseSeriesBase {
   note?: string;
   variant?: string;
 }
+
+export interface WeightedExerciseSeries extends ExerciseSeriesBase {
+  weight: number;
+  repetitions: number;
+}
+
+export interface DurationExerciseSeries extends ExerciseSeriesBase {
+  durationInSeconds: number;
+}
+
+export interface RepetitionsExerciseSeries extends ExerciseSeriesBase {
+  repetitions: number;
+}
+
+export interface DistanceExerciseSeries extends ExerciseSeriesBase {
+  distance: number;
+}
+
+export type ExerciseSeries = WeightedExerciseSeries | DurationExerciseSeries | RepetitionsExerciseSeries | DistanceExerciseSeries;
+
 
 export interface ExerciseExecution extends Exercise {
   exerciseId?: ExerciseId;
