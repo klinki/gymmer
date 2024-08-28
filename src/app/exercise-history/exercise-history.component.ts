@@ -1,6 +1,9 @@
-import { Component, inject } from '@angular/core';
+import {Component, effect, inject, input, signal} from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
+import {DatabaseService, Exercise, ExerciseExecution} from "../database.service";
+import {asapScheduler, combineLatest} from "rxjs";
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
 @Component({
   selector: 'app-exercise-history',
@@ -8,26 +11,36 @@ import { map } from 'rxjs/operators';
   styleUrl: './exercise-history.component.scss'
 })
 export class ExerciseHistoryComponent {
-  private breakpointObserver = inject(BreakpointObserver);
+  private db = inject(DatabaseService);
 
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
+  id = input<string>();
+  executions = signal<ExerciseExecution[]>([]);
+  exercise = signal<Exercise|null>(null);
+
+  constructor() {
+    effect(() => {
+      const id = this.id();
+      if (id == null) {
+        return;
       }
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
+      const subscription = combineLatest([
+        fromPromise(this.db.trainings.toArray()),
+        fromPromise(this.db.exercises.get(id)),
+      ]).subscribe(([trainings, exercise]) => {
+        const trainingsWithExecutions = trainings.filter(x => x.exercises.some(ex => ex.exerciseId == id));
+        const justExecutions = trainingsWithExecutions
+          .flatMap(x => x.exercises)
+          .filter(x => x.exerciseId == id);
+
+        // https://github.com/ngrx/platform/issues/3932
+        asapScheduler.schedule(() => {
+          this.executions.set(justExecutions);
+          this.exercise.set(exercise!);
+        });
+      });
+
+      return () => subscription.unsubscribe();
+    });
+  }
 }

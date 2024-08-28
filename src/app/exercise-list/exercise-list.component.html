@@ -29,7 +29,7 @@
   <mat-list>
     <div mat-subheader>Exercises</div>
     @for (exercise of filteredExercises(); track exercise) {
-      <mat-list-item>
+      <mat-list-item [routerLink]="['/exercise', exercise.id, 'history']">
         <mat-icon matListItemIcon>folder</mat-icon>
         <div matListItemTitle>{{exercise.name}}</div>
         <div matListItemLine>{{exercise.name}}</div>
