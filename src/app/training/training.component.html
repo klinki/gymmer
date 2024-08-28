@@ -4,11 +4,12 @@
 <mat-list *ngIf="training();let training;">
   <div mat-subheader>Training: {{training.name}}</div>
   @if (training.startDate != null) {
-    <span>Training started at: {{ training.startDate | date: 'hh:mm:ss' }}</span>
-    <span>Training running: {{ trainingRunningTime() | duration }}</span>
+    <div>Training started at: {{ training.startDate | date: 'short' }}</div>
+    <div>Training ended at: {{ training.endDate | date: 'short' }}</div>
+    <div>Training took: {{ trainingRunningTime() | duration }}</div>
   }
   @for (exercise of training.exercises; track exercise) {
-    <mat-list-item (click)="startExercise(exercise)">
+    <mat-list-item (click)="showExercise(exercise)">
       <mat-icon matListItemIcon>folder</mat-icon>
       <div matListItemTitle>{{exercise.name}}</div>
 
@@ -18,15 +19,7 @@
     </mat-list-item>
   }
 </mat-list>
-@if (training()?.startDate == null || training()?.endDate != null) {
-  <button (click)="start()" mat-fab [color]="'green'">
-    <mat-icon>play_arrow</mat-icon>
-  </button>
-} @else {
-  <button (click)="stop()" mat-fab [color]="'red'">
-    <mat-icon>square</mat-icon>
-  </button>
-}
+
 <button (click)="addExercise()" mat-fab>
   <mat-icon>add</mat-icon>
 </button>

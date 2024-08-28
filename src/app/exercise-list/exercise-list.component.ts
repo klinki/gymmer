@@ -1,9 +1,10 @@
 import {Component, computed, inject, input, signal, TemplateRef, ViewChild} from '@angular/core';
-import {DatabaseService, Exercise, Training} from "../database.service";
+import {DatabaseService, Exercise, ExerciseExecution, ExerciseSeries, Training} from "../database.service";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";
 import {createComputed} from "@angular/core/primitives/signals";
 import {MatSelectionList} from "@angular/material/list";
+import {exerciseData} from "../db";
 
 @Component({
   selector: 'app-exercise-list',

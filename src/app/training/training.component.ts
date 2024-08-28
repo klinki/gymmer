@@ -34,35 +34,14 @@ export class TrainingComponent {
         // https://github.com/ngrx/platform/issues/3932
         asapScheduler.schedule(() => {
           this.training.set(training);
+          const totalTime = (training.endDate ?? new Date()).getTime() - (training.startDate ?? new Date()).getTime();
+          this.trainingRunningTime.set(totalTime);
           this.loading.set(false);
         });
       });
 
       return () => subscription.unsubscribe();
     });
-  }
-
-  start() {
-    const training = {
-      ...this.training() as any,
-      startDate: new Date()
-    };
-
-    this.training.set(training);
-
-    this.interval = setInterval(() => {
-      this.trainingRunningTime.update(x => x + 1);
-    }, 1000);
-  }
-
-  stop() {
-    const training = {
-      ...this.training() as any,
-      endDate: new Date()
-    };
-
-    this.training.set(training);
-    clearInterval(this.interval);
   }
 
   addExercise() {
@@ -72,8 +51,8 @@ export class TrainingComponent {
     });
   }
 
-  startExercise(exercise: ExerciseExecution) {
-    this.router.navigate(['/exercise', exercise.id])
+  showExercise(exercise: ExerciseExecution) {
+    this.router.navigate(['exercise', exercise.id])
   }
 
 }
