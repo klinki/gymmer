@@ -71,7 +71,7 @@ export class DatabaseService extends Dexie {
   }
 
   addTraining(training: Omit<Training, 'id'>): Observable<Training> {
-    return fromPromise(this.trainings.add(training as Training));
+    return fromPromise(this.trainings.put(training as Training));
   }
 
   getTraining(trainingId: string) {
@@ -107,7 +107,13 @@ export class DatabaseService extends Dexie {
   }
 
   importFromJson(json: string) {
-    const data = JSON.parse(json);
+    const data = JSON.parse(json, (key, value) => {
+      if (value != null && (key == 'startDate' || key == 'endDate')) {
+        return new Date(value);
+      }
+
+      return value;
+    });
     const { exercises, trainingPlans, trainings } = data;
 
     for (const exercise of exercises) {
@@ -119,8 +125,25 @@ export class DatabaseService extends Dexie {
     }
 
     for (const training of trainings) {
-      this.addTraining(training);
+      const fixedTraining = this.fixTraining(training);
+      this.addTraining(fixedTraining);
     }
+  }
+
+  fixTraining(training: Training) {
+    const fixedTraining = { ...training };
+
+    if (training.startDate != null) {
+      console.log(training);
+    }
+
+    fixedTraining.exercises.forEach(exec => {
+      if (exec.id == null || exec.id == exec.exerciseId) {
+        exec.id = ulid(training.startDate?.getTime());
+      }
+    });
+
+    return fixedTraining;
   }
 
   async exportDb() {
