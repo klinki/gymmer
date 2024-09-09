@@ -1,5 +1,6 @@
 <h2>Cvik {{exercise?.name}}</h2>
-<table mat-table [dataSource]="exercise.series" class="mat-elevation-z8" *ngIf="exercise != null">
+@if (!loading()) {
+<table mat-table [dataSource]="exercise?.series ?? []" class="mat-elevation-z8" *ngIf="exercise != null">
   <!-- series Column -->
   <ng-container matColumnDef="series">
     <th mat-header-cell *matHeaderCellDef> Série </th>
@@ -21,6 +22,7 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+}
 <form class="example-form">
   <div class="form-body">
     <mat-form-field>

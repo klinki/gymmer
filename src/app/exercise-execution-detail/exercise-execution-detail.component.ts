@@ -1,6 +1,5 @@
-import {Component, effect, inject, input, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, effect, inject, input, signal} from '@angular/core';
 import {Location, NgIf} from "@angular/common";
-import {TrainingSessionService} from "../training-session.service";
 import {DatabaseService, ExerciseExecution, ExerciseSeries, Training, TrainingPlan} from "../database.service";
 import {asapScheduler} from "rxjs";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -11,7 +10,9 @@ import {
   MatHeaderCell,
   MatHeaderRow,
   MatHeaderRowDef,
-  MatRow, MatRowDef, MatTable
+  MatRow,
+  MatRowDef,
+  MatTable
 } from "@angular/material/table";
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
@@ -42,7 +43,8 @@ import {MatInput} from "@angular/material/input";
     ReactiveFormsModule
   ],
   templateUrl: './exercise-execution-detail.component.html',
-  styleUrl: './exercise-execution-detail.component.scss'
+  styleUrl: './exercise-execution-detail.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExerciseExecutionDetailComponent {
   private location = inject(Location);
