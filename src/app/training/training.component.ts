@@ -52,7 +52,7 @@ export class TrainingComponent {
   }
 
   showExercise(exercise: ExerciseExecution) {
-    this.router.navigate(['exercise', exercise.id])
+    this.router.navigate(['training', this.training()?.id ?? '', exercise.id])
   }
 
 }
