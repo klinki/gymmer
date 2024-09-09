@@ -4,6 +4,7 @@
   <input type="file" (change)="onChange($event)">
   <button (click)="import()">Import</button>
 
+  <button (click)="clear()">Clear</button>
 
   @if ((user$ | async) != null) {
     <button (click)="syncToDb()">Sync to DB</button>

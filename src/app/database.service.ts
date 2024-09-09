@@ -111,6 +111,13 @@ export class DatabaseService extends Dexie {
     return fromPromise(this.trainingPlans.get(trainingPlanId));
   }
 
+  async clear() {
+    await this.trainings.clear();
+    await this.trainingPlanExercises.clear();
+    await this.trainingPlans.clear();
+    await this.exercises.clear();
+  }
+
   importFromJson(json: string) {
     const data = JSON.parse(json, (key, value) => {
       if (value != null && (key == 'startDate' || key == 'endDate')) {

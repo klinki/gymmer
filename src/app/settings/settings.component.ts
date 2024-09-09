@@ -78,6 +78,12 @@ export class SettingsComponent {
     }
   }
 
+  async clear() {
+    if (window.confirm('Are you sure? This will delete all data')) {
+      await this.db.clear();
+    }
+  }
+
   syncToDb() {
     this.db.syncToPostgre();
   }
