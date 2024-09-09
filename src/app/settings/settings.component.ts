@@ -1,6 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {DatabaseService, ExerciseExecution, ExerciseSeries, Training} from "../database.service";
-import {exerciseData} from "../db";
+import {DatabaseService} from "../database.service";
 import {SupabaseAuthService} from "../supabase-auth.service";
 import {AsyncPipe} from "@angular/common";
 
@@ -37,45 +36,6 @@ export class SettingsComponent {
 
   import() {
     this.db.importFromJson(this.fileContent);
-  }
-
-  async importCustomData() {
-    const data = exerciseData;
-
-    const exercisesFromDbByName = new Map((await this.db.exercises.toArray()).map(x => [x.name, x.id]));
-
-    for (const aTraining of data) {
-      const executions: ExerciseExecution[] = aTraining.exercises.map(x => {
-        return {
-          name: x.exercise,
-          exerciseId: exercisesFromDbByName.get(x.exercise),
-          series: x.executions.map(serie => {
-            const weight = (serie as any)?.['weight'] ?? '';
-            let variant = '';
-
-            if (weight.indexOf(':') !== -1) {
-              variant = weight.substring(weight.indexOf(':'));
-            }
-
-            const note = `${weight}`;
-
-            return {
-              repetitions: serie.count,
-              weight: 0,
-              note: note
-            } as ExerciseSeries;
-          })
-        } as ExerciseExecution;
-      });
-
-      const training: Partial<Training> = {
-        name: aTraining.date,
-        exercises: executions
-      };
-
-      console.log(training);
-      this.db.trainings.put(training as Training);
-    }
   }
 
   async clear() {

@@ -4,7 +4,6 @@ import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";
 import {createComputed} from "@angular/core/primitives/signals";
 import {MatSelectionList} from "@angular/material/list";
-import {exerciseData} from "../db";
 
 @Component({
   selector: 'app-exercise-list',
