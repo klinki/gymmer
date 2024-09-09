@@ -1,9 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
+import {inject, Injectable} from '@angular/core';
+import {first, Observable, take} from "rxjs";
 import Dexie, {Table} from "dexie";
 import 'dexie-observable';
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 import {ulid} from "ulidx";
+import {SupabaseService} from "./supabase.service";
+import {SupabaseAuthService} from "./supabase-auth.service";
 
 type ExerciseId = string;
 type TrainingPlanId = string;
@@ -58,6 +60,9 @@ export class DatabaseService extends Dexie {
   trainingPlans!: Table<TrainingPlan>;
   trainingPlanExercises!: Table<TrainingPlanExercise>;
   trainings!: Table<Training>;
+
+  private supabase = inject(SupabaseService);
+  private supabaseAuth = inject(SupabaseAuthService);
 
   constructor() {
     super('GymmerDB');
@@ -174,5 +179,85 @@ export class DatabaseService extends Dexie {
     link.dispatchEvent(evt);
     link.remove();
     URL.revokeObjectURL(url);
+  }
+
+  async syncToPostgre() {
+    this.supabaseAuth.$user.pipe(first(), take(1)).subscribe(async user => {
+      const exercises = await this.exercises.toArray();
+      const trainingPlans = await this.trainingPlans.toArray();
+      const trainings = await this.trainings.toArray();
+
+      const userTrainings2 = trainings.map(x => ({
+        ...x,
+        user_id: user?.id,
+      }));
+
+      try {
+        let res = await this.supabase.supabase
+          .from('trainings')
+          .insert(userTrainings2);
+        console.log(res);
+      } catch (error) {
+        console.error(error);
+      }
+
+      const postgreSqlVersion = await this.supabase.supabase
+        .from('profiles')
+        .select()
+        .match({ id: user?.id })
+        .single();
+
+      // TODO: Select IndexedDB version and PostgreSQL version
+      // If one of them doesn't exists, it means full sync
+      // One with higher value is the source of truth
+      const userExercises = exercises.map(x => ({
+        ...x,
+        user_id: user?.id,
+      }));
+
+      await this.supabase.supabase.from('user_exercises')
+        .insert(userExercises);
+
+      const userTrainingPlans = trainingPlans.map(x => ({
+        ...x,
+        user_id: user?.id,
+      }));
+
+      await this.supabase.supabase.from('training_plans')
+        .insert(userTrainingPlans);
+
+      const userTrainings = trainings.map(x => ({
+        ...x,
+        user_id: user?.id,
+      }));
+
+      this.supabase.supabase
+        .from('trainings')
+        .insert(userTrainings);
+    });
+  }
+
+  async syncFromPostgre() {
+    this.supabaseAuth.$user.pipe(first(), take(1)).subscribe(async user => {
+
+      const exercises = await this.supabase
+        .supabase
+        .from('user_exercises')
+        .select()
+        .match({ user_id: user?.id });
+
+      const trainingPlans = await this.supabase
+        .supabase
+        .from('training_plans')
+        .select('*');
+
+      const trainings = await this.supabase
+        .supabase
+        .from('trainings')
+        .select()
+        .match({ id: user?.id });
+
+
+    });
   }
 }

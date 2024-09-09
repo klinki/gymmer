@@ -3,4 +3,10 @@
 
   <input type="file" (change)="onChange($event)">
   <button (click)="import()">Import</button>
+
+
+  @if ((user$ | async) != null) {
+    <button (click)="syncToDb()">Sync to DB</button>
+    <button (click)="syncFromDb()">Sync from DB</button>
+  }
 </div>

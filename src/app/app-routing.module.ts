@@ -11,6 +11,8 @@ import {SynchronizeDataComponent} from "./synchronize-data/synchronize-data.comp
 import {SettingsComponent} from "./settings/settings.component";
 import {ExerciseExecutionDetailComponent} from "./exercise-execution-detail/exercise-execution-detail.component";
 import {ExerciseHistoryComponent} from "./exercise-history/exercise-history.component";
+import {LoginComponent} from "./user/login/login.component";
+import {AccountComponent} from "./user/account/account.component";
 
 const routes: Routes = [
   {
@@ -88,6 +90,19 @@ const routes: Routes = [
       {
         path: 'settings',
         component: SettingsComponent,
+      },
+      {
+        path: 'account',
+        children: [
+          {
+            path: 'login',
+            component: LoginComponent,
+          },
+          {
+            path: 'profile',
+            component: AccountComponent,
+          }
+        ]
       }
     ],
   }

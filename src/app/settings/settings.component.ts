@@ -1,16 +1,21 @@
 import {Component, inject} from '@angular/core';
 import {DatabaseService, ExerciseExecution, ExerciseSeries, Training} from "../database.service";
 import {exerciseData} from "../db";
+import {SupabaseAuthService} from "../supabase-auth.service";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss'
 })
 export class SettingsComponent {
   private db = inject(DatabaseService);
+  private authService = inject(SupabaseAuthService);
+
+  user$ = this.authService.$user;
 
   export() {
     this.db.exportDb();
@@ -71,5 +76,13 @@ export class SettingsComponent {
       console.log(training);
       this.db.trainings.put(training as Training);
     }
+  }
+
+  syncToDb() {
+    this.db.syncToPostgre();
+  }
+
+  syncFromDb() {
+    this.db.syncFromPostgre();
   }
 }

@@ -14,6 +14,23 @@ Entities in system:
   - Training is list of exercise executions at given time
   - Has start and end time
 
+## Screens
+
+- [ ] Exercise
+  - [x] Exercise List
+  - [ ] Exercise Detail
+  - [ ] Exercise History
+- [ ] Training Plans
+  - [x] Training Plan List
+  - [x] Training Plan Edit
+  - [ ] Training Plan History
+- [ ] Training
+  - [x] Training Detail
+  - [x] Exercise Execution
+  - [ ] Training History
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.5.
 
 ## Development server
