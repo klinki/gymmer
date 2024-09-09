@@ -202,7 +202,7 @@ export class DatabaseService extends Dexie {
       try {
         let res = await this.supabase.supabase
           .from('trainings')
-          .insert(userTrainings2);
+          .upsert(userTrainings2);
         console.log(res);
       } catch (error) {
         console.error(error);
@@ -223,7 +223,7 @@ export class DatabaseService extends Dexie {
       }));
 
       await this.supabase.supabase.from('user_exercises')
-        .insert(userExercises);
+        .upsert(userExercises);
 
       const userTrainingPlans = trainingPlans.map(x => ({
         ...x,
@@ -231,7 +231,7 @@ export class DatabaseService extends Dexie {
       }));
 
       await this.supabase.supabase.from('training_plans')
-        .insert(userTrainingPlans);
+        .upsert(userTrainingPlans);
 
       const userTrainings = trainings.map(x => ({
         ...x,
@@ -240,7 +240,7 @@ export class DatabaseService extends Dexie {
 
       this.supabase.supabase
         .from('trainings')
-        .insert(userTrainings);
+        .upsert(userTrainings);
     });
   }
 
