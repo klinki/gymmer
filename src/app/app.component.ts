@@ -1,12 +1,19 @@
 import {Component, NgZone} from '@angular/core';
-import {ActivatedRoute, ActivatedRouteSnapshot, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {SupabaseAuthService} from "./supabase-auth.service";
 import {Location} from "@angular/common";
+import {versions} from "../environments/version";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  host: {
+    'build-version': versions.version,
+    'build-date': versions.date,
+    'build-branch': versions.branch,
+    'build-commit': versions.commitHash,
+  }
 })
 export class AppComponent {
   title = 'gymmer';

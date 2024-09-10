@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {DatabaseService} from "../database.service";
 import {SupabaseAuthService} from "../supabase-auth.service";
 import {AsyncPipe} from "@angular/common";
+import {versions} from "../../environments/version";
 
 @Component({
   selector: 'app-settings',
@@ -15,6 +16,8 @@ export class SettingsComponent {
   private authService = inject(SupabaseAuthService);
 
   user$ = this.authService.$user;
+
+  version = versions;
 
   export() {
     this.db.exportDb();

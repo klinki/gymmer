@@ -8,7 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "i18n": "ng extract-i18n --output-path src/locale",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "getversion": "node ./git-version.mjs",
+    "prebuild": "npm run getversion .",
+    "prestart": "npm run getversion ."
   },
   "private": true,
   "dependencies": {
