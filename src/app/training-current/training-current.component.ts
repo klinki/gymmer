@@ -71,7 +71,7 @@ export class TrainingCurrentComponent {
   }
 
   addExercise() {
-    const dialogRef = this.dialog.open(ExerciseListComponent);
+    const dialogRef = this.dialog.open(ExerciseListComponent, { height: '100%' });
     dialogRef.beforeClosed().pipe(first()).subscribe(_ => {
       const selection = dialogRef.componentInstance.selectedItems();
       this.session.addExercisesToCurrentTraining(selection);

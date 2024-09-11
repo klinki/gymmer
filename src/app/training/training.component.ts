@@ -45,7 +45,7 @@ export class TrainingComponent {
   }
 
   addExercise() {
-    const dialogRef = this.dialog.open(ExerciseListComponent);
+    const dialogRef = this.dialog.open(ExerciseListComponent, { height: '100%' });
     this.dialog.afterOpened.subscribe(_ => {
       dialogRef.componentRef?.setInput('showSelection', true);
     });
