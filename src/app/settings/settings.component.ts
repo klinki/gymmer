@@ -67,10 +67,10 @@ export class SettingsComponent {
   }
 
   logout() {
-    this.router.navigate(['/', 'account', 'login']);
+    this.authService.signOut();
   }
 
   login() {
-    this.authService.signOut();
+    this.router.navigate(['/', 'account', 'login']);
   }
 }
