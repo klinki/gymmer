@@ -57,13 +57,7 @@
                 }
               ],
               "outputHashing": "all",
-              "serviceWorker": "ngsw-config.json",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/version.ts",
-                  "with": "src/environments/version.prod.ts"
-                }
-              ]
+              "serviceWorker": "ngsw-config.json"
             },
             "development": {
               "optimization": false,
