@@ -1,11 +1,12 @@
 import {inject, Injectable} from '@angular/core';
-import {first, Observable, take} from "rxjs";
+import {first, from, Observable, take} from "rxjs";
 import Dexie, {Table} from "dexie";
 import 'dexie-observable';
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 import {ulid} from "ulidx";
 import {SupabaseService} from "./supabase.service";
 import {SupabaseAuthService} from "./supabase-auth.service";
+import {map, switchMap} from "rxjs/operators";
 
 type ExerciseId = string;
 type TrainingPlanId = string;
@@ -26,6 +27,7 @@ export interface ExerciseSeries {
 export interface ExerciseExecution extends Exercise {
   exerciseId?: ExerciseId;
   series: ExerciseSeries[];
+  date?: Date|null;
 }
 
 export interface Training {
@@ -60,6 +62,7 @@ export class DatabaseService extends Dexie {
   trainingPlans!: Table<TrainingPlan>;
   trainingPlanExercises!: Table<TrainingPlanExercise>;
   trainings!: Table<Training>;
+  exerciseExecutions!: Table<ExerciseExecution>;
 
   private supabase = inject(SupabaseService);
   private supabaseAuth = inject(SupabaseAuthService);
@@ -72,11 +75,14 @@ export class DatabaseService extends Dexie {
       trainingPlans: '$$id',
       trainings: '$$id',
       trainingPlanExercises: '[trainingPlanId+exerciseId]',
+      exerciseExecutions: '$$id,exerciseId,date'
     });
   }
 
   addTraining(training: Omit<Training, 'id'>): Observable<Training> {
-    return fromPromise(this.trainings.put(training as Training));
+    const allExercises = training.exercises.map(x => this.exerciseExecutions.put(x as ExerciseExecution));
+    const finalPromise = Promise.all(allExercises).then(_ => this.trainings.put(training as Training));
+    return fromPromise(finalPromise);
   }
 
   getTraining(trainingId: string) {
@@ -89,6 +95,71 @@ export class DatabaseService extends Dexie {
 
   getExercise(id: ExerciseId) {
     return fromPromise(this.exercises.get(id));
+  }
+  getLastExerciseExecution(id: ExerciseId) {
+    return from(this.ensureExerciseExecutions()).pipe(
+      switchMap(() => {
+        const queryPromise = this.exerciseExecutions
+        .orderBy('date')
+        .reverse()
+        .filter(x => x.exerciseId == id)
+        .limit(1)
+    // .where({
+    //   exerciseId: id
+    // })
+       .toArray();
+
+        return from(queryPromise).pipe(map(x => x.length > 0 ? x[0] : null));
+      })
+    );
+
+    const queryPromise = this.exerciseExecutions
+      .orderBy('date')
+      .reverse()
+      .filter(x => x.exerciseId == id)
+      .limit(1)
+  // .where({
+  //   exerciseId: id
+  // })
+     .toArray();
+
+    return fromPromise(queryPromise).pipe(map(x => x.length > 0 ? x[0] : null));
+  }
+
+  private async ensureExerciseExecutions(): Promise<void> {
+    if (await this.exerciseExecutions.count() === 0) {
+      await this.fillExerciseExecutions();
+    }
+  }
+
+  async fillExerciseExecutions(): Promise<void> {
+    // Get all trainings
+    const trainings = await this.trainings.toArray();
+
+    // Prepare an array to hold all exercise executions
+    const exerciseExecutions: ExerciseExecution[] = [];
+
+    // Iterate through each training
+    for (const training of trainings) {
+      // Iterate through each exercise in the training
+      for (const exercise of training.exercises) {
+        // Create a new ExerciseExecution object
+        const exerciseExecution: ExerciseExecution = {
+          id: ulid(), // Generate a new ID for this execution
+          exerciseId: exercise.id,
+          name: exercise.name,
+          series: exercise.series,
+          date: exercise.date || training.startDate // Use exercise date if available, otherwise use training start date
+        };
+
+        exerciseExecutions.push(exerciseExecution);
+      }
+    }
+
+    // Bulk add all exercise executions to the table
+    await this.exerciseExecutions.bulkAdd(exerciseExecutions);
+
+    console.log(`Added ${exerciseExecutions.length} exercise executions.`);
   }
 
   updateExercise(exercise: Exercise) {
@@ -152,6 +223,10 @@ export class DatabaseService extends Dexie {
     fixedTraining.exercises.forEach(exec => {
       if (exec.id == null || exec.id == exec.exerciseId) {
         exec.id = ulid(training.startDate?.getTime());
+      }
+
+      if (exec.date == null) {
+        exec.date = training.startDate;
       }
     });
 
