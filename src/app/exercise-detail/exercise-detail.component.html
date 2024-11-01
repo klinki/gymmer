@@ -6,7 +6,7 @@
   <!-- series Column -->
   <ng-container matColumnDef="series">
     <th mat-header-cell *matHeaderCellDef> Série </th>
-    <td mat-cell *matCellDef="let element"> {{element.series}} </td>
+    <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
   </ng-container>
 
   <!-- weight Column -->
