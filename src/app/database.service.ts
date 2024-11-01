@@ -243,7 +243,7 @@ export class DatabaseService extends Dexie {
     return fixedTraining;
   }
 
-  async exportDb() {
+  async exportDb(filename: string = 'database.json') {
     const exercises = await this.exercises.toArray();
     const trainingPlans = await this.trainingPlans.toArray();
     const trainings = await this.trainings.toArray();
@@ -258,7 +258,7 @@ export class DatabaseService extends Dexie {
     const link = document.createElement("a");
 
     const url = URL.createObjectURL(blob);
-    link.download = "database.json";
+    link.download = filename;
     link.href = url;
     link.dataset['downloadurl'] = ["text/json", link.download, link.href].join(":");
 

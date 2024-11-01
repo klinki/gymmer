@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {DatabaseService} from "../database.service";
 import {SupabaseAuthService} from "../supabase-auth.service";
-import {AsyncPipe} from "@angular/common";
+import {AsyncPipe, DatePipe} from "@angular/common";
 import {versions} from "../../environments/version";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
@@ -11,7 +11,7 @@ import {BehaviorSubject, filter, skipUntil, take, tap} from "rxjs";
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [AsyncPipe, MatCard, MatCardTitle, MatCardHeader, MatCardActions, MatButton, MatCardContent],
+  imports: [AsyncPipe, MatCard, MatCardTitle, MatCardHeader, MatCardActions, MatButton, MatCardContent, DatePipe],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss'
 })
@@ -25,9 +25,16 @@ export class SettingsComponent {
   version = versions;
 
   export() {
-    this.db.exportDb();
-  }
+    const now = new Date();
 
+    const datePipe = new DatePipe('en');
+    const defaultName = `database-${datePipe.transform(now, 'yyyy-MM-dd-HH-mm')}.json`;
+
+    const filename = window.prompt('Enter filename:', defaultName);
+    if (filename) {
+      this.db.exportDb(filename);
+    }
+  }
 
   fileContent$ = new BehaviorSubject<string|null>(null);
 
