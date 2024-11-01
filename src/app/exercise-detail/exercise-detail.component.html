@@ -1,4 +1,7 @@
 <h2>Cvik {{exercise?.name}}</h2>
+@if (lastExecution != null) {
+  Last time: {{ lastExecution.date | date }}
+}
 <table mat-table [dataSource]="exercise.series" class="mat-elevation-z8" *ngIf="exercise != null">
   <!-- series Column -->
   <ng-container matColumnDef="series">

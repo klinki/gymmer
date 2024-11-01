@@ -2,7 +2,7 @@ import {Component, effect, inject, input, signal} from '@angular/core';
 import {DatabaseService, ExerciseExecution, ExerciseSeries, Training, TrainingPlan} from "../database.service";
 import {Location} from "@angular/common";
 import {TrainingSessionService} from "../training-session.service";
-import {asapScheduler} from "rxjs";
+import {asapScheduler, combineLatest} from "rxjs";
 
 @Component({
   selector: 'app-exercise-detail',
@@ -19,6 +19,7 @@ export class ExerciseDetailComponent {
   loading = signal(true);
 
   exercise: ExerciseExecution|null = null;
+  lastExecution: ExerciseExecution|null = null;
 
   displayedColumns = ['series', 'weight', 'repetitions'];
 
@@ -38,12 +39,20 @@ export class ExerciseDetailComponent {
       this.exercise = this.session.getExercise(id)!;
 
       if (this.exercise == null) {
-        const subscription = this.db.getExercise(id).subscribe(exercise => {
+        const subscription = combineLatest([this.db.getExercise(id), this.db.getLastExerciseExecution(id)]).subscribe(([exercise, execution]) => {
           if (exercise == null) {
             return;
           }
+
+          if (execution != null) {
+            if (execution.series.length > 0) {
+              this.currentValue.weight = execution.series[0].weight;
+            }
+          }
+
           // https://github.com/ngrx/platform/issues/3932
           asapScheduler.schedule(() => {
+            this.lastExecution = execution;
             this.exercise = ({...exercise, exerciseId: exercise.id, series: []});
             this.loading.set(false);
           });
@@ -52,7 +61,13 @@ export class ExerciseDetailComponent {
         return () => subscription.unsubscribe();
       }
 
-      return () => {};
+      const subscription = this.db.getLastExerciseExecution(id).subscribe(execution => {
+        if (execution != null) {
+          this.lastExecution = execution;
+          this.currentValue.weight = execution.series[0].weight;
+        }
+      });
+      return () => subscription.unsubscribe();
     });
   }
 
