@@ -15,6 +15,7 @@ type TrainingId = string;
 export interface Exercise {
   id: ExerciseId;
   name: string;
+  hidden?: boolean;
 }
 
 export interface ExerciseSeries {
@@ -96,6 +97,15 @@ export class DatabaseService extends Dexie {
   getExercise(id: ExerciseId) {
     return fromPromise(this.exercises.get(id));
   }
+
+  getVisibleExercises(): Observable<Exercise[]> {
+    return fromPromise(
+      this.exercises
+        .filter(exercise => !exercise.hidden)
+        .toArray()
+    );
+  }
+
   getLastExerciseExecution(id: ExerciseId) {
     return from(this.ensureExerciseExecutions()).pipe(
       switchMap(() => {

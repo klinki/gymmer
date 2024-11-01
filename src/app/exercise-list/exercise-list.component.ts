@@ -19,8 +19,10 @@ export class ExerciseListComponent {
   searchText = signal<string>('');
   exercises = toSignal<Exercise[]>(liveQuery(() => this.db.exercises.toArray()));
   filteredExercises = computed(() => {
+    const exercises = this.exercises()?.filter(x => !x.hidden);
+
     if (this.searchText() == '') {
-      return this.exercises();
+      return exercises;
     }
 
     const regex = new RegExp(this.searchText(), 'iu');
