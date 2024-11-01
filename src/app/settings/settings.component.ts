@@ -6,6 +6,7 @@ import {versions} from "../../environments/version";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
 import {Router} from "@angular/router";
+import {BehaviorSubject, filter, skipUntil, take, tap} from "rxjs";
 
 @Component({
   selector: 'app-settings',
@@ -28,9 +29,11 @@ export class SettingsComponent {
   }
 
 
-  fileContent: string = '';
+  fileContent$ = new BehaviorSubject<string|null>(null);
 
   public onChange(event: Event): void {
+    this.fileContent$.next(null);
+
     const fileList = (event.target as any)?.files ?? [];
 
     if (fileList.lenght == 0) {
@@ -41,7 +44,7 @@ export class SettingsComponent {
     let fileReader: FileReader = new FileReader();
     let self = this;
     fileReader.onloadend = function(x) {
-      self.fileContent = fileReader.result as string;
+      self.fileContent$.next(fileReader.result as string);
     }
     fileReader.readAsText(file);
 
@@ -49,7 +52,11 @@ export class SettingsComponent {
   }
 
   import() {
-    this.db.importFromJson(this.fileContent);
+    this.fileContent$.pipe(
+      filter(x => x != null),
+      take(1),
+      tap(x => console.log(x)),
+    ).subscribe(value => this.db.importFromJson(value!));
   }
 
   async clear() {
