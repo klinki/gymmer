@@ -25,8 +25,15 @@ export class ExerciseListComponent {
       return exercises;
     }
 
-    const regex = new RegExp(this.searchText(), 'iu');
-    return this.exercises()?.filter(x => x.name.match(regex));
+    // Other way is to use localeCompare(this.searchText(), undefined, {sensitivity: 'base'}) === 0
+    // Normalize string to ignore diacritics and other special characters
+    const normalize = (str: string) =>
+      str.normalize('NFKD')
+         .replace(/[\u0300-\u036f]/g, '')
+         .toLowerCase();
+
+    const search = normalize(this.searchText());
+    return exercises?.filter(x => normalize(x.name).includes(search));
   });
 
   async newExercise() {
