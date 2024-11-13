@@ -17,9 +17,22 @@ export class ExerciseListComponent {
   selectedItems = signal<Training[]>([]);
 
   searchText = signal<string>('');
-  exercises = toSignal<Exercise[]>(liveQuery(() => this.db.exercises.toArray()));
+  exercises = toSignal<(Exercise & { executionCount: number })[]>(liveQuery(async () => {
+    const exercises = await this.db.exercises.toArray();
+    const exercisesWithCount = await Promise.all(exercises.map(async exercise => ({
+      ...exercise,
+      executionCount: await this.db.exerciseExecutions
+          .where('exerciseId')
+          .equals(exercise.id)
+          .count()
+    })));
+
+    return exercisesWithCount;
+  }));
+
   filteredExercises = computed(() => {
-    const exercises = this.exercises()?.filter(x => !x.hidden);
+    const exercises = (this.exercises()?.filter(x => !x.hidden) ?? [])
+      .sort((a, b) => (b.executionCount ?? 0) - (a.executionCount ?? 0));
 
     if (this.searchText() == '') {
       return exercises;

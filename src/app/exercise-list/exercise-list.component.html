@@ -21,7 +21,7 @@
       <mat-list-option [value]="exercise">
         <mat-icon matListItemIcon>folder</mat-icon>
         <div matListItemTitle>{{exercise.name}}</div>
-        <div matListItemLine>{{exercise.name}}</div>
+        <div matListItemLine>{{exercise.name}} - {{ exercise.executionCount }}</div>
       </mat-list-option>
     }
   </mat-selection-list>
@@ -32,7 +32,7 @@
       <mat-list-item [routerLink]="['/exercise', exercise.id, 'history']">
         <mat-icon matListItemIcon>folder</mat-icon>
         <div matListItemTitle>{{exercise.name}}</div>
-        <div matListItemLine>{{exercise.name}}</div>
+        <div matListItemLine>{{exercise.name}} - {{ exercise.executionCount }}</div>
       </mat-list-item>
     }
   </mat-list>
