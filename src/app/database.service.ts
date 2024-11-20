@@ -218,12 +218,12 @@ export class DatabaseService extends Dexie {
     }
 
     for (const training of trainings) {
-      const fixedTraining = this.fixTraining(training);
+      const fixedTraining = this.fixTraining(training, trainingPlans);
       this.addTraining(fixedTraining);
     }
   }
 
-  fixTraining(training: Training) {
+  fixTraining(training: Training, trainingPlans: Array<TrainingPlan>) {
     const fixedTraining = { ...training };
 
     if (training.startDate != null) {
@@ -240,6 +240,13 @@ export class DatabaseService extends Dexie {
       }
     });
 
+    if (fixedTraining.trainingPlanId == null) {
+      const plan = trainingPlans.find(x => fixedTraining.name.startsWith(x.name))
+      if (plan != null) {
+        fixedTraining.trainingPlanId = plan.id;
+      }
+    }
+
     return fixedTraining;
   }
 
@@ -247,11 +254,13 @@ export class DatabaseService extends Dexie {
     const exercises = await this.exercises.toArray();
     const trainingPlans = await this.trainingPlans.toArray();
     const trainings = await this.trainings.toArray();
+    const trainingPlanExercises = await this.trainingPlanExercises.toArray();
 
     const data = {
       exercises,
       trainingPlans,
-      trainings
+      trainings,
+      trainingPlanExercises
     };
 
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: "text/json" });
