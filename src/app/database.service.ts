@@ -2,7 +2,6 @@ import {inject, Injectable} from '@angular/core';
 import {first, from, Observable, take} from "rxjs";
 import Dexie, {Table} from "dexie";
 import 'dexie-observable';
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
 import {ulid} from "ulidx";
 import {SupabaseService} from "./supabase.service";
 import {SupabaseAuthService} from "./supabase-auth.service";
@@ -99,11 +98,11 @@ export class DatabaseService extends Dexie {
   addTraining(training: Omit<Training, 'id'>): Observable<Training> {
     const allExercises = training.exercises.map(x => this.exerciseExecutions.put(x as ExerciseExecution));
     const finalPromise = Promise.all(allExercises).then(_ => this.trainings.put(training as Training));
-    return fromPromise(finalPromise);
+    return from(finalPromise);
   }
 
   getTraining(trainingId: string) {
-    return fromPromise(this.trainings.get(trainingId));
+    return from(this.trainings.get(trainingId));
   }
 
   addExercise(exercise: Omit<Exercise, 'id'>) {
@@ -111,11 +110,11 @@ export class DatabaseService extends Dexie {
   }
 
   getExercise(id: ExerciseId) {
-    return fromPromise(this.exercises.get(id));
+    return from(this.exercises.get(id));
   }
 
   getVisibleExercises(): Observable<Exercise[]> {
-    return fromPromise(
+    return from(
       this.exercises
         .filter(exercise => !exercise.hidden)
         .toArray()
@@ -149,7 +148,7 @@ export class DatabaseService extends Dexie {
   // })
      .toArray();
 
-    return fromPromise(queryPromise).pipe(map(x => x.length > 0 ? x[0] : null));
+    return from(queryPromise).pipe(map(x => x.length > 0 ? x[0] : null));
   }
 
   private async ensureExerciseExecutions(): Promise<void> {
@@ -205,7 +204,7 @@ export class DatabaseService extends Dexie {
   }
 
   getTrainingPlan(trainingPlanId: string): Observable<TrainingPlan|undefined> {
-    return fromPromise(this.trainingPlans.get(trainingPlanId));
+    return from(this.trainingPlans.get(trainingPlanId));
   }
 
   async clear() {

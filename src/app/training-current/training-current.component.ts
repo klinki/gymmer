@@ -40,9 +40,14 @@ export class TrainingCurrentComponent implements OnInit {
 
   constructor() {
     // Constructor should only handle dependency injection
+    // Register a callback to be called when the component is destroyed
+    this.destroyRef.onDestroy(() => {
+      console.log('💀 TrainingCurrentComponent destroyed');
+    });
   }
 
   ngOnInit(): void {
+    console.log('🚀 TrainingCurrentComponent initialized');
     const startDate = this.training()?.startDate;
     if (startDate != null) {
       const secondsBetweenDates = Math.floor((new Date().getTime() - startDate.getTime()) / 1000);
@@ -52,14 +57,24 @@ export class TrainingCurrentComponent implements OnInit {
   }
 
   private startTimer(): void {
+    console.log('🟢 Starting timer...');
     interval(1000)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.trainingRunningTime.update(x => x + 1);
+      .subscribe({
+        next: () => {
+          this.trainingRunningTime.update(x => x + 1);
+        },
+        complete: () => {
+          console.log('🔴 Timer destroyed - subscription completed');
+        },
+        error: (error) => {
+          console.error('❌ Timer error:', error);
+        }
       });
   }
 
   start() {
+    console.log('▶️ Starting new training session');
     const training = {
       ...this.training() as any,
       startDate: new Date()
@@ -71,6 +86,7 @@ export class TrainingCurrentComponent implements OnInit {
 
   stop() {
     if (window.confirm('Finish the training?')) {
+      console.log('⏹️ Stopping training session');
       const training = {
         ...this.training() as any,
         endDate: new Date()
@@ -98,6 +114,7 @@ export class TrainingCurrentComponent implements OnInit {
 
   deleteCurrentSession() {
     if (window.confirm('Delete current training?')) {
+      console.log('🗑️ Deleting current training session');
       this.session.clear();
       this.router.navigate(['/']);
     }

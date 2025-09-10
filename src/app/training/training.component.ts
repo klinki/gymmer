@@ -1,6 +1,5 @@
 import {Component, effect, inject, input, signal} from '@angular/core';
 import {DatabaseService, ExerciseExecution, Training} from "../database.service";
-import {asapScheduler} from "rxjs";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
@@ -44,13 +43,10 @@ export class TrainingComponent {
 
       const subscription = this.db.getTraining(id).subscribe(training => {
         if (training == null) { return; }
-        // https://github.com/ngrx/platform/issues/3932
-        asapScheduler.schedule(() => {
-          this.training.set(training);
-          const totalTime = (training.endDate ?? new Date()).getTime() - (training.startDate ?? new Date()).getTime();
-          this.trainingRunningTime.set(totalTime);
-          this.loading.set(false);
-        });
+        this.training.set(training);
+        const totalTime = (training.endDate ?? new Date()).getTime() - (training.startDate ?? new Date()).getTime();
+        this.trainingRunningTime.set(totalTime);
+        this.loading.set(false);
       });
 
       return () => subscription.unsubscribe();

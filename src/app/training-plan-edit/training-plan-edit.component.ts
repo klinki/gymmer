@@ -1,7 +1,7 @@
 import {Component, effect, inject, input, signal} from '@angular/core';
 import {Router} from "@angular/router";
 import {DatabaseService, Exercise, TrainingPlan} from "../database.service";
-import {asapScheduler, first} from "rxjs";
+import {first} from "rxjs";
 import {DatePipe, NgIf} from "@angular/common";
 import {DurationPipe} from "../duration-pipe.pipe";
 import {MatFabButton} from "@angular/material/button";
@@ -65,9 +65,7 @@ export class TrainingPlanEditComponent {
   constructor() {
     effect(() => {
       if (this.trainingPlan() != null) {
-        asapScheduler.schedule(() => {
-          this.loading.set(false);
-        });
+        this.loading.set(false);
       }
     });
   }
