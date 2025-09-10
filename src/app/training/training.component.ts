@@ -35,8 +35,6 @@ export class TrainingComponent {
 
   trainingRunningTime = signal(0);
 
-  interval: any;
-
   constructor(private db: DatabaseService) {
     this.loading.set(true);
 

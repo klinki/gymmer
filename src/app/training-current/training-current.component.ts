@@ -1,10 +1,11 @@
-import {Component, effect, inject, input, signal} from '@angular/core';
+import {Component, effect, inject, input, signal, OnInit, OnDestroy, DestroyRef} from '@angular/core';
 import {Router} from "@angular/router";
 import {DatabaseService, ExerciseExecution, Training} from "../database.service";
 import {TrainingSessionService} from "../training-session.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
-import {first} from "rxjs";
+import {first, interval, Subscription} from "rxjs";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 /**
  * Component for managing the current active training session.
@@ -27,18 +28,21 @@ import {first} from "rxjs";
   templateUrl: './training-current.component.html',
   styleUrl: './training-current.component.scss'
 })
-export class TrainingCurrentComponent {
+export class TrainingCurrentComponent implements OnInit {
   private router = inject(Router);
   private db = inject(DatabaseService);
   private session = inject(TrainingSessionService);
   private dialog = inject(MatDialog);
+  private destroyRef = inject(DestroyRef);
 
   training = this.session.currentSession;
   trainingRunningTime = signal(0);
 
-  interval: any;
-
   constructor() {
+    // Constructor should only handle dependency injection
+  }
+
+  ngOnInit(): void {
     const startDate = this.training()?.startDate;
     if (startDate != null) {
       const secondsBetweenDates = Math.floor((new Date().getTime() - startDate.getTime()) / 1000);
@@ -47,17 +51,12 @@ export class TrainingCurrentComponent {
     }
   }
 
-  startTimer() {
-    if (this.interval != null) {
-      clearInterval(this.interval);
-      this.interval = null;
-    }
-
-    if (this.interval == null) {
-      this.interval = setInterval(() => {
+  private startTimer(): void {
+    interval(1000)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
         this.trainingRunningTime.update(x => x + 1);
-      }, 1000);
-    }
+      });
   }
 
   start() {
@@ -78,8 +77,6 @@ export class TrainingCurrentComponent {
       };
 
       this.session.updateTraining(training);
-      clearInterval(this.interval);
-      this.interval = null;
       this.session.stopTraining();
       this.db.addTraining(training);
       this.router.navigate(['/']);
