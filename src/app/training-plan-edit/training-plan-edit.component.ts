@@ -19,6 +19,21 @@ import {MatDialog} from "@angular/material/dialog";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";
 
+/**
+ * Component for editing training plans and managing their exercise composition.
+ *
+ * This component provides a detailed interface for modifying training plans and allows users to:
+ * - View the current training plan details and exercises
+ * - Add new exercises to the training plan from the exercise library
+ * - Remove exercises from the training plan
+ * - Save changes to the training plan
+ *
+ * The component loads the training plan data based on the route parameter and provides
+ * a dialog-based interface for exercise selection and management.
+ *
+ * @route /training-plans/:id/edit
+ * @param id - Training plan ID from the route
+ */
 @Component({
   selector: 'app-training-plan-edit',
   standalone: true,

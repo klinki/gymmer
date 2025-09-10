@@ -55,6 +55,22 @@ export interface Routine {}
 
 Dexie.Observable.createUUID = () => ulid();
 
+/**
+ * Main database service for the gymmer application using Dexie (IndexedDB wrapper).
+ *
+ * This service provides comprehensive data management for the fitness tracking app including:
+ * - Exercise management (CRUD operations)
+ * - Training session storage and retrieval
+ * - Training plan management
+ * - Exercise execution history tracking
+ * - Data synchronization with Supabase backend
+ * - Import/export functionality for data backup
+ *
+ * The service uses Dexie for local IndexedDB storage with reactive observables
+ * and includes automatic data migration and synchronization capabilities.
+ *
+ * @extends Dexie
+ */
 @Injectable({
   providedIn: 'root'
 })

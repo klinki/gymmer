@@ -2,6 +2,21 @@ import { Component, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 
+/**
+ * Dashboard component for displaying application overview and statistics.
+ *
+ * This component provides a responsive dashboard interface that adapts to different screen sizes
+ * and displays key application metrics and quick access cards. The component features:
+ * - Responsive grid layout that adjusts based on screen size
+ * - Breakpoint-aware card arrangement (handset vs desktop)
+ * - Quick access to main application features
+ * - Overview of training statistics and progress
+ *
+ * The component uses Angular CDK's BreakpointObserver to provide responsive behavior
+ * across different device types and screen sizes.
+ *
+ * @route /dashboard
+ */
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

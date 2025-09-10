@@ -8,6 +8,21 @@ import {MatButton} from "@angular/material/button";
 import {Router} from "@angular/router";
 import {BehaviorSubject, filter, skipUntil, take, tap} from "rxjs";
 
+/**
+ * Component for application settings and data management.
+ *
+ * This component provides access to various application settings and data management features including:
+ * - Export training data to JSON files for backup
+ * - Import training data from JSON files
+ * - View application version information
+ * - User authentication status and management
+ * - Data synchronization controls
+ *
+ * The component handles file operations for data backup/restore and provides
+ * integration with the Supabase authentication system.
+ *
+ * @route /settings
+ */
 @Component({
   selector: 'app-settings',
   standalone: true,

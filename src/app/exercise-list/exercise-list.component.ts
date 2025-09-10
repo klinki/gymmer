@@ -5,6 +5,22 @@ import {liveQuery} from "dexie";
 import {createComputed} from "@angular/core/primitives/signals";
 import {MatSelectionList} from "@angular/material/list";
 
+/**
+ * Component for managing the exercise library and exercise selection.
+ *
+ * This component provides a comprehensive exercise management interface that allows users to:
+ * - View all available exercises with execution count statistics
+ * - Search and filter exercises by name (with diacritics support)
+ * - Create new exercises
+ * - Edit existing exercises
+ * - Delete exercises
+ * - Select exercises for training plans or current training sessions
+ *
+ * The component sorts exercises by execution count (most used first) and provides
+ * real-time search functionality with normalized text matching.
+ *
+ * @route /exercise-list
+ */
 @Component({
   selector: 'app-exercise-list',
   templateUrl: './exercise-list.component.html',

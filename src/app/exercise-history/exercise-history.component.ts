@@ -5,6 +5,22 @@ import {DatabaseService, Exercise, ExerciseExecution} from "../database.service"
 import {asapScheduler, combineLatest} from "rxjs";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
+/**
+ * Component for viewing the historical performance of a specific exercise.
+ *
+ * This component displays all past executions of a particular exercise across
+ * different training sessions and allows users to:
+ * - View a chronological list of all exercise executions
+ * - See performance trends over time (weight, repetitions, dates)
+ * - Analyze progress and performance patterns
+ *
+ * The component aggregates exercise execution data from all training sessions
+ * where the exercise was performed, providing a comprehensive view of
+ * the user's progress with that specific exercise.
+ *
+ * @route /exercise/:id/history
+ * @param id - Exercise ID from the route
+ */
 @Component({
   selector: 'app-exercise-history',
   templateUrl: './exercise-history.component.html',

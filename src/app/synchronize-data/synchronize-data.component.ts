@@ -8,6 +8,21 @@ import {MatInput, MatInputModule} from "@angular/material/input";
 import {CdkCopyToClipboard} from "@angular/cdk/clipboard";
 import {MatIconModule} from "@angular/material/icon";
 
+/**
+ * Component for data synchronization using PeerJS peer-to-peer connections.
+ *
+ * This component provides functionality for synchronizing training data between devices
+ * using WebRTC peer-to-peer connections and allows users to:
+ * - Generate and share peer connection IDs
+ * - Connect to other devices for data synchronization
+ * - Send and receive messages through peer connections
+ * - Copy connection IDs to clipboard for easy sharing
+ *
+ * The component uses PeerJS library to establish direct connections between devices
+ * without requiring a central server, enabling offline data synchronization.
+ *
+ * @route /synchronize
+ */
 @Component({
   selector: 'app-synchronize-data',
   standalone: true,

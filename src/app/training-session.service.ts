@@ -1,6 +1,19 @@
 import {Injectable, signal} from '@angular/core';
 import {Exercise, ExerciseExecution, Training} from "./database.service";
 
+/**
+ * Service for managing the current active training session.
+ *
+ * This service provides state management for ongoing workout sessions and includes:
+ * - Current session state management with reactive signals
+ * - Local storage persistence for session data
+ * - Exercise management within the current session
+ * - Session lifecycle management (start, update, stop, clear)
+ *
+ * The service automatically persists the current session to localStorage
+ * and restores it on application startup, ensuring users don't lose
+ * their workout progress.
+ */
 @Injectable({
   providedIn: 'root'
 })

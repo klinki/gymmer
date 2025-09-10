@@ -5,6 +5,21 @@ import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";
 import {TrainingSessionService} from "../training-session.service";
 
+/**
+ * Component for managing training plans and starting new training sessions.
+ *
+ * This component serves as the main entry point for workout planning and allows users to:
+ * - View all available training plans
+ * - Create new training plans
+ * - Start a training session from an existing plan
+ * - Start a free-form training session without a plan
+ * - Edit existing training plans
+ *
+ * When starting a training from a plan, the component creates a new training session
+ * with the plan's exercises and navigates to the current training interface.
+ *
+ * @route / (root route)
+ */
 @Component({
   selector: 'app-training-plans',
   templateUrl: './training-plans.component.html',

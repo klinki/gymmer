@@ -6,6 +6,22 @@ import {MatDialog} from "@angular/material/dialog";
 import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
 import {first} from "rxjs";
 
+/**
+ * Component for managing the current active training session.
+ *
+ * This component is the main interface for an ongoing workout and allows users to:
+ * - Start a new training session with a timer
+ * - View the current training duration in real-time
+ * - Add exercises to the current training from the exercise library
+ * - Navigate to individual exercises to perform them
+ * - Stop and save the training session to the database
+ * - Delete the current training session if needed
+ *
+ * The component manages the training session state and provides a live timer
+ * that tracks the duration of the current workout.
+ *
+ * @route /training (current session)
+ */
 @Component({
   selector: 'app-training-current',
   templateUrl: './training-current.component.html',

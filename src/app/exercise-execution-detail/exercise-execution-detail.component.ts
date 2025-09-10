@@ -19,6 +19,18 @@ import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 
+/**
+ * Component for viewing and editing exercise execution details from past training sessions.
+ *
+ * This component is used when reviewing completed workouts and allows users to:
+ * - View series data (weight, repetitions, notes) for a specific exercise execution
+ * - Add new series to the exercise execution
+ * - Delete individual series from the exercise execution
+ *
+ * @route /training/:id/:exerciseExecutionId
+ * @param id - Training ID from the route
+ * @param exerciseExecutionId - Exercise execution ID from the route
+ */
 @Component({
   selector: 'app-exercise-execution-detail',
   standalone: true,

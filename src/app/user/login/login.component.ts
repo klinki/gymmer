@@ -2,6 +2,20 @@ import { Component } from '@angular/core';
 import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
 import {SupabaseAuthService} from "../../supabase-auth.service";
 
+/**
+ * Component for user authentication using email-based login.
+ *
+ * This component provides a simple authentication interface that allows users to:
+ * - Enter their email address for authentication
+ * - Receive a login link via email (magic link authentication)
+ * - Handle authentication errors and success states
+ * - Reset the form after successful submission
+ *
+ * The component uses Supabase's magic link authentication system, which sends
+ * a secure login link to the user's email address instead of requiring a password.
+ *
+ * @route /account/login
+ */
 @Component({
   selector: 'app-login',
   standalone: true,

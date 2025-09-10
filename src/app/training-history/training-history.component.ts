@@ -4,6 +4,19 @@ import {fromPromise} from "rxjs/internal/observable/innerFrom";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {Router} from "@angular/router";
 
+/**
+ * Component for viewing the complete history of all training sessions.
+ *
+ * This component displays a chronological list of all completed training sessions and allows users to:
+ * - View all past training sessions sorted by date (most recent first)
+ * - Navigate to individual training session details
+ * - See training session information at a glance
+ *
+ * The component automatically sorts training sessions by start date in descending order,
+ * with sessions without dates placed at the end of the list.
+ *
+ * @route /training/history
+ */
 @Component({
   selector: 'app-training-history',
   templateUrl: './training-history.component.html',

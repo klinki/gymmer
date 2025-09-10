@@ -4,6 +4,21 @@ import {Location} from "@angular/common";
 import {TrainingSessionService} from "../training-session.service";
 import {asapScheduler, combineLatest} from "rxjs";
 
+/**
+ * Component for performing exercises during an active training session.
+ *
+ * This component is used when actively working out and allows users to:
+ * - View the last execution of an exercise for reference
+ * - Add new series (weight, repetitions, notes) to the current exercise
+ * - Delete individual series from the current exercise
+ * - Save the exercise execution and move to the next exercise
+ *
+ * The component automatically loads the last execution data to pre-populate
+ * weight values for better user experience.
+ *
+ * @route /exercise/:id
+ * @param id - Exercise ID from the route
+ */
 @Component({
   selector: 'app-exercise-detail',
   templateUrl: './exercise-detail.component.html',

@@ -5,6 +5,21 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
 
+/**
+ * Component for viewing completed training sessions and their exercise executions.
+ *
+ * This component displays a summary of a past training session and allows users to:
+ * - View the training duration and overall information
+ * - See all exercises that were performed in the training
+ * - Navigate to individual exercise execution details for review/editing
+ * - Add new exercises to the training (if needed)
+ *
+ * The component calculates and displays the total training time based on
+ * start and end dates.
+ *
+ * @route /training/:id
+ * @param id - Training ID from the route
+ */
 @Component({
   selector: 'app-training',
   templateUrl: './training.component.html',
