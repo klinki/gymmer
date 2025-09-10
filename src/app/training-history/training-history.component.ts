@@ -18,9 +18,10 @@ import {Router} from "@angular/router";
  * @route /training/history
  */
 @Component({
-  selector: 'app-training-history',
-  templateUrl: './training-history.component.html',
-  styleUrl: './training-history.component.scss'
+    selector: 'app-training-history',
+    templateUrl: './training-history.component.html',
+    styleUrl: './training-history.component.scss',
+    standalone: false
 })
 export class TrainingHistoryComponent {
   db = inject(DatabaseService);

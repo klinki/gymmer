@@ -20,9 +20,10 @@ import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
  * @param id - Training ID from the route
  */
 @Component({
-  selector: 'app-training',
-  templateUrl: './training.component.html',
-  styleUrls: ['./training.component.scss']
+    selector: 'app-training',
+    templateUrl: './training.component.html',
+    styleUrls: ['./training.component.scss'],
+    standalone: false
 })
 export class TrainingComponent {
   private router = inject(Router);

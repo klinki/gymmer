@@ -20,9 +20,10 @@ import {combineLatest} from "rxjs";
  * @param id - Exercise ID from the route
  */
 @Component({
-  selector: 'app-exercise-detail',
-  templateUrl: './exercise-detail.component.html',
-  styleUrls: ['./exercise-detail.component.scss']
+    selector: 'app-exercise-detail',
+    templateUrl: './exercise-detail.component.html',
+    styleUrls: ['./exercise-detail.component.scss'],
+    standalone: false
 })
 export class ExerciseDetailComponent {
   private location = inject(Location);

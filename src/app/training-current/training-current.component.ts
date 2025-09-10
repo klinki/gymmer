@@ -24,9 +24,10 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
  * @route /training (current session)
  */
 @Component({
-  selector: 'app-training-current',
-  templateUrl: './training-current.component.html',
-  styleUrl: './training-current.component.scss'
+    selector: 'app-training-current',
+    templateUrl: './training-current.component.html',
+    styleUrl: './training-current.component.scss',
+    standalone: false
 })
 export class TrainingCurrentComponent implements OnInit {
   private router = inject(Router);

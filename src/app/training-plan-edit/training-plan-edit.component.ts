@@ -35,23 +35,22 @@ import {liveQuery} from "dexie";
  * @param id - Training plan ID from the route
  */
 @Component({
-  selector: 'app-training-plan-edit',
-  standalone: true,
-  imports: [
-    DatePipe,
-    DurationPipe,
-    MatFabButton,
-    MatIcon,
-    MatList,
-    MatListItem,
-    MatListItemIcon,
-    MatListItemLine,
-    MatListItemTitle,
-    MatListSubheaderCssMatStyler,
-    NgIf
-  ],
-  templateUrl: './training-plan-edit.component.html',
-  styleUrl: './training-plan-edit.component.scss'
+    selector: 'app-training-plan-edit',
+    imports: [
+        DatePipe,
+        DurationPipe,
+        MatFabButton,
+        MatIcon,
+        MatList,
+        MatListItem,
+        MatListItemIcon,
+        MatListItemLine,
+        MatListItemTitle,
+        MatListSubheaderCssMatStyler,
+        NgIf
+    ],
+    templateUrl: './training-plan-edit.component.html',
+    styleUrl: './training-plan-edit.component.scss'
 })
 export class TrainingPlanEditComponent {
   private router = inject(Router);

@@ -22,9 +22,10 @@ import {from} from "rxjs";
  * @param id - Exercise ID from the route
  */
 @Component({
-  selector: 'app-exercise-history',
-  templateUrl: './exercise-history.component.html',
-  styleUrl: './exercise-history.component.scss'
+    selector: 'app-exercise-history',
+    templateUrl: './exercise-history.component.html',
+    styleUrl: './exercise-history.component.scss',
+    standalone: false
 })
 export class ExerciseHistoryComponent {
   private db = inject(DatabaseService);

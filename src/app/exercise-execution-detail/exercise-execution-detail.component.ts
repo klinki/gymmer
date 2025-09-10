@@ -31,31 +31,30 @@ import {MatInput} from "@angular/material/input";
  * @param exerciseExecutionId - Exercise execution ID from the route
  */
 @Component({
-  selector: 'app-exercise-execution-detail',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatFormField,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatLabel,
-    MatRow,
-    MatRowDef,
-    MatSuffix,
-    MatTable,
-    NgIf,
-    ReactiveFormsModule
-  ],
-  templateUrl: './exercise-execution-detail.component.html',
-  styleUrl: './exercise-execution-detail.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-exercise-execution-detail',
+    imports: [
+        FormsModule,
+        MatCell,
+        MatCellDef,
+        MatColumnDef,
+        MatFormField,
+        MatHeaderCell,
+        MatHeaderRow,
+        MatHeaderRowDef,
+        MatIcon,
+        MatIconButton,
+        MatInput,
+        MatLabel,
+        MatRow,
+        MatRowDef,
+        MatSuffix,
+        MatTable,
+        NgIf,
+        ReactiveFormsModule
+    ],
+    templateUrl: './exercise-execution-detail.component.html',
+    styleUrl: './exercise-execution-detail.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExerciseExecutionDetailComponent {
   private location = inject(Location);
