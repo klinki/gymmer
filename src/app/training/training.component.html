@@ -1,24 +1,25 @@
 @if (loading()) {
   Loading...
 }
-<mat-list *ngIf="training();let training;">
-  <div mat-subheader>Training: {{training.name}}</div>
-  @if (training.startDate != null) {
-    <div>Training started at: {{ training.startDate | date: 'short' }}</div>
-    <div>Training ended at: {{ training.endDate | date: 'short' }}</div>
-    <div>Training took: {{ trainingRunningTime() | duration }}</div>
-  }
-  @for (exercise of training.exercises; track exercise) {
-    <mat-list-item (click)="showExercise(exercise)">
-      <mat-icon matListItemIcon>folder</mat-icon>
-      <div matListItemTitle>{{exercise.name}}</div>
-
-      @if (exercise.series.length > 0) {
-        <div matListItemLine>Done</div>
-      }
-    </mat-list-item>
-  }
-</mat-list>
+@if (training(); as training;) {
+  <mat-list>
+    <div mat-subheader>Training: {{training.name}}</div>
+    @if (training.startDate != null) {
+      <div>Training started at: {{ training.startDate | date: 'short' }}</div>
+      <div>Training ended at: {{ training.endDate | date: 'short' }}</div>
+      <div>Training took: {{ trainingRunningTime() | duration }}</div>
+    }
+    @for (exercise of training.exercises; track exercise) {
+      <mat-list-item (click)="showExercise(exercise)">
+        <mat-icon matListItemIcon>folder</mat-icon>
+        <div matListItemTitle>{{exercise.name}}</div>
+        @if (exercise.series.length > 0) {
+          <div matListItemLine>Done</div>
+        }
+      </mat-list-item>
+    }
+  </mat-list>
+}
 
 <button (click)="addExercise()" mat-fab>
   <mat-icon>add</mat-icon>

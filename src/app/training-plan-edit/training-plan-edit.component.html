@@ -1,15 +1,17 @@
 @if (loading()) {
   Loading...
 }
-<mat-list *ngIf="trainingPlan();let trainingPlan;">
-  <div mat-subheader>Training Plan: {{trainingPlan.name}}</div>
-  @for (exercise of trainingPlan.exercises; track $index) {
-    <mat-list-item>
-      <mat-icon matListItemIcon>folder</mat-icon>
-      <div matListItemTitle>{{exercise.name}}</div>
-    </mat-list-item>
-  }
-</mat-list>
+@if (trainingPlan(); as trainingPlan;) {
+  <mat-list>
+    <div mat-subheader>Training Plan: {{trainingPlan.name}}</div>
+    @for (exercise of trainingPlan.exercises; track $index) {
+      <mat-list-item>
+        <mat-icon matListItemIcon>folder</mat-icon>
+        <div matListItemTitle>{{exercise.name}}</div>
+      </mat-list-item>
+    }
+  </mat-list>
+}
 <button (click)="addExercise()" mat-fab>
   <mat-icon>add</mat-icon>
 </button>
