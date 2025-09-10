@@ -58,7 +58,7 @@ export class ExerciseExecutionDetailComponent {
 
   exercise: ExerciseExecution|null = null;
 
-  displayedColumns = ['series', 'weight', 'repetitions'];
+  displayedColumns = ['series', 'weight', 'repetitions', 'actions'];
 
   currentValue: ExerciseSeries = {
     weight: 30,
@@ -102,6 +102,20 @@ export class ExerciseExecutionDetailComponent {
   add() {
     this.exercise!.series = [ ...this.exercise!.series, this.currentValue ];
     this.currentValue = { ...this.currentValue };
+  }
+
+  deleteSeries(element: ExerciseSeries) {
+    if (this.exercise == null) {
+      return;
+    }
+
+    const idx = this.exercise.series.indexOf(element);
+    if (idx === -1) { return; }
+
+    this.exercise.series = [
+      ...this.exercise.series.slice(0, idx),
+      ...this.exercise.series.slice(idx + 1)
+    ];
   }
 
   back() {
