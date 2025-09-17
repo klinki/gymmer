@@ -24,14 +24,13 @@ import {MatIconModule} from "@angular/material/icon";
  * @route /synchronize
  */
 @Component({
-  selector: 'app-synchronize-data',
-  standalone: true,
-  imports: [
-    FormsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCardActions,
-    MatButton, CdkCopyToClipboard, MatCardContent, MatCardTitle, MatCardHeader, MatCard, MatIconButton
-  ],
-  templateUrl: './synchronize-data.component.html',
-  styleUrl: './synchronize-data.component.scss'
+    selector: 'app-synchronize-data',
+    imports: [
+        FormsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCardActions,
+        MatButton, CdkCopyToClipboard, MatCardContent, MatCardTitle, MatCardHeader, MatCard, MatIconButton
+    ],
+    templateUrl: './synchronize-data.component.html',
+    styleUrl: './synchronize-data.component.scss'
 })
 export class SynchronizeDataComponent {
   connection: any;

@@ -18,9 +18,10 @@ import { map } from 'rxjs/operators';
  * @route /dashboard
  */
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss',
+    standalone: false
 })
 export class DashboardComponent {
   private breakpointObserver = inject(BreakpointObserver);

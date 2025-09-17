@@ -24,11 +24,10 @@ import {BehaviorSubject, filter, skipUntil, take, tap} from "rxjs";
  * @route /settings
  */
 @Component({
-  selector: 'app-settings',
-  standalone: true,
-  imports: [AsyncPipe, MatCard, MatCardTitle, MatCardHeader, MatCardActions, MatButton, MatCardContent, DatePipe],
-  templateUrl: './settings.component.html',
-  styleUrl: './settings.component.scss'
+    selector: 'app-settings',
+    imports: [AsyncPipe, MatCard, MatCardTitle, MatCardHeader, MatCardActions, MatButton, MatCardContent, DatePipe],
+    templateUrl: './settings.component.html',
+    styleUrl: './settings.component.scss'
 })
 export class SettingsComponent {
   private db = inject(DatabaseService);

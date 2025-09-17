@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, effect, inject, input, signal} from '@angular/core';
-import {Location, NgIf} from "@angular/common";
+import { Location } from "@angular/common";
 import {DatabaseService, ExerciseExecution, ExerciseSeries, Training, TrainingPlan} from "../database.service";
-import {asapScheduler} from "rxjs";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
   MatCell,
@@ -32,9 +31,8 @@ import {MatInput} from "@angular/material/input";
  * @param exerciseExecutionId - Exercise execution ID from the route
  */
 @Component({
-  selector: 'app-exercise-execution-detail',
-  standalone: true,
-  imports: [
+    selector: 'app-exercise-execution-detail',
+    imports: [
     FormsModule,
     MatCell,
     MatCellDef,
@@ -51,12 +49,11 @@ import {MatInput} from "@angular/material/input";
     MatRowDef,
     MatSuffix,
     MatTable,
-    NgIf,
     ReactiveFormsModule
-  ],
-  templateUrl: './exercise-execution-detail.component.html',
-  styleUrl: './exercise-execution-detail.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+],
+    templateUrl: './exercise-execution-detail.component.html',
+    styleUrl: './exercise-execution-detail.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExerciseExecutionDetailComponent {
   private location = inject(Location);
@@ -95,12 +92,9 @@ export class ExerciseExecutionDetailComponent {
           const exercise = training.exercises.find(x => x.id === exerciseExecutionId);
 
           if (exercise != null) {
-            // https://github.com/ngrx/platform/issues/3932
-            asapScheduler.schedule(() => {
-              this.training.set(training);
-              this.exercise = exercise;
-              this.loading.set(false);
-            });
+            this.training.set(training);
+            this.exercise = exercise;
+            this.loading.set(false);
           }
         });
 

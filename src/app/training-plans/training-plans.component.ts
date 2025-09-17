@@ -21,9 +21,10 @@ import {TrainingSessionService} from "../training-session.service";
  * @route / (root route)
  */
 @Component({
-  selector: 'app-training-plans',
-  templateUrl: './training-plans.component.html',
-  styleUrl: './training-plans.component.scss'
+    selector: 'app-training-plans',
+    templateUrl: './training-plans.component.html',
+    styleUrl: './training-plans.component.scss',
+    standalone: false
 })
 export class TrainingPlansComponent {
   private database = inject(DatabaseService);

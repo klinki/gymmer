@@ -4,13 +4,12 @@ import { AuthSession } from '@supabase/supabase-js'
 import {Profile, SupabaseAuthService} from "../../supabase-auth.service";
 
 @Component({
-  selector: 'app-account',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule
-  ],
-  templateUrl: './account.component.html',
-  styleUrl: './account.component.scss'
+    selector: 'app-account',
+    imports: [
+        ReactiveFormsModule
+    ],
+    templateUrl: './account.component.html',
+    styleUrl: './account.component.scss'
 })
 export class AccountComponent implements OnInit {
   loading = false;

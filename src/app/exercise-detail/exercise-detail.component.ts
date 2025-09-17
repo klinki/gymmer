@@ -2,7 +2,7 @@ import {Component, effect, inject, input, signal} from '@angular/core';
 import {DatabaseService, ExerciseExecution, ExerciseSeries, Training, TrainingPlan} from "../database.service";
 import {Location} from "@angular/common";
 import {TrainingSessionService} from "../training-session.service";
-import {asapScheduler, combineLatest} from "rxjs";
+import {combineLatest} from "rxjs";
 
 /**
  * Component for performing exercises during an active training session.
@@ -20,9 +20,10 @@ import {asapScheduler, combineLatest} from "rxjs";
  * @param id - Exercise ID from the route
  */
 @Component({
-  selector: 'app-exercise-detail',
-  templateUrl: './exercise-detail.component.html',
-  styleUrls: ['./exercise-detail.component.scss']
+    selector: 'app-exercise-detail',
+    templateUrl: './exercise-detail.component.html',
+    styleUrls: ['./exercise-detail.component.scss'],
+    standalone: false
 })
 export class ExerciseDetailComponent {
   private location = inject(Location);
@@ -65,12 +66,9 @@ export class ExerciseDetailComponent {
             }
           }
 
-          // https://github.com/ngrx/platform/issues/3932
-          asapScheduler.schedule(() => {
-            this.lastExecution = execution;
-            this.exercise = ({...exercise, exerciseId: exercise.id, series: []});
-            this.loading.set(false);
-          });
+          this.lastExecution = execution;
+          this.exercise = ({...exercise, exerciseId: exercise.id, series: []});
+          this.loading.set(false);
         });
 
         return () => subscription.unsubscribe();
