@@ -1,10 +1,11 @@
-import {Component, effect, inject, input, signal} from '@angular/core';
+import {Component, effect, inject, input, signal, OnInit, OnDestroy, DestroyRef} from '@angular/core';
 import {Router} from "@angular/router";
 import {DatabaseService, ExerciseExecution, Training} from "../database.service";
 import {TrainingSessionService} from "../training-session.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
-import {first} from "rxjs";
+import {first, interval, Subscription} from "rxjs";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 /**
  * Component for managing the current active training session.
@@ -23,22 +24,31 @@ import {first} from "rxjs";
  * @route /training (current session)
  */
 @Component({
-  selector: 'app-training-current',
-  templateUrl: './training-current.component.html',
-  styleUrl: './training-current.component.scss'
+    selector: 'app-training-current',
+    templateUrl: './training-current.component.html',
+    styleUrl: './training-current.component.scss',
+    standalone: false
 })
-export class TrainingCurrentComponent {
+export class TrainingCurrentComponent implements OnInit {
   private router = inject(Router);
   private db = inject(DatabaseService);
   private session = inject(TrainingSessionService);
   private dialog = inject(MatDialog);
+  private destroyRef = inject(DestroyRef);
 
   training = this.session.currentSession;
   trainingRunningTime = signal(0);
 
-  interval: any;
-
   constructor() {
+    // Constructor should only handle dependency injection
+    // Register a callback to be called when the component is destroyed
+    this.destroyRef.onDestroy(() => {
+      console.log('💀 TrainingCurrentComponent destroyed');
+    });
+  }
+
+  ngOnInit(): void {
+    console.log('🚀 TrainingCurrentComponent initialized');
     const startDate = this.training()?.startDate;
     if (startDate != null) {
       const secondsBetweenDates = Math.floor((new Date().getTime() - startDate.getTime()) / 1000);
@@ -47,20 +57,25 @@ export class TrainingCurrentComponent {
     }
   }
 
-  startTimer() {
-    if (this.interval != null) {
-      clearInterval(this.interval);
-      this.interval = null;
-    }
-
-    if (this.interval == null) {
-      this.interval = setInterval(() => {
-        this.trainingRunningTime.update(x => x + 1);
-      }, 1000);
-    }
+  private startTimer(): void {
+    console.log('🟢 Starting timer...');
+    interval(1000)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.trainingRunningTime.update(x => x + 1);
+        },
+        complete: () => {
+          console.log('🔴 Timer destroyed - subscription completed');
+        },
+        error: (error) => {
+          console.error('❌ Timer error:', error);
+        }
+      });
   }
 
   start() {
+    console.log('▶️ Starting new training session');
     const training = {
       ...this.training() as any,
       startDate: new Date()
@@ -72,14 +87,13 @@ export class TrainingCurrentComponent {
 
   stop() {
     if (window.confirm('Finish the training?')) {
+      console.log('⏹️ Stopping training session');
       const training = {
         ...this.training() as any,
         endDate: new Date()
       };
 
       this.session.updateTraining(training);
-      clearInterval(this.interval);
-      this.interval = null;
       this.session.stopTraining();
       this.db.addTraining(training);
       this.router.navigate(['/']);
@@ -101,6 +115,7 @@ export class TrainingCurrentComponent {
 
   deleteCurrentSession() {
     if (window.confirm('Delete current training?')) {
+      console.log('🗑️ Deleting current training session');
       this.session.clear();
       this.router.navigate(['/']);
     }
