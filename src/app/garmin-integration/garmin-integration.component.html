@@ -19,20 +19,43 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
-            <mat-label>Garmin Activity</mat-label>
-            <mat-select formControlName="garminCtrl">
-              @for (activity of garminActivities(); track activity.id) {
-                <mat-option [value]="activity.id">
-                  {{ activity.name }} ({{ activity.startTime | date:'medium' }})
-                </mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
+          <mat-tab-group animationDuration="0ms">
+            <mat-tab label="Garmin API (Mock)">
+                <div class="tab-content">
+                    <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Garmin Activity</mat-label>
+                        <mat-select formControlName="garminCtrl">
+                        @for (activity of garminActivities(); track activity.id) {
+                            <mat-option [value]="activity.id">
+                            {{ activity.name }} ({{ activity.startTime | date:'medium' }})
+                            </mat-option>
+                        }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Import FIT File">
+                <div class="tab-content">
+                    <div class="file-upload">
+                        <p>Upload a .fit file exported from Garmin Connect.</p>
+                        <input type="file" (change)="onFileSelected($event)" accept=".fit">
+                    </div>
+                    @if (importedActivity()) {
+                        <div class="imported-info">
+                            <mat-icon>check_circle</mat-icon>
+                            <span>Loaded: {{ importedActivity()?.startTime | date:'medium' }} ({{ importedActivity()?.exercises?.length }} exercises)</span>
+                        </div>
+                    }
+                </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
 
         <div>
-          <button mat-button matStepperNext (click)="onStep1Next()">Next</button>
+          <button mat-button matStepperNext (click)="onStep1Next()"
+            [disabled]="!selectionFormGroup.get('trainingCtrl')?.value || (!selectionFormGroup.get('garminCtrl')?.value && !importedActivity())">
+            Next
+          </button>
         </div>
       </form>
     </mat-step>
@@ -91,7 +114,11 @@
             <p><strong>Action Summary:</strong></p>
             <ul>
                 <li>Gymmer training will be updated with sets/weights from Garmin.</li>
-                <li>Garmin activity will be reordered to match Gymmer exercise order.</li>
+                @if (!isFileUpload()) {
+                    <li>Garmin activity will be reordered to match Gymmer exercise order.</li>
+                } @else {
+                    <li><em>Garmin activity update is not available with File Import mode.</em></li>
+                }
             </ul>
         </div>
       </div>
