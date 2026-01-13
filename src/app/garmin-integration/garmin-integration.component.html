@@ -1,0 +1,141 @@
+<div class="container">
+  <h2>Garmin Integration</h2>
+
+  <mat-stepper [linear]="true" #stepper>
+    <!-- Step 1: Select Training & Activity -->
+    <mat-step [stepControl]="selectionFormGroup">
+      <form [formGroup]="selectionFormGroup">
+        <ng-template matStepLabel>Select Data</ng-template>
+
+        <div class="selection-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Gymmer Training</mat-label>
+            <mat-select formControlName="trainingCtrl">
+              @for (training of trainings(); track training.id) {
+                <mat-option [value]="training.id">
+                  {{ training.name }} ({{ training.startDate | date:'medium' }})
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-tab-group animationDuration="0ms">
+            <mat-tab label="Garmin API (Mock)">
+                <div class="tab-content">
+                    <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Garmin Activity</mat-label>
+                        <mat-select formControlName="garminCtrl">
+                        @for (activity of garminActivities(); track activity.id) {
+                            <mat-option [value]="activity.id">
+                            {{ activity.name }} ({{ activity.startTime | date:'medium' }})
+                            </mat-option>
+                        }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Import FIT File">
+                <div class="tab-content">
+                    <div class="file-upload">
+                        <p>Upload a .fit file exported from Garmin Connect.</p>
+                        <input type="file" (change)="onFileSelected($event)" accept=".fit">
+                    </div>
+                    @if (importedActivity()) {
+                        <div class="imported-info">
+                            <mat-icon>check_circle</mat-icon>
+                            <span>Loaded: {{ importedActivity()?.startTime | date:'medium' }} ({{ importedActivity()?.exercises?.length }} exercises)</span>
+                        </div>
+                    }
+                </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+
+        <div>
+          <button mat-button matStepperNext (click)="onStep1Next()"
+            [disabled]="!selectionFormGroup.get('trainingCtrl')?.value || (!selectionFormGroup.get('garminCtrl')?.value && !importedActivity())">
+            Next
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 2: Review & Merge -->
+    <mat-step>
+      <ng-template matStepLabel>Review & Merge</ng-template>
+
+      <div class="review-container" *ngIf="selectedTraining() && selectedGarminActivity()">
+        <p>Review the matches below. Uncheck any you wish to skip.</p>
+
+        <div class="matches-list">
+          @for (match of matches(); track match.gymmerExercise.id) {
+            <mat-card class="match-card" [class.unmatched]="!match.garminExercise">
+              <mat-card-header>
+                <mat-card-title>
+                    <mat-checkbox [(ngModel)]="match.selected" [disabled]="!match.garminExercise">
+                        {{ match.gymmerExercise.name }}
+                    </mat-checkbox>
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="comparison">
+                  <div class="gymmer-side">
+                    <h4>Gymmer (Current)</h4>
+                    <ul>
+                      @for (set of match.gymmerExercise.series; track $index) {
+                        <li>{{ set.weight }}kg x {{ set.repetitions }}</li>
+                      }
+                    </ul>
+                  </div>
+
+                  <div class="arrow-icon">
+                    <mat-icon>arrow_forward</mat-icon>
+                  </div>
+
+                  <div class="garmin-side">
+                    <h4>Garmin (New)</h4>
+                    @if (match.garminExercise) {
+                        <ul>
+                        @for (set of match.garminExercise.sets; track $index) {
+                            <li>{{ set.weight }}kg x {{ set.reps }}</li>
+                        }
+                        </ul>
+                    } @else {
+                        <p class="warning">No match found in Garmin</p>
+                    }
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          }
+        </div>
+
+        <div class="actions">
+            <p><strong>Action Summary:</strong></p>
+            <ul>
+                <li>Gymmer training will be updated with sets/weights from Garmin.</li>
+                @if (!isFileUpload()) {
+                    <li>Garmin activity will be reordered to match Gymmer exercise order.</li>
+                } @else {
+                    <li><em>Garmin activity update is not available with File Import mode.</em></li>
+                }
+            </ul>
+        </div>
+      </div>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext (click)="executeMerge()">Confirm & Merge</button>
+      </div>
+    </mat-step>
+
+    <!-- Step 3: Done -->
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>Synchronization complete!</p>
+      <div>
+        <button mat-button (click)="stepper.reset()">Start Over</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

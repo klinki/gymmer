@@ -8,6 +8,7 @@ import {TrainingCurrentComponent} from "./training-current/training-current.comp
 import {TrainingHistoryComponent} from "./training-history/training-history.component";
 import {TrainingPlanEditComponent} from "./training-plan-edit/training-plan-edit.component";
 import {SynchronizeDataComponent} from "./synchronize-data/synchronize-data.component";
+import {GarminIntegrationComponent} from "./garmin-integration/garmin-integration.component";
 import {SettingsComponent} from "./settings/settings.component";
 import {ExerciseExecutionDetailComponent} from "./exercise-execution-detail/exercise-execution-detail.component";
 import {ExerciseHistoryComponent} from "./exercise-history/exercise-history.component";
@@ -86,6 +87,10 @@ const routes: Routes = [
       {
         path: 'synchronize',
         component: SynchronizeDataComponent,
+      },
+      {
+        path: 'garmin-integration',
+        component: GarminIntegrationComponent,
       },
       {
         path: 'settings',
