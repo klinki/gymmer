@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { DatabaseService, Training, ExerciseExecution } from '../database.service';
 import { GarminService, GarminActivity, GarminExercise } from './garmin.service';
@@ -38,7 +39,8 @@ interface ExerciseMatch {
     MatListModule,
     MatIconModule,
     MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTabsModule
   ],
   templateUrl: './garmin-integration.component.html',
   styleUrls: ['./garmin-integration.component.scss']
@@ -58,8 +60,11 @@ export class GarminIntegrationComponent implements OnInit {
 
   selectionFormGroup = this._formBuilder.group({
     trainingCtrl: ['', Validators.required],
-    garminCtrl: ['', Validators.required],
+    garminCtrl: [''], // Optional if file used
   });
+
+  importedActivity = signal<GarminActivity | null>(null);
+  isFileUpload = signal(false);
 
   constructor() {}
 
@@ -68,23 +73,42 @@ export class GarminIntegrationComponent implements OnInit {
     const trainings = await this.db.trainings.orderBy('startDate').reverse().limit(10).toArray();
     this.trainings.set(trainings);
 
-    // Load Garmin activities
+    // Load Garmin activities (Mock/API)
     const activities = await firstValueFrom(this.garminService.getActivities());
     this.garminActivities.set(activities);
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.garminService.parseFitFile(file).subscribe({
+        next: (activity) => {
+            this.importedActivity.set(activity);
+            this.isFileUpload.set(true);
+            // Auto-select this activity for the next step logic
+            this.selectedGarminActivity.set(activity);
+        },
+        error: (err) => {
+            console.error('Error parsing FIT file:', err);
+            alert('Failed to parse FIT file.');
+        }
+      });
+    }
+  }
+
   onStep1Next() {
     const trainingId = this.selectionFormGroup.get('trainingCtrl')?.value;
-    const garminId = this.selectionFormGroup.get('garminCtrl')?.value;
-
     const training = this.trainings().find(t => t.id === trainingId) || null;
-    const garminActivity = this.garminActivities().find(a => a.id === garminId) || null;
-
     this.selectedTraining.set(training);
-    this.selectedGarminActivity.set(garminActivity);
 
-    if (training && garminActivity) {
-      this.matchExercises(training, garminActivity);
+    if (!this.isFileUpload()) {
+        const garminId = this.selectionFormGroup.get('garminCtrl')?.value;
+        const garminActivity = this.garminActivities().find(a => a.id === garminId) || null;
+        this.selectedGarminActivity.set(garminActivity);
+    }
+
+    if (this.selectedTraining() && this.selectedGarminActivity()) {
+      this.matchExercises(this.selectedTraining()!, this.selectedGarminActivity()!);
     }
   }
 
@@ -152,25 +176,28 @@ export class GarminIntegrationComponent implements OnInit {
     }
 
     // 2. Update Garmin Data (Order)
-    // We want Garmin exercises to follow Gymmer order.
-    // We construct a list of Garmin Exercise IDs in the order of Gymmer exercises.
-    const newOrderIds: string[] = [];
+    // Only possible if using API (Mock) and not File Upload
+    if (!this.isFileUpload()) {
+        const newOrderIds: string[] = [];
 
-    // First, add the matched ones in Gymmer order
-    for (const match of currentMatches) {
-        if (match.selected && match.garminExercise) {
-            newOrderIds.push(match.garminExercise.id);
+        // First, add the matched ones in Gymmer order
+        for (const match of currentMatches) {
+            if (match.selected && match.garminExercise) {
+                newOrderIds.push(match.garminExercise.id);
+            }
         }
-    }
 
-    // Then append any unmatched Garmin exercises (at the end)
-    for (const gEx of garminActivity.exercises) {
-        if (!newOrderIds.includes(gEx.id)) {
-            newOrderIds.push(gEx.id);
+        // Then append any unmatched Garmin exercises (at the end)
+        for (const gEx of garminActivity.exercises) {
+            if (!newOrderIds.includes(gEx.id)) {
+                newOrderIds.push(gEx.id);
+            }
         }
-    }
 
-    await firstValueFrom(this.garminService.updateActivityExerciseOrder(garminActivity.id, newOrderIds));
-    console.log('Garmin activity order updated');
+        await firstValueFrom(this.garminService.updateActivityExerciseOrder(garminActivity.id, newOrderIds));
+        console.log('Garmin activity order updated');
+    } else {
+        console.log('Skipping Garmin update (File Import mode)');
+    }
   }
 }
