@@ -102,6 +102,12 @@ export class DatabaseService extends Dexie {
     return fromPromise(finalPromise);
   }
 
+  updateTraining(training: Training): Observable<Training> {
+    const allExercises = training.exercises.map(x => this.exerciseExecutions.put(x as ExerciseExecution));
+    const finalPromise = Promise.all(allExercises).then(_ => this.trainings.put(training));
+    return fromPromise(finalPromise);
+  }
+
   getTraining(trainingId: string) {
     return fromPromise(this.trainings.get(trainingId));
   }
