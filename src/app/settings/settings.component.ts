@@ -1,12 +1,12 @@
 import {Component, inject} from '@angular/core';
 import {DatabaseService} from "../database.service";
-import {SupabaseAuthService} from "../supabase-auth.service";
+import {DexieAuthService} from "../dexie-auth.service";
 import {AsyncPipe, DatePipe} from "@angular/common";
 import {versions} from "../../environments/version";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
 import {Router} from "@angular/router";
-import {BehaviorSubject, filter, skipUntil, take, tap} from "rxjs";
+import {BehaviorSubject, filter, take, tap} from "rxjs";
 
 /**
  * Component for application settings and data management.
@@ -16,10 +16,6 @@ import {BehaviorSubject, filter, skipUntil, take, tap} from "rxjs";
  * - Import training data from JSON files
  * - View application version information
  * - User authentication status and management
- * - Data synchronization controls
- *
- * The component handles file operations for data backup/restore and provides
- * integration with the Supabase authentication system.
  *
  * @route /settings
  */
@@ -31,10 +27,10 @@ import {BehaviorSubject, filter, skipUntil, take, tap} from "rxjs";
 })
 export class SettingsComponent {
   private db = inject(DatabaseService);
-  private authService = inject(SupabaseAuthService);
+  private authService = inject(DexieAuthService);
   private router = inject(Router);
 
-  user$ = this.authService.$user;
+  user$ = this.authService.user;
 
   version = versions;
 
@@ -86,16 +82,8 @@ export class SettingsComponent {
     }
   }
 
-  syncToDb() {
-    this.db.syncToPostgre();
-  }
-
-  syncFromDb() {
-    this.db.syncFromPostgre();
-  }
-
   logout() {
-    this.authService.signOut();
+    this.authService.logout();
   }
 
   login() {

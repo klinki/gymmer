@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms'
-import { AuthSession } from '@supabase/supabase-js'
-import { SupabaseAuthService} from "../../supabase-auth.service";
+import {UserLogin} from "dexie-cloud-addon";
+import {DatabaseService} from "../../database.service";
+import { DexieAuthService } from "../../dexie-auth.service";
 import { Profile } from '../../models';
 
 @Component({
@@ -15,7 +16,7 @@ import { Profile } from '../../models';
 export class AccountComponent implements OnInit {
   loading = false;
   profile!: Profile;
-  session: AuthSession | null = null;
+  user: UserLogin | undefined;
 
   updateProfileForm = this.formBuilder.group({
     username: '',
@@ -24,40 +25,33 @@ export class AccountComponent implements OnInit {
   })
 
   constructor(
-    private readonly supabase: SupabaseAuthService,
+    private readonly authService: DexieAuthService,
+    private readonly db: DatabaseService,
     private formBuilder: FormBuilder
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.supabase.authChanges((_, session) => (this.session = session))
-
-    await this.getProfile()
-
-    const { username, website, avatar_url } = this.profile
-    this.updateProfileForm.patchValue({
-      username,
-      website,
-      avatar_url,
-    })
+    this.authService.user.subscribe(async user => {
+      this.user = user;
+      if (user && user.userId) {
+        await this.getProfile(user.userId);
+      }
+    });
   }
 
-  async getProfile() {
+  async getProfile(userId: string) {
     try {
       this.loading = true
-      const user = this.session?.user;
-
-      if (!user) {
-        return;
-      }
-
-      const { data: profile, error, status } = await this.supabase.profile(user);
-
-      if (error && status !== 406) {
-        throw error;
-      }
+      const profile = await this.db.profiles.get(userId);
 
       if (profile) {
         this.profile = profile;
+        const { username, website, avatar_url } = this.profile
+        this.updateProfileForm.patchValue({
+          username,
+          website,
+          avatar_url,
+        })
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -71,9 +65,9 @@ export class AccountComponent implements OnInit {
   async updateProfile(): Promise<void> {
     try {
       this.loading = true
-      const user = this.session?.user;
+      const user = this.user;
 
-      if (!user) {
+      if (!user || !user.userId) {
         return;
       }
 
@@ -81,13 +75,12 @@ export class AccountComponent implements OnInit {
       const website = this.updateProfileForm.value.website as string
       const avatar_url = this.updateProfileForm.value.avatar_url as string
 
-      const { error } = await this.supabase.updateProfile({
-        id: user.id,
+      await this.db.profiles.put({
+        id: user.userId,
         username,
         website,
         avatar_url,
       })
-      if (error) throw error
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message)
@@ -98,7 +91,6 @@ export class AccountComponent implements OnInit {
   }
 
   async signOut() {
-    await this.supabase.signOut()
+    this.authService.logout()
   }
 }
-

@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
 import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
-import {SupabaseAuthService} from "../../supabase-auth.service";
+import {DexieAuthService} from "../../dexie-auth.service";
 
 /**
  * Component for user authentication using email-based login.
  *
  * This component provides a simple authentication interface that allows users to:
  * - Enter their email address for authentication
- * - Receive a login link via email (magic link authentication)
  * - Handle authentication errors and success states
  * - Reset the form after successful submission
  *
- * The component uses Supabase's magic link authentication system, which sends
- * a secure login link to the user's email address instead of requiring a password.
+ * The component uses Dexie Cloud authentication system.
  *
  * @route /account/login
  */
@@ -32,7 +30,7 @@ export class LoginComponent {
   });
 
   constructor(
-    private readonly supabase: SupabaseAuthService,
+    private readonly authService: DexieAuthService,
     private readonly formBuilder: FormBuilder
   ) {}
 
@@ -40,12 +38,7 @@ export class LoginComponent {
     try {
       this.loading = true;
       const email = this.signInForm.value.email as string;
-      const { data, error } = await this.supabase.signIn(email);
-
-      if (error)
-        throw error;
-
-      alert('Check your email for the login link!');
+      await this.authService.login(email);
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);

@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Synchronization</mat-card-title>
+    <mat-card-title>Data Management</mat-card-title>
   </mat-card-header>
   <mat-card-actions>
     <button mat-button (click)="export()">Export</button>
@@ -9,37 +9,28 @@
     <button color="error" mat-button (click)="clear()">Clear</button>
   </mat-card-actions>
 </mat-card>
+
 <mat-card>
   <mat-card-header>
     <mat-card-title>User</mat-card-title>
   </mat-card-header>
   <mat-card-actions>
     @if ((user$ | async); as user) {
-      {{ user.email }}
-      <button (click)="logout()" mat-button>Log out</button>
+      @if (user.isLoggedIn) {
+        {{ user.userId }}
+        <button (click)="logout()" mat-button>Log out</button>
+      } @else {
+        <button (click)="login()" mat-button>Log in</button>
+      }
     } @else {
       <button (click)="login()" mat-button>Log in</button>
-    }
-  </mat-card-actions>
-</mat-card>
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>DB Sync</mat-card-title>
-  </mat-card-header>
-  <mat-card-actions>
-    @if ((user$ | async) != null) {
-      <button mat-button (click)="syncToDb()">Sync to DB</button>
-      <button mat-button (click)="syncFromDb()">Sync from DB</button>
-    } @else {
-      <button mat-button>Sync to DB</button>
-      <button mat-button>Sync from DB</button>
     }
   </mat-card-actions>
 </mat-card>
 
 <mat-card>
   <mat-card-header>
-    <mat-card-title>DB Synch</mat-card-title>
+    <mat-card-title>App Info</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div>Version: {{ version.version }}</div>
@@ -47,4 +38,3 @@
     <div>Date: {{ version.date }}</div>
   </mat-card-content>
 </mat-card>
-
