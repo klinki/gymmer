@@ -2,8 +2,8 @@ import {Component, effect, inject, input, signal} from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import {DatabaseService, Exercise, ExerciseExecution} from "../database.service";
-import {asapScheduler, combineLatest} from "rxjs";
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import {combineLatest} from "rxjs";
+import {from} from "rxjs";
 
 /**
  * Component for viewing the historical performance of a specific exercise.
@@ -22,9 +22,10 @@ import {fromPromise} from "rxjs/internal/observable/innerFrom";
  * @param id - Exercise ID from the route
  */
 @Component({
-  selector: 'app-exercise-history',
-  templateUrl: './exercise-history.component.html',
-  styleUrl: './exercise-history.component.scss'
+    selector: 'app-exercise-history',
+    templateUrl: './exercise-history.component.html',
+    styleUrl: './exercise-history.component.scss',
+    standalone: false
 })
 export class ExerciseHistoryComponent {
   private db = inject(DatabaseService);
@@ -41,19 +42,16 @@ export class ExerciseHistoryComponent {
       }
 
       const subscription = combineLatest([
-        fromPromise(this.db.trainings.toArray()),
-        fromPromise(this.db.exercises.get(id)),
+        from(this.db.trainings.toArray()),
+        from(this.db.exercises.get(id)),
       ]).subscribe(([trainings, exercise]) => {
         const trainingsWithExecutions = trainings.filter(x => x.exercises.some(ex => ex.exerciseId == id));
         const justExecutions = trainingsWithExecutions
           .flatMap(x => x.exercises)
           .filter(x => x.exerciseId == id);
 
-        // https://github.com/ngrx/platform/issues/3932
-        asapScheduler.schedule(() => {
-          this.executions.set(justExecutions);
-          this.exercise.set(exercise!);
-        });
+        this.executions.set(justExecutions);
+        this.exercise.set(exercise!);
       });
 
       return () => subscription.unsubscribe();

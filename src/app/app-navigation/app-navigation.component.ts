@@ -5,9 +5,10 @@ import { map, shareReplay } from 'rxjs/operators';
 import {TrainingSessionService} from "../training-session.service";
 
 @Component({
-  selector: 'app-app-navigation',
-  templateUrl: './app-navigation.component.html',
-  styleUrl: './app-navigation.component.scss'
+    selector: 'app-app-navigation',
+    templateUrl: './app-navigation.component.html',
+    styleUrl: './app-navigation.component.scss',
+    standalone: false
 })
 export class AppNavigationComponent {
   private breakpointObserver = inject(BreakpointObserver);

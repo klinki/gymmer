@@ -1,8 +1,8 @@
 import {Component, effect, inject, input, signal} from '@angular/core';
 import {Router} from "@angular/router";
 import {DatabaseService, Exercise, TrainingPlan} from "../database.service";
-import {asapScheduler, first} from "rxjs";
-import {DatePipe, NgIf} from "@angular/common";
+import {first} from "rxjs";
+import { DatePipe } from "@angular/common";
 import {DurationPipe} from "../duration-pipe.pipe";
 import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
@@ -35,9 +35,8 @@ import {liveQuery} from "dexie";
  * @param id - Training plan ID from the route
  */
 @Component({
-  selector: 'app-training-plan-edit',
-  standalone: true,
-  imports: [
+    selector: 'app-training-plan-edit',
+    imports: [
     DatePipe,
     DurationPipe,
     MatFabButton,
@@ -47,11 +46,10 @@ import {liveQuery} from "dexie";
     MatListItemIcon,
     MatListItemLine,
     MatListItemTitle,
-    MatListSubheaderCssMatStyler,
-    NgIf
-  ],
-  templateUrl: './training-plan-edit.component.html',
-  styleUrl: './training-plan-edit.component.scss'
+    MatListSubheaderCssMatStyler
+],
+    templateUrl: './training-plan-edit.component.html',
+    styleUrl: './training-plan-edit.component.scss'
 })
 export class TrainingPlanEditComponent {
   private router = inject(Router);
@@ -65,9 +63,7 @@ export class TrainingPlanEditComponent {
   constructor() {
     effect(() => {
       if (this.trainingPlan() != null) {
-        asapScheduler.schedule(() => {
-          this.loading.set(false);
-        });
+        this.loading.set(false);
       }
     });
   }

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import {DatabaseService, Training} from "../database.service";
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import {from} from "rxjs";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {Router} from "@angular/router";
 
@@ -18,15 +18,16 @@ import {Router} from "@angular/router";
  * @route /training/history
  */
 @Component({
-  selector: 'app-training-history',
-  templateUrl: './training-history.component.html',
-  styleUrl: './training-history.component.scss'
+    selector: 'app-training-history',
+    templateUrl: './training-history.component.html',
+    styleUrl: './training-history.component.scss',
+    standalone: false
 })
 export class TrainingHistoryComponent {
   db = inject(DatabaseService);
   router = inject(Router);
 
-  trainings = toSignal(fromPromise(
+  trainings = toSignal(from(
     this.db.trainings
       .toArray()
       .then(trainings => trainings.sort((a, b) => {

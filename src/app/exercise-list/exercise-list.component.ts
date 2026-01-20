@@ -22,9 +22,10 @@ import {MatSelectionList} from "@angular/material/list";
  * @route /exercise-list
  */
 @Component({
-  selector: 'app-exercise-list',
-  templateUrl: './exercise-list.component.html',
-  styleUrls: ['./exercise-list.component.scss']
+    selector: 'app-exercise-list',
+    templateUrl: './exercise-list.component.html',
+    styleUrls: ['./exercise-list.component.scss'],
+    standalone: false
 })
 export class ExerciseListComponent {
   db = inject(DatabaseService);

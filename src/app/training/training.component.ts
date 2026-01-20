@@ -1,6 +1,5 @@
 import {Component, effect, inject, input, signal} from '@angular/core';
 import {DatabaseService, ExerciseExecution, Training} from "../database.service";
-import {asapScheduler} from "rxjs";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
@@ -21,9 +20,10 @@ import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
  * @param id - Training ID from the route
  */
 @Component({
-  selector: 'app-training',
-  templateUrl: './training.component.html',
-  styleUrls: ['./training.component.scss']
+    selector: 'app-training',
+    templateUrl: './training.component.html',
+    styleUrls: ['./training.component.scss'],
+    standalone: false
 })
 export class TrainingComponent {
   private router = inject(Router);
@@ -35,8 +35,6 @@ export class TrainingComponent {
 
   trainingRunningTime = signal(0);
 
-  interval: any;
-
   constructor(private db: DatabaseService) {
     this.loading.set(true);
 
@@ -46,13 +44,10 @@ export class TrainingComponent {
 
       const subscription = this.db.getTraining(id).subscribe(training => {
         if (training == null) { return; }
-        // https://github.com/ngrx/platform/issues/3932
-        asapScheduler.schedule(() => {
-          this.training.set(training);
-          const totalTime = (training.endDate ?? new Date()).getTime() - (training.startDate ?? new Date()).getTime();
-          this.trainingRunningTime.set(totalTime);
-          this.loading.set(false);
-        });
+        this.training.set(training);
+        const totalTime = (training.endDate ?? new Date()).getTime() - (training.startDate ?? new Date()).getTime();
+        this.trainingRunningTime.set(totalTime);
+        this.loading.set(false);
       });
 
       return () => subscription.unsubscribe();
