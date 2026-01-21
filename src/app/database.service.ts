@@ -123,32 +123,26 @@ export class DatabaseService extends Dexie {
 
   getLastExerciseExecution(id: ExerciseId) {
     return from(this.ensureExerciseExecutions()).pipe(
-      switchMap(() => {
-        const queryPromise = this.exerciseExecutions
-        .orderBy('date')
-        .reverse()
-        .filter(x => x.exerciseId == id)
-        .limit(1)
-    // .where({
-    //   exerciseId: id
-    // })
-       .toArray();
+      switchMap(async () => {
+        const executions = await this.exerciseExecutions
+          .where('exerciseId')
+          .equals(id)
+          .toArray();
 
-        return from(queryPromise).pipe(map(x => x.length > 0 ? x[0] : null));
+        if (executions.length === 0) {
+          return null;
+        }
+
+        // Sort descending by date
+        executions.sort((a, b) => {
+          const dateA = a.date ? new Date(a.date).getTime() : 0;
+          const dateB = b.date ? new Date(b.date).getTime() : 0;
+          return dateB - dateA;
+        });
+
+        return executions[0];
       })
     );
-
-    const queryPromise = this.exerciseExecutions
-      .orderBy('date')
-      .reverse()
-      .filter(x => x.exerciseId == id)
-      .limit(1)
-  // .where({
-  //   exerciseId: id
-  // })
-     .toArray();
-
-    return from(queryPromise).pipe(map(x => x.length > 0 ? x[0] : null));
   }
 
   private async ensureExerciseExecutions(): Promise<void> {
