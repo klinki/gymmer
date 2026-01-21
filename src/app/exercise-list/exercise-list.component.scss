@@ -1,8 +1,31 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  background-color: var(--mat-sys-surface, #303030);
+  color: var(--mat-sys-on-surface, #fff);
+}
+
 .search {
   width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 mat-selection-list, mat-list {
   overflow: auto;
-  height: 100%;
+  flex-grow: 1;
+  padding-bottom: 88px; // Space for FAB
+}
+
+.fab-container {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+}
+
+.spacer {
+  flex: 1 1 auto;
 }
