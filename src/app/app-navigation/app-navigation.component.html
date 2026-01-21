@@ -1,22 +1,54 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false">
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      @if (currentTraining() != null) {
-        <a mat-list-item [routerLink]="['/training']" i18n>Active Training</a>
+      <!-- Desktop Navigation -->
+      @if ((isHandset$ | async) === false) {
+        @if (currentTraining() != null) {
+          <a mat-list-item [routerLink]="['/training']" routerLinkActive="active-link">
+             <mat-icon matListItemIcon>timer</mat-icon>
+             <span matListItemTitle>Active Training</span>
+          </a>
+        }
+        <a mat-list-item [routerLink]="['/']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+           <mat-icon matListItemIcon>dashboard</mat-icon>
+           <span matListItemTitle>Training Plans</span>
+        </a>
+        <a mat-list-item [routerLink]="['/exercise-list']" routerLinkActive="active-link">
+           <mat-icon matListItemIcon>fitness_center</mat-icon>
+           <span matListItemTitle>Exercises</span>
+        </a>
+        <a mat-list-item [routerLink]="['/training/history']" routerLinkActive="active-link">
+           <mat-icon matListItemIcon>history</mat-icon>
+           <span matListItemTitle>History</span>
+        </a>
+        <a mat-list-item [routerLink]="['/settings']" routerLinkActive="active-link">
+           <mat-icon matListItemIcon>settings</mat-icon>
+           <span matListItemTitle>Settings</span>
+        </a>
+      } @else {
+        <!-- Mobile Secondary Navigation (Side Menu) -->
+        <a mat-list-item [routerLink]="['/settings']" (click)="drawer.close()">
+           <mat-icon matListItemIcon>settings</mat-icon>
+           <span matListItemTitle>Settings</span>
+        </a>
+        <a mat-list-item [routerLink]="['/synchronize']" (click)="drawer.close()">
+           <mat-icon matListItemIcon>sync</mat-icon>
+           <span matListItemTitle>Sync Data</span>
+        </a>
+        <a mat-list-item [routerLink]="['/account/profile']" (click)="drawer.close()">
+           <mat-icon matListItemIcon>person</mat-icon>
+           <span matListItemTitle>Profile</span>
+        </a>
       }
-      <a mat-list-item [routerLink]="['']" i18n>Training Plans</a>
-      <a mat-list-item [routerLink]="['/exercise-list']" i18n>Exercise List</a>
-      <a mat-list-item [routerLink]="['/training/history']" i18n>History</a>
-      <a mat-list-item [routerLink]="['/settings']" i18n>Settings</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      @if ((isHandset$ | async)) {
+      @if (isHandset$ | async) {
         <button
           type="button"
           aria-label="Toggle sidenav"
@@ -25,9 +57,38 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
       }
-      <span>gymmer</span>
+      <span>Gymmer</span>
     </mat-toolbar>
-    <!-- Add Content Here -->
-    <router-outlet />
+
+    <div class="main-content" [class.mobile-content]="(isHandset$ | async)">
+      <router-outlet />
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    @if (isHandset$ | async) {
+      <mat-toolbar class="bottom-nav">
+        <a mat-icon-button [routerLink]="['/']" routerLinkActive="active-link-icon" [routerLinkActiveOptions]="{exact: true}">
+          <mat-icon>dashboard</mat-icon>
+        </a>
+
+        <a mat-icon-button [routerLink]="['/exercise-list']" routerLinkActive="active-link-icon">
+          <mat-icon>fitness_center</mat-icon>
+        </a>
+
+        @if (currentTraining() != null) {
+           <a mat-fab color="primary" [routerLink]="['/training']" class="fab-nav-item">
+             <mat-icon>timer</mat-icon>
+           </a>
+        } @else {
+           <a mat-icon-button [routerLink]="['/training']" routerLinkActive="active-link-icon">
+             <mat-icon>play_circle_outline</mat-icon>
+           </a>
+        }
+
+        <a mat-icon-button [routerLink]="['/training/history']" routerLinkActive="active-link-icon">
+          <mat-icon>history</mat-icon>
+        </a>
+      </mat-toolbar>
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>

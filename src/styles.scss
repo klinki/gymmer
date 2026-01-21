@@ -1,4 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+@use './theme.scss';
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@include mat.core();
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -6,6 +12,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 body {
   /* Disables pull-to-refresh but allows overscroll glow effects. */
   overscroll-behavior-y: contain;
+
+  @include mat.all-component-themes(theme.$light-theme);
+  background: mat.get-theme-color(theme.$light-theme, surface);
+  color: mat.get-theme-color(theme.$light-theme, on-surface);
+
+  @media (prefers-color-scheme: dark) {
+    @include mat.all-component-themes(theme.$dark-theme);
+    background: mat.get-theme-color(theme.$dark-theme, surface);
+    color: mat.get-theme-color(theme.$dark-theme, on-surface);
+  }
 }
 
 * { user-select: none; }
+
+// Utility classes
+.spacer {
+  flex: 1 1 auto;
+}
+
+.p-2 { padding: 16px; }
+.m-2 { margin: 16px; }
+.mb-2 { margin-bottom: 16px; }
+
+// Container for consistent mobile spacing
+.container {
+  padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}

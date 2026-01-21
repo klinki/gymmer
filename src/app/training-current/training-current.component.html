@@ -1,33 +1,87 @@
-@if (training(); as training;) {
-  <mat-list>
-    <div mat-subheader>Training: {{training.name}}</div>
-    @if (training.startDate != null) {
-      <span>Training started at: {{ training.startDate | date: 'hh:mm:ss' }}</span>
-      <span>Training running: {{ trainingRunningTime() | duration }}</span>
-    }
-    @for (exercise of training.exercises; track $index) {
-      <mat-list-item (click)="startExercise(exercise)">
-        <mat-icon matListItemIcon>folder</mat-icon>
-        <div matListItemTitle>{{exercise.name}}</div>
-        @if (exercise.series.length > 0) {
-          <div matListItemLine>Done</div>
-        }
-      </mat-list-item>
-    }
-  </mat-list>
-}
-@if (training()?.startDate == null || training()?.endDate != null) {
-  <button (click)="start()" mat-fab [color]="'green'">
-    <mat-icon>play_arrow</mat-icon>
-  </button>
-} @else {
-  <button (click)="stop()" mat-fab [color]="'red'">
-    <mat-icon>square</mat-icon>
-  </button>
-}
-<button (click)="addExercise()" mat-fab>
-  <mat-icon>add</mat-icon>
-</button>
-<button (click)="deleteCurrentSession()" [color]="'warn'" mat-fab>
-  <mat-icon>delete</mat-icon>
-</button>
+<div class="container page-content">
+  @if (training(); as training;) {
+    <!-- Header with Timer -->
+    <div class="training-header">
+       <div class="training-info">
+         <h1 class="mat-h2">{{training.name}}</h1>
+         @if (training.startDate != null) {
+            <div class="timer">{{ trainingRunningTime() | duration }}</div>
+            <div class="start-time">Started: {{ training.startDate | date: 'shortTime' }}</div>
+         } @else {
+            <div class="timer">00:00:00</div>
+         }
+       </div>
+       <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+       </button>
+       <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="deleteCurrentSession()">
+            <mat-icon>delete</mat-icon>
+            <span>Discard Session</span>
+          </button>
+       </mat-menu>
+    </div>
+
+    <!-- Exercises List -->
+    <div class="exercise-list">
+      @for (exercise of training.exercises; track $index) {
+        <mat-card class="exercise-card" [class.done]="exercise.series.length > 0" (click)="startExercise(exercise)" matRipple>
+          <div class="exercise-content">
+             <div class="exercise-icon">
+                @if (exercise.series.length > 0) {
+                   <mat-icon class="done-icon">check_circle</mat-icon>
+                } @else {
+                   <mat-icon>fitness_center</mat-icon>
+                }
+             </div>
+             <div class="exercise-details">
+                <div class="exercise-name">{{exercise.name}}</div>
+                <div class="exercise-stats">
+                   @if (exercise.series.length > 0) {
+                      {{exercise.series.length}} Sets
+                   } @else {
+                      Not started
+                   }
+                </div>
+             </div>
+             <mat-icon>chevron_right</mat-icon>
+          </div>
+        </mat-card>
+      }
+
+      <!-- Hint if no exercises -->
+      @if (training.exercises.length === 0) {
+        <div class="empty-state" style="text-align: center; padding: 32px; opacity: 0.6;">
+           <mat-icon style="font-size: 48px; width: 48px; height: 48px;">fitness_center</mat-icon>
+           <p>Add exercises to start your workout</p>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Floating Controls (Fixed at bottom) -->
+  <div class="controls-container">
+    <div class="main-controls">
+       @if (training()?.startDate == null || training()?.endDate != null) {
+          <button mat-fab extended color="primary" (click)="start()">
+             <mat-icon>play_arrow</mat-icon>
+             START WORKOUT
+          </button>
+
+          <button mat-fab color="accent" (click)="addExercise()">
+             <mat-icon>add</mat-icon>
+          </button>
+       } @else {
+          <!-- Add Exercise -->
+          <button mat-fab color="accent" (click)="addExercise()">
+             <mat-icon>add</mat-icon>
+          </button>
+
+          <!-- Stop Button -->
+          <button mat-fab color="warn" (click)="stop()">
+             <mat-icon>stop</mat-icon>
+          </button>
+       }
+    </div>
+  </div>
+</div>

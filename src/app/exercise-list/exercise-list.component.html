@@ -1,44 +1,52 @@
-<mat-form-field class="search">
-  <mat-label>Search</mat-label>
-  <input [(ngModel)]="searchText" matInput type="text" />
-  <button
-    mat-icon-button
-    matPrefix
-  >
-    <mat-icon>search</mat-icon>
-  </button>
-  <button (click)="searchText.set('')" [hidden]="searchText().length == 0"
-    mat-icon-button
-    matSuffix
-  >
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>
-@if (showSelection()) {
-  <mat-selection-list [(ngModel)]="selectedItems">
-    <div mat-subheader>Exercises</div>
-    @for (exercise of filteredExercises(); track exercise) {
-      <mat-list-option [value]="exercise">
-        <mat-icon matListItemIcon>folder</mat-icon>
-        <div matListItemTitle>{{exercise.name}}</div>
-        <div matListItemLine>{{exercise.name}} - {{ exercise.executionCount }}</div>
-      </mat-list-option>
-    }
-  </mat-selection-list>
-} @else {
-  <mat-list>
-    <div mat-subheader>Exercises</div>
-    @for (exercise of filteredExercises(); track exercise) {
-      <mat-list-item [routerLink]="['/exercise', exercise.id, 'history']">
-        <mat-icon matListItemIcon>folder</mat-icon>
-        <div matListItemTitle>{{exercise.name}}</div>
-        <div matListItemLine>{{exercise.name}} - {{ exercise.executionCount }}</div>
-      </mat-list-item>
-    }
-  </mat-list>
-}
-<div class="fab-container">
-  <button (click)="newExercise()" mat-fab>
-    <mat-icon>add</mat-icon>
-  </button>
+<div class="container page-content">
+  <!-- Sticky Search Bar -->
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search Exercises</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input [(ngModel)]="searchText" matInput type="text" placeholder="e.g. Bench Press" />
+      @if (searchText().length > 0) {
+        <button (click)="searchText.set('')" mat-icon-button matSuffix>
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+  </div>
+
+  <!-- Content -->
+  @if (showSelection()) {
+    <mat-selection-list [(ngModel)]="selectedItems" class="exercise-list">
+      <div mat-subheader>Select Exercises</div>
+      @for (exercise of filteredExercises(); track exercise) {
+        <mat-list-option [value]="exercise" class="exercise-item">
+          <mat-icon matListItemIcon>fitness_center</mat-icon>
+          <div matListItemTitle>{{exercise.name}}</div>
+          <div matListItemLine>{{ exercise.executionCount }} executions</div>
+        </mat-list-option>
+      }
+    </mat-selection-list>
+  } @else {
+    <div class="exercise-grid">
+      @for (exercise of filteredExercises(); track exercise) {
+        <mat-card class="exercise-card" [routerLink]="['/exercise', exercise.id, 'history']">
+          <div class="card-content">
+            <div class="icon-container">
+               <mat-icon>fitness_center</mat-icon>
+            </div>
+            <div class="text-container">
+              <div class="title">{{exercise.name}}</div>
+              <div class="subtitle">{{ exercise.executionCount }} executions</div>
+            </div>
+            <mat-icon class="arrow-icon">chevron_right</mat-icon>
+          </div>
+        </mat-card>
+      }
+    </div>
+  }
+
+  <div class="fab-container">
+    <button (click)="newExercise()" mat-fab color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>
