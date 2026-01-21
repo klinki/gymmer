@@ -29,6 +29,7 @@
     "@angular/router": "^21.1.1",
     "@angular/service-worker": "^21.1.1",
     "@formatjs/intl-durationformat": "^0.2.4",
+    "@garmin/fitsdk": "^21.188.0",
     "@supabase/supabase-js": "^2.45.3",
     "dexie": "^4.0.8",
     "dexie-observable": "^4.0.1-beta.13",

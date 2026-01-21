@@ -104,7 +104,7 @@ export class DatabaseService extends Dexie {
   updateTraining(training: Training): Observable<Training> {
     const allExercises = training.exercises.map(x => this.exerciseExecutions.put(x as ExerciseExecution));
     const finalPromise = Promise.all(allExercises).then(_ => this.trainings.put(training));
-    return fromPromise(finalPromise);
+    return from(finalPromise);
   }
 
   getTraining(trainingId: string) {
@@ -383,3 +383,4 @@ export class DatabaseService extends Dexie {
     });
   }
 }
+

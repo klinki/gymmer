@@ -70,7 +70,7 @@ export class GarminIntegrationComponent implements OnInit {
 
   async ngOnInit() {
     // Load Gymmer trainings
-    const trainings = await this.db.trainings.orderBy('startDate').reverse().limit(10).toArray();
+    const trainings = await this.db.trainings.orderBy('id').reverse().limit(10).toArray();
     this.trainings.set(trainings);
 
     // Load Garmin activities (Mock/API)

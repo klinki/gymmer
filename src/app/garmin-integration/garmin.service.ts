@@ -3,6 +3,7 @@ import { Observable, of, delay, from, map } from 'rxjs';
 // @ts-ignore
 import FitParser from 'fit-file-parser';
 import { ulid } from 'ulidx';
+import { Decoder, Stream, Profile, Utils } from '@garmin/fitsdk';
 
 export interface GarminSet {
   weight: number;
@@ -127,10 +128,12 @@ export class GarminService {
 
       reader.onload = (event) => {
         const buffer = event.target?.result;
-        if (!buffer) {
+        if (!buffer || !(buffer instanceof ArrayBuffer)) {
           observer.error('Failed to read file');
           return;
         }
+
+        this.officialParserParse(buffer);
 
         const fitParser = new FitParser({
           force: true,
@@ -159,6 +162,28 @@ export class GarminService {
       reader.onerror = (error) => observer.error(error);
       reader.readAsArrayBuffer(file);
     });
+  }
+
+  private officialParserParse(buffer: ArrayBuffer) {
+    // TODO: Implement official parsing logic.
+    // Decoder requires a Stream object.
+    const uintArr = new Uint8Array(buffer);
+    const bytes = Array.from(uintArr);
+
+    const stream = Stream.fromByteArray(bytes);
+    const decoder = new Decoder(stream);
+
+    console.log("isFIT (static method): " + Decoder.isFIT(stream));
+    console.log("isFIT (instance method): " + decoder.isFIT());
+    console.log("checkIntegrity: " + decoder.checkIntegrity());
+
+    const { messages, errors } = decoder.read();
+
+    console.log(errors);
+    console.log(messages);
+
+    const jsonStr = JSON.stringify(messages, undefined, 2);
+    console.log(jsonStr);
   }
 
   private mapFitDataToActivity(data: any): GarminActivity {

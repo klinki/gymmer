@@ -50,6 +50,9 @@ importers:
       '@formatjs/intl-durationformat':
         specifier: ^0.2.4
         version: 0.2.4
+      '@garmin/fitsdk':
+        specifier: ^21.188.0
+        version: 21.188.0
       '@supabase/supabase-js':
         specifier: ^2.45.3
         version: 2.46.1
@@ -913,6 +916,9 @@ packages:
 
   '@formatjs/intl-localematcher@0.5.4':
     resolution: {integrity: sha512-zTwEpWOzZ2CiKcB93BLngUX59hQkuZjT2+SAQEscSm52peDW/getsawMcWF1rGRpMCX6D7nSJA3CzJ8gn13N/g==}
+
+  '@garmin/fitsdk@21.188.0':
+    resolution: {integrity: sha512-HN+4dQ8bdairVQMm6Kykr2BAh7lzDfRhIEKl5eoy/UE03ZLVUYhDIPhIAmFZFZ1Gx4IQ02/6AoviQdamgl67pQ==}
 
   '@grpc/grpc-js@1.9.15':
     resolution: {integrity: sha512-nqE7Hc0AzI+euzUwDAy0aY5hCp10r734gMGRdU+qOPX0XSceI2ULrcXB5U2xSc5VkWwalCj4M7GzCAygZl2KoQ==}
@@ -4698,6 +4704,8 @@ snapshots:
   '@formatjs/intl-localematcher@0.5.4':
     dependencies:
       tslib: 2.8.1
+
+  '@garmin/fitsdk@21.188.0': {}
 
   '@grpc/grpc-js@1.9.15':
     dependencies:

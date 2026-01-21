@@ -56,6 +56,13 @@ declare module '@garmin/fitsdk' {
             sportMesgs?: any[];
             activityMesgs?: any[];
             setMesgs?: any[]; // Strength training sets
+            timeInZoneMesgs?: any[];
+            timestampCorrelationMesgs?: any[];
+            eventMesgs?: any[];
+            deviceSettingsMesgs?: any[];
+            userProfileMesgs?: any[];
+            trainingSettingsMesgs?: any[];
+            zonesTargetMesgs?: any[];
             
             // Catch-all
             [key: string]: any[];
