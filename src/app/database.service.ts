@@ -59,9 +59,12 @@ export class DatabaseService extends Dexie {
       profiles: 'id'
     });
 
-    this.cloud.configure({
-      databaseUrl: environment.dexieCloudUrl,
-      requireAuth: false,
+    // Defer cloud configuration to next microtask to avoid circular DI issues
+    queueMicrotask(() => {
+      this.cloud.configure({
+        databaseUrl: environment.dexieCloudUrl,
+        requireAuth: false,
+      });
     });
   }
 
