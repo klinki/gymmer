@@ -68,9 +68,23 @@ export class DatabaseService extends Dexie {
     });
   }
 
-  addTraining(training: Omit<Training, 'id'>): Observable<Training> {
-    const allExercises = training.exercises.map(x => this.exerciseExecutions.put(x as ExerciseExecution));
-    const finalPromise = Promise.all(allExercises).then(_ => this.trainings.put(training as Training));
+  addTraining(training: Omit<Training, 'id'> | Training): Observable<Training> {
+    const allExercises = training.exercises.map(x => {
+      // Ensure each execution has a valid id for Dexie Cloud sync
+      const execution: ExerciseExecution = {
+        ...x,
+        id: x.id ?? ulid(),
+      };
+      return this.exerciseExecutions.put(execution);
+    });
+
+    // Ensure training has a valid id for Dexie Cloud sync
+    const trainingWithId: Training = {
+      ...training,
+      id: (training as Training).id ?? ulid(),
+    };
+
+    const finalPromise = Promise.all(allExercises).then(_ => this.trainings.put(trainingWithId));
     return from(finalPromise);
   }
 
@@ -201,6 +215,8 @@ export class DatabaseService extends Dexie {
       this.addExercise(exercise);
     }
 
+    return;
+
     for (const plan of trainingPlans) {
       this.addTrainingPlan(plan);
     }
@@ -220,7 +236,8 @@ export class DatabaseService extends Dexie {
 
     fixedTraining.exercises.forEach(exec => {
       if (exec.id == null || exec.id == exec.exerciseId) {
-        exec.id = ulid(training.startDate?.getTime());
+        // Generate a new ULID - use training startDate if available, otherwise use current time
+        exec.id = training.startDate ? ulid(training.startDate.getTime()) : ulid();
       }
 
       if (exec.date == null) {
