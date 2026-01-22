@@ -1,11 +1,12 @@
-import {inject, Injectable} from '@angular/core';
-import {first, from, Observable, take} from "rxjs";
+import {Injectable} from '@angular/core';
+import {from, Observable} from "rxjs";
 import Dexie, {Table} from "dexie";
 import 'dexie-observable';
+import dexieCloud from 'dexie-cloud-addon';
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
 import {ulid} from "ulidx";
-import {SupabaseService} from "./supabase.service";
-import {SupabaseAuthService} from "./supabase-auth.service";
 import {map, switchMap} from "rxjs/operators";
+import {environment} from "../environments/environment";
 
 import {
   Exercise,
@@ -27,7 +28,7 @@ Dexie.Observable.createUUID = () => ulid();
  * - Training session storage and retrieval
  * - Training plan management
  * - Exercise execution history tracking
- * - Data synchronization with Supabase backend
+ * - Data synchronization with Dexie Cloud
  * - Import/export functionality for data backup
  *
  * The service uses Dexie for local IndexedDB storage with reactive observables
@@ -44,25 +45,46 @@ export class DatabaseService extends Dexie {
   trainingPlanExercises!: Table<TrainingPlanExercise>;
   trainings!: Table<Training>;
   exerciseExecutions!: Table<ExerciseExecution>;
-
-  private supabase = inject(SupabaseService);
-  private supabaseAuth = inject(SupabaseAuthService);
+  profiles!: Table<Profile>;
 
   constructor() {
-    super('GymmerDB');
-    this.version(1).stores({
+    super('GymmerDB', { addons: [dexieCloud] });
+    this.version(2).stores({
       // Primary key and indexed props
       exercises: '$$id',
       trainingPlans: '$$id',
       trainings: '$$id',
       trainingPlanExercises: '[trainingPlanId+exerciseId]',
-      exerciseExecutions: '$$id,exerciseId,date'
+      exerciseExecutions: '$$id,exerciseId,date',
+      profiles: 'id'
+    });
+
+    // Defer cloud configuration to next microtask to avoid circular DI issues
+    queueMicrotask(() => {
+      this.cloud.configure({
+        databaseUrl: environment.dexieCloudUrl,
+        requireAuth: false,
+      });
     });
   }
 
-  addTraining(training: Omit<Training, 'id'>): Observable<Training> {
-    const allExercises = training.exercises.map(x => this.exerciseExecutions.put(x as ExerciseExecution));
-    const finalPromise = Promise.all(allExercises).then(_ => this.trainings.put(training as Training));
+  addTraining(training: Omit<Training, 'id'> | Training): Observable<Training> {
+    const allExercises = training.exercises.map(x => {
+      // Ensure each execution has a valid id for Dexie Cloud sync
+      const execution: ExerciseExecution = {
+        ...x,
+        id: x.id ?? ulid(),
+      };
+      return this.exerciseExecutions.put(execution);
+    });
+
+    // Ensure training has a valid id for Dexie Cloud sync
+    const trainingWithId: Training = {
+      ...training,
+      id: (training as Training).id ?? ulid(),
+    };
+
+    const finalPromise = Promise.all(allExercises).then(_ => this.trainings.put(trainingWithId));
     return from(finalPromise);
   }
 
@@ -193,6 +215,8 @@ export class DatabaseService extends Dexie {
       this.addExercise(exercise);
     }
 
+    return;
+
     for (const plan of trainingPlans) {
       this.addTrainingPlan(plan);
     }
@@ -212,7 +236,8 @@ export class DatabaseService extends Dexie {
 
     fixedTraining.exercises.forEach(exec => {
       if (exec.id == null || exec.id == exec.exerciseId) {
-        exec.id = ulid(training.startDate?.getTime());
+        // Generate a new ULID - use training startDate if available, otherwise use current time
+        exec.id = training.startDate ? ulid(training.startDate.getTime()) : ulid();
       }
 
       if (exec.date == null) {
@@ -262,83 +287,4 @@ export class DatabaseService extends Dexie {
     URL.revokeObjectURL(url);
   }
 
-  async syncToPostgre() {
-    this.supabaseAuth.$user.pipe(first(), take(1)).subscribe(async user => {
-      const exercises = await this.exercises.toArray();
-      const trainingPlans = await this.trainingPlans.toArray();
-      const trainings = await this.trainings.toArray();
-
-      const userTrainings2 = trainings.map(x => ({
-        ...x,
-        user_id: user?.id,
-      }));
-
-      try {
-        let res = await this.supabase.supabase
-          .from('trainings')
-          .upsert(userTrainings2);
-        console.log(res);
-      } catch (error) {
-        console.error(error);
-      }
-
-      const postgreSqlVersion = await this.supabase.supabase
-        .from('profiles')
-        .select()
-        .match({ id: user?.id })
-        .single();
-
-      // TODO: Select IndexedDB version and PostgreSQL version
-      // If one of them doesn't exists, it means full sync
-      // One with higher value is the source of truth
-      const userExercises = exercises.map(x => ({
-        ...x,
-        user_id: user?.id,
-      }));
-
-      await this.supabase.supabase.from('user_exercises')
-        .upsert(userExercises);
-
-      const userTrainingPlans = trainingPlans.map(x => ({
-        ...x,
-        user_id: user?.id,
-      }));
-
-      await this.supabase.supabase.from('training_plans')
-        .upsert(userTrainingPlans);
-
-      const userTrainings = trainings.map(x => ({
-        ...x,
-        user_id: user?.id,
-      }));
-
-      this.supabase.supabase
-        .from('trainings')
-        .upsert(userTrainings);
-    });
-  }
-
-  async syncFromPostgre() {
-    this.supabaseAuth.$user.pipe(first(), take(1)).subscribe(async user => {
-
-      const exercises = await this.supabase
-        .supabase
-        .from('user_exercises')
-        .select()
-        .match({ user_id: user?.id });
-
-      const trainingPlans = await this.supabase
-        .supabase
-        .from('training_plans')
-        .select('*');
-
-      const trainings = await this.supabase
-        .supabase
-        .from('trainings')
-        .select()
-        .match({ id: user?.id });
-
-
-    });
-  }
 }

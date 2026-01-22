@@ -29,7 +29,13 @@ Entities in system:
   - [x] Exercise Execution
   - [ ] Training History
 
+## Setup Dexie Cloud (Sync & Auth)
 
+1. Run `npx dexie-cloud create` in the project root.
+2. Follow the instructions to log in and create a database.
+3. Copy the database URL (e.g., `https://<YOUR_DB_ID>.dexie.cloud`).
+4. Update `src/environments/environment.ts` with your database URL.
+5. Build and deploy!
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.5.
 
