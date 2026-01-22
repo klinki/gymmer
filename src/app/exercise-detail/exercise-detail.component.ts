@@ -1,5 +1,6 @@
 import {Component, effect, inject, input, signal} from '@angular/core';
-import {DatabaseService, ExerciseExecution, ExerciseSeries, Training, TrainingPlan} from "../database.service";
+import {DatabaseService} from "../database.service";
+import {ExerciseExecution, ExerciseSeries, Training, TrainingPlan} from "../models";
 import {Location} from "@angular/common";
 import {TrainingSessionService} from "../training-session.service";
 import {combineLatest} from "rxjs";

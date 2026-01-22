@@ -1,5 +1,6 @@
 import {Component, computed, inject, input, signal, TemplateRef, ViewChild} from '@angular/core';
-import {DatabaseService, Exercise, ExerciseExecution, ExerciseSeries, Training} from "../database.service";
+import {DatabaseService} from "../database.service";
+import {Exercise, Training} from "../models";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";
 import {createComputed} from "@angular/core/primitives/signals";

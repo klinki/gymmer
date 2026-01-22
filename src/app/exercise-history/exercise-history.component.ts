@@ -1,7 +1,8 @@
 import {Component, effect, inject, input, signal} from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
-import {DatabaseService, Exercise, ExerciseExecution} from "../database.service";
+import {DatabaseService} from "../database.service";
+import {Exercise, ExerciseExecution} from "../models";
 import {combineLatest} from "rxjs";
 import {from} from "rxjs";
 

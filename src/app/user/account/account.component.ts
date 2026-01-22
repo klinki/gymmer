@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms'
 import { AuthSession } from '@supabase/supabase-js'
-import {Profile, SupabaseAuthService} from "../../supabase-auth.service";
+import { SupabaseAuthService} from "../../supabase-auth.service";
+import { Profile } from '../../models';
 
 @Component({
     selector: 'app-account',

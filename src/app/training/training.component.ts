@@ -1,5 +1,6 @@
 import {Component, effect, inject, input, signal} from '@angular/core';
-import {DatabaseService, ExerciseExecution, Training} from "../database.service";
+import {DatabaseService} from "../database.service";
+import {ExerciseExecution, Training} from "../models";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
