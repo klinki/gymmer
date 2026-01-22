@@ -1,7 +1,5 @@
 :host {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  display: block;
   position: relative;
   background-color: var(--mat-sys-surface, #303030);
   color: var(--mat-sys-on-surface, #fff);
@@ -14,16 +12,21 @@
 }
 
 mat-selection-list, mat-list {
-  overflow: auto;
-  flex-grow: 1;
   padding-bottom: 88px; // Space for FAB
 }
 
 .fab-container {
-  position: absolute;
+  position: sticky;
   bottom: 24px;
-  right: 24px;
+  margin-right: 24px;
+  display: flex;
+  justify-content: flex-end;
   z-index: 1000;
+  pointer-events: none;
+
+  button {
+    pointer-events: auto;
+  }
 }
 
 .spacer {
