@@ -165,25 +165,19 @@ export class GarminService {
   }
 
   private officialParserParse(buffer: ArrayBuffer) {
-    // TODO: Implement official parsing logic.
-    // Decoder requires a Stream object.
     const uintArr = new Uint8Array(buffer);
     const bytes = Array.from(uintArr);
 
     const stream = Stream.fromByteArray(bytes);
     const decoder = new Decoder(stream);
 
-    console.log("isFIT (static method): " + Decoder.isFIT(stream));
-    console.log("isFIT (instance method): " + decoder.isFIT());
-    console.log("checkIntegrity: " + decoder.checkIntegrity());
+    const result = decoder.read({
+      expandComponents: true,
+      expandSubFields: true,
+      convertTypesToStrings: true,
+    });
 
-    const { messages, errors } = decoder.read();
-
-    console.log(errors);
-    console.log(messages);
-
-    const jsonStr = JSON.stringify(messages, undefined, 2);
-    console.log(jsonStr);
+    return result;
   }
 
   private mapFitDataToActivity(data: any): GarminActivity {
