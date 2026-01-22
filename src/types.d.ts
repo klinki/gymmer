@@ -22,16 +22,128 @@ declare module '@garmin/fitsdk' {
     }
 
     export interface DecoderReadOptions {
+        /**
+         * Optional callback function that can be used to inspect or manipulate messages after they are fully decoded 
+         * and all the options have been applied. 
+         * The message is mutable and we be returned from the Read method in the messages dictionary.
+         * 
+         * @param mesgNum 
+         * @param message
+         */
         mesgListener?: (mesgNum: number, message: any) => void;
+
+        /**
+         * Optional callback function that can be used to inspect message defintions as they are decoded from the file.
+         * @param messageDefinition 
+         */
         mesgDefinitionListener?: (messageDefinition: any) => void;
+
+        /**
+         * Optional callback function that can be used to inspect developer field descriptions as they are decoded from the file.
+         * @param key 
+         * @param developerDataIdMesg 
+         * @param fieldDescriptionMesg 
+         */ 
         fieldDescriptionListener?: (key: number, developerDataIdMesg: any, fieldDescriptionMesg: any) => void;
+
+        /**
+         * When true subfields are created for fields as defined in the FIT Profile.
+         * 
+         * @example 
+         * ```js
+         * {
+         *  event: 'rearGearChange',
+         *  data: 16717829,
+         *  gearChangeData:16717829 // Sub Field of data when event == 'rearGearChange'
+         * }
+         * ```
+         * 
+         * When false subfields are omitted.
+         * 
+         * @example 
+         * ```js
+         * {
+         *  event: 'rearGearChange',
+         *  data: 16717829
+         * }
+         * ```
+         */
         expandSubFields?: boolean;
+
+        /**
+         * When true field components as defined in the FIT Profile are expanded into new fields. 
+         * expandSubFields must be set to true in order for subfields to be expanded.
+         * 
+         * @example
+         * ```js
+         * {
+         *  event: 'rearGearChange',
+         *  data: 16717829,
+         *  gearChangeData:16717829, // Sub Field of data when event == 'rearGearChange
+         *  frontGear: 2, // Expanded field of gearChangeData, bits 0-7
+         *  frontGearNum: 53, // Expanded field of gearChangeData, bits 8-15
+         *  rearGear: 11, // Expanded field of gearChangeData, bits 16-23
+         *  rearGearNum: 1, // Expanded field of gearChangeData, bits 24-31
+         * }
+         * ```
+         * 
+         * When false field components are not expanded.
+         * @example
+         * ```js
+         * {
+         *  event: 'rearGearChange',
+         *  data: 16717829,
+         *  gearChangeData: 16717829 // Sub Field of data when event == 'rearGearChange
+         * }
+         * ```
+         */
         expandComponents?: boolean;
+
+        /**
+         * When true the scale and offset values as defined in the FIT Profile are applied to the raw field values.
+         */
         applyScaleAndOffset?: boolean;
+
+        /**
+         * When true field values are converted from raw integer values to the corresponding string values as defined in the FIT Profile.
+         * 
+         * @example
+         * ```js
+         * { type:'activity'}
+         * ```
+         * 
+         * When false the raw integer value is used.
+         * 
+         * @example 
+         * ```js
+         * { type: 4 }
+         * ```
+         */
         convertTypesToStrings?: boolean;
+
+        /**
+         * When true FIT Epoch values are converted to JavaScript Date objects.
+         */
         convertDateTimesToDates?: boolean;
+
+        /**
+         * When true unknown field values are stored in the message using the field id as the key.
+         * 
+         * @example 
+         * ```js
+         * { 249: 123 } // Unknown field with an id of 249
+         * ```  
+         */
         includeUnknownData?: boolean;
+
+        /**
+         * When true automatically merge heart rate values from HR messages into the Record messages. 
+         * This option requires the applyScaleAndOffset and expandComponents options to be enabled. 
+         * This option has no effect on the Record messages when no HR messages are present in the decoded messages.
+         */
         mergeHeartRates?: boolean;
+
+
         decodeMemoGlobs?: boolean;
         skipHeader?: boolean;
         dataOnly?: boolean;
