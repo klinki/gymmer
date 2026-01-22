@@ -65,6 +65,14 @@
       <ng-template matStepLabel>Review & Merge</ng-template>
 
       <div class="review-container" *ngIf="selectedTraining() && selectedGarminActivity()">
+        
+        <div class="mapper-section">
+            <app-garmin-exercise-mapper 
+                [training]="selectedTraining()" 
+                [garminActivity]="selectedGarminActivity()">
+            </app-garmin-exercise-mapper>
+        </div>
+
         <p>Review the matches below. Uncheck any you wish to skip.</p>
 
         <div class="matches-list">

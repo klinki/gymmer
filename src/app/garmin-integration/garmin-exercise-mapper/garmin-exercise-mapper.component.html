@@ -1,0 +1,63 @@
+<div class="mapper-container">
+  <div class="header">
+    <h3>Data Mapping Preview</h3>
+    <p class="subtitle">Comparing interpreted data row-by-row</p>
+  </div>
+
+  <table mat-table [dataSource]="mappingRows()" class="mat-elevation-z8">
+
+    <!-- Index Column -->
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> # </th>
+      <td mat-cell *matCellDef="let element"> {{element.index}} </td>
+    </ng-container>
+
+    <!-- Gymmer Column -->
+    <ng-container matColumnDef="gymmer">
+      <th mat-header-cell *matHeaderCellDef> Gymmer (Target) </th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.gymmerExerciseName" class="cell-content">
+          <span class="ex-name">{{element.gymmerExerciseName}}</span>
+          <span class="details">Set {{element.gymmerSeriesIndex}}</span>
+          <div class="stats">
+            <span class="badg">{{element.gymmerWeight}} kg</span> x 
+            <span class="badg">{{element.gymmerReps}} reps</span>
+          </div>
+        </div>
+        <div *ngIf="!element.gymmerExerciseName" class="empty-cell">
+          -- No Data --
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Garmin Column -->
+    <ng-container matColumnDef="garmin">
+      <th mat-header-cell *matHeaderCellDef> Garmin (Source) </th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.garminExerciseName" class="cell-content">
+          <span class="ex-name">{{element.garminExerciseName}}</span>
+          <span class="details">Set {{element.garminSetIndex}}</span>
+          <div class="stats">
+            <span class="badg">{{element.garminWeight}} kg</span> x 
+            <span class="badg">{{element.garminReps}} reps</span>
+          </div>
+        </div>
+        <div *ngIf="!element.garminExerciseName" class="empty-cell">
+          -- No Data --
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon *ngIf="element.isMatch" class="match-icon" color="primary">check_circle</mat-icon>
+        <mat-icon *ngIf="!element.isMatch && element.gymmerExerciseName && element.garminExerciseName" class="mismatch-icon" color="warn">warning</mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.match-row]="row.isMatch"></tr>
+  </table>
+</div>

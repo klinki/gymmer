@@ -15,6 +15,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { DatabaseService, Training, ExerciseExecution } from '../database.service';
 import { GarminService, GarminActivity, GarminExercise } from './garmin.service';
+import { GarminExerciseMapperComponent } from './garmin-exercise-mapper/garmin-exercise-mapper.component';
 import { firstValueFrom } from 'rxjs';
 
 interface ExerciseMatch {
@@ -40,7 +41,9 @@ interface ExerciseMatch {
     MatIconModule,
     MatExpansionModule,
     MatCheckboxModule,
-    MatTabsModule
+    MatCheckboxModule,
+    MatTabsModule,
+    GarminExerciseMapperComponent
   ],
   templateUrl: './garmin-integration.component.html',
   styleUrls: ['./garmin-integration.component.scss']
