@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, delay, from, map } from 'rxjs';
-// @ts-ignore
-import FitParser from 'fit-file-parser';
 import { ulid } from 'ulidx';
-import { Decoder, Stream, Profile, Utils } from '@garmin/fitsdk';
+import { Decoder, Stream, Profile, Utils, DecoderReadResult } from '@garmin/fitsdk';
 
 export interface GarminSet {
   weight: number;
@@ -133,30 +131,14 @@ export class GarminService {
           return;
         }
 
-        this.officialParserParse(buffer);
-
-        const fitParser = new FitParser({
-          force: true,
-          speedUnit: 'km/h',
-          lengthUnit: 'm',
-          temperatureUnit: 'celsius',
-          elapsedRecordField: true,
-          mode: 'list'
-        });
-
-        fitParser.parse(buffer, (error: any, data: any) => {
-          if (error) {
-            observer.error(error);
-          } else {
-            try {
-              const activity = this.mapFitDataToActivity(data);
-              observer.next(activity);
-              observer.complete();
-            } catch (e) {
-              observer.error(e);
-            }
-          }
-        });
+        try {
+          const result = this.officialParserParse(buffer);
+          const activity = this.mapFitDataToActivity(result);
+          observer.next(activity);
+          observer.complete();
+        } catch (e) {
+          observer.error(e);
+        }
       };
 
       reader.onerror = (error) => observer.error(error);
@@ -175,85 +157,72 @@ export class GarminService {
       expandComponents: true,
       expandSubFields: true,
       convertTypesToStrings: true,
+      convertDateTimesToDates: true,
     });
 
     return result;
   }
 
-  private mapFitDataToActivity(data: any): GarminActivity {
-    // Basic extraction logic - this depends on FIT file structure for Strength Training
-    // which usually involves 'session', 'lap', and 'set' messages.
-    // 'set' messages contain 'weight', 'repetitions', 'start_time', 'category', 'sub_category'
+  private mapFitDataToActivity(data: DecoderReadResult): GarminActivity {
+    const session = data.messages.sessionMesgs?.[0] || {};
+    const startTime = session.startTime || new Date();
+    const name = `Workout - ${session.sportProfileName || 'Unknown'}`;
 
-    const session = data.sessions?.[0] || {};
-    const startTime = new Date(session.start_time || Date.now());
-    const name = 'Imported Activity'; // FIT files often don't have a user-friendly name field unless typed manually
-
-    const setsData = data.set_mesgs || [];
-
+    const setsData = data.messages.setMesgs || [];
     const exercises: GarminExercise[] = [];
 
-    // Group sets by exercise?
-    // In Garmin FIT, sets are just a list. We need to infer exercise groupings if they are contiguous?
-    // Or just treat each set as an exercise if we don't know the grouping?
-    // Usually, Garmin groups them by 'category' and 'sub_category' (e.g. BENCH_PRESS).
-
-    // Simple grouping strategy: adjacent sets with same category/sub_category are the same exercise.
     let currentExercise: GarminExercise | null = null;
     let lastType = '';
 
     for (const set of setsData) {
-        // 1 = active, 0 = rest? Check 'duration' or 'repetition_count'
-        // Only interested in sets with reps > 0 or type = active
+      // Logic for active sets:
+      // Garmin SDK might correctly identify 'setType' as 'active' (string) if convertTypesToStrings is true.
+      if (set.setType !== 'active') {
+          continue;
+      }
 
-        // category + sub_category uniquely identifies the exercise type (e.g. 13 + 2 = Bench Press)
-        const type = `${set.category}_${set.sub_category}`;
-        const weight = (set.weight || 0) / 1000; // FIT weight is often scaled?
-        // Actually fit-file-parser might handle scaling.
-        // Standard FIT: weight is in kg * 16? No, usually native units.
-        // Let's assume parsed value is correct or verify.
-        // fit-file-parser applies scale/offset by default.
-        // Weight is in kg.
+      // Handling array categories from SDK
+      const category = Array.isArray(set.category) ? set.category[0] : set.category;
+      const subCategory = Array.isArray(set.categorySubtype) ? set.categorySubtype[0] : set.categorySubtype;
+      
+      const type = `${category}_${subCategory}`;
+      const reps = set.repetitions || 0;
 
-        const reps = set.repetition_count || 0;
-
-        if (reps === 0) continue; // Skip rest sets
-
-        if (!currentExercise || type !== lastType) {
-            if (currentExercise) {
-                exercises.push(currentExercise);
-            }
-            currentExercise = {
-                id: ulid(),
-                name: this.getExerciseName(set.category, set.sub_category),
-                sets: []
-            };
-            lastType = type;
+      if (!currentExercise || type !== lastType) {
+        if (currentExercise) {
+          exercises.push(currentExercise);
         }
+        currentExercise = {
+          id: ulid(),
+          name: this.getExerciseName(category ?? 'Unknown', subCategory ?? undefined),
+          sets: []
+        };
+        lastType = type;
+      }
 
-        currentExercise.sets.push({
-            weight: set.weight || 0, // Assuming library handles scaling
-            reps: reps,
-            duration: set.duration
-        });
+      currentExercise.sets.push({
+        weight: set.weight || 0,
+        reps: reps,
+        duration: set.duration
+      });
     }
 
     if (currentExercise) {
-        exercises.push(currentExercise);
+      exercises.push(currentExercise);
     }
 
     return {
-        id: ulid(),
-        name: name,
-        startTime: startTime,
-        exercises: exercises
+      id: ulid(),
+      name: name,
+      startTime: startTime,
+      exercises: exercises
     };
   }
 
-  private getExerciseName(category: number, subCategory: number): string {
-      // This would need a massive lookup table for all Garmin types.
-      // For now, return a generic name with IDs so user can identify it.
-      // Or map a few common ones.
-      return `Exercise (${category}/${subCategory})`;
+  private getExerciseName(category: string | number, subCategory?: string | number): string {
+    const catStr = category ? category.toString() : 'Unknown';
+    const subCatStr = subCategory ? ` / ${subCategory}` : '';
+    return `${catStr}${subCatStr}`;
   }
+
 }
