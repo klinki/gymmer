@@ -76,8 +76,9 @@
         </a>
 
         @if (currentTraining() != null) {
-           <a mat-fab color="primary" [routerLink]="['/training']" class="fab-nav-item">
-             <mat-icon>timer</mat-icon>
+           <!-- Highlighted Active Training Button -->
+           <a mat-icon-button [routerLink]="['/training']" routerLinkActive="active-link-icon" class="active-training-btn">
+             <mat-icon color="primary">timer</mat-icon>
            </a>
         } @else {
            <a mat-icon-button [routerLink]="['/training']" routerLinkActive="active-link-icon">

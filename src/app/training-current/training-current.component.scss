@@ -12,6 +12,7 @@
   border-radius: 16px;
 
   .training-info {
+    flex: 1; // Take available space
     h1 { margin: 0; font-size: 1.2rem; word-break: break-word;}
 
     .timer {
@@ -20,6 +21,7 @@
       font-family: 'Roboto Mono', monospace;
       margin: 8px 0;
       color: var(--mat-sys-primary, #1976d2);
+      line-height: 1;
     }
 
     .start-time {
@@ -61,6 +63,8 @@
     margin-right: 16px;
     color: var(--mat-sys-secondary, #757575);
     display: flex;
+    align-items: center;
+    justify-content: center;
 
     .done-icon {
       color: var(--mat-sys-primary, #1976d2);
@@ -96,7 +100,8 @@
     pointer-events: auto;
     display: flex;
     gap: 24px;
-    background: rgba(255,255,255,0.9);
+    // Ensure sufficient contrast and visibility
+    background: var(--mat-sys-surface-container-high, rgba(255,255,255,0.95));
     padding: 12px 24px;
     border-radius: 32px;
     backdrop-filter: blur(5px);
@@ -107,6 +112,6 @@
 
 @media (prefers-color-scheme: dark) {
   .controls-container .main-controls {
-    background: rgba(66, 66, 66, 0.9);
+    background: var(--mat-sys-surface-container-high, rgba(66, 66, 66, 0.95));
   }
 }

@@ -231,3 +231,1643 @@ Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
   ➜  Local:   http://localhost:4300/
   ➜  Network: http://192.168.0.2:4300/
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 254.46 kB |
+
+Application bundle generation complete. [7.967 seconds] - 2026-01-22T20:24:04.361Z
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:42:58:
+[37m      42 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:45:58:
+[37m      45 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:54:63:
+[37m      54 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:57:63:
+[37m      57 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:4:45:
+[37m      4 │ ...able [dataSource]="exercise?.[32mseries[37m ?? []" class="mat-elevation-...
+        ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:7:29:
+[37m      7 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Série </th>
+        ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:12:29:
+[37m      12 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Váha </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:17:29:
+[37m      17 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Opakování </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:22:29:
+[37m      22 │         <th mat-header-cell *[32mmatHeaderCellDef[37m></th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:41:58:
+[37m      41 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:44:58:
+[37m      44 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:53:63:
+[37m      53 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:56:63:
+[37m      56 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of SettingsComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/settings/settings.component.ts:28:106:
+[37m      28 │ ...tCardHeader, MatCardActions, MatButton, MatCardContent, [32mDatePipe[37m],
+         ╵                                                            [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:40:4:
+[37m      40 │     [32mDatePipe[37m,
+         ╵     [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DurationPipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:41:4:
+[37m      41 │     [32mDurationPipe[37m,
+         ╵     [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatListItemLine is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:47:4:
+[37m      47 │     [32mMatListItemLine[37m,
+         ╵     [32m~~~~~~~~~~~~~~~[0m
+
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 253.75 kB |
+
+Application bundle generation complete. [1.058 seconds] - 2026-01-22T20:24:05.523Z
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:42:58:
+[37m      42 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:45:58:
+[37m      45 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:54:63:
+[37m      54 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:57:63:
+[37m      57 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:4:45:
+[37m      4 │ ...able [dataSource]="exercise?.[32mseries[37m ?? []" class="mat-elevation-...
+        ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:7:29:
+[37m      7 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Série </th>
+        ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:12:29:
+[37m      12 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Váha </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:17:29:
+[37m      17 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Opakování </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:22:29:
+[37m      22 │         <th mat-header-cell *[32mmatHeaderCellDef[37m></th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:41:58:
+[37m      41 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:44:58:
+[37m      44 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:53:63:
+[37m      53 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:56:63:
+[37m      56 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of SettingsComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/settings/settings.component.ts:28:106:
+[37m      28 │ ...tCardHeader, MatCardActions, MatButton, MatCardContent, [32mDatePipe[37m],
+         ╵                                                            [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:40:4:
+[37m      40 │     [32mDatePipe[37m,
+         ╵     [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DurationPipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:41:4:
+[37m      41 │     [32mDurationPipe[37m,
+         ╵     [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatListItemLine is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:47:4:
+[37m      47 │     [32mMatListItemLine[37m,
+         ╵     [32m~~~~~~~~~~~~~~~[0m
+
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 253.48 kB |
+
+Application bundle generation complete. [0.417 seconds] - 2026-01-22T20:24:19.766Z
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:42:58:
+[37m      42 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:45:58:
+[37m      45 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:54:63:
+[37m      54 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:57:63:
+[37m      57 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:4:45:
+[37m      4 │ ...able [dataSource]="exercise?.[32mseries[37m ?? []" class="mat-elevation-...
+        ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:7:29:
+[37m      7 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Série </th>
+        ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:12:29:
+[37m      12 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Váha </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:17:29:
+[37m      17 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Opakování </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:22:29:
+[37m      22 │         <th mat-header-cell *[32mmatHeaderCellDef[37m></th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:41:58:
+[37m      41 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:44:58:
+[37m      44 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:53:63:
+[37m      53 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:56:63:
+[37m      56 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of SettingsComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/settings/settings.component.ts:28:106:
+[37m      28 │ ...tCardHeader, MatCardActions, MatButton, MatCardContent, [32mDatePipe[37m],
+         ╵                                                            [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:40:4:
+[37m      40 │     [32mDatePipe[37m,
+         ╵     [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DurationPipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:41:4:
+[37m      41 │     [32mDurationPipe[37m,
+         ╵     [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatListItemLine is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:47:4:
+[37m      47 │     [32mMatListItemLine[37m,
+         ╵     [32m~~~~~~~~~~~~~~~[0m
+
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 251.38 kB |
+
+Application bundle generation complete. [0.581 seconds] - 2026-01-22T20:24:25.536Z
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:42:58:
+[37m      42 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:45:58:
+[37m      45 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:54:63:
+[37m      54 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:57:63:
+[37m      57 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:4:45:
+[37m      4 │ ...able [dataSource]="exercise?.[32mseries[37m ?? []" class="mat-elevation-...
+        ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:7:29:
+[37m      7 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Série </th>
+        ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:12:29:
+[37m      12 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Váha </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:17:29:
+[37m      17 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Opakování </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:22:29:
+[37m      22 │         <th mat-header-cell *[32mmatHeaderCellDef[37m></th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:41:58:
+[37m      41 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:44:58:
+[37m      44 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:53:63:
+[37m      53 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:56:63:
+[37m      56 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of SettingsComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/settings/settings.component.ts:28:106:
+[37m      28 │ ...tCardHeader, MatCardActions, MatButton, MatCardContent, [32mDatePipe[37m],
+         ╵                                                            [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:40:4:
+[37m      40 │     [32mDatePipe[37m,
+         ╵     [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DurationPipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:41:4:
+[37m      41 │     [32mDurationPipe[37m,
+         ╵     [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatListItemLine is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:47:4:
+[37m      47 │     [32mMatListItemLine[37m,
+         ╵     [32m~~~~~~~~~~~~~~~[0m
+
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 251.86 kB |
+
+Application bundle generation complete. [1.323 seconds] - 2026-01-22T20:24:50.778Z
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:42:58:
+[37m      42 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:45:58:
+[37m      45 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:54:63:
+[37m      54 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:57:63:
+[37m      57 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:4:45:
+[37m      4 │ ...able [dataSource]="exercise?.[32mseries[37m ?? []" class="mat-elevation-...
+        ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:7:29:
+[37m      7 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Série </th>
+        ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:12:29:
+[37m      12 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Váha </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:17:29:
+[37m      17 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Opakování </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:22:29:
+[37m      22 │         <th mat-header-cell *[32mmatHeaderCellDef[37m></th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:41:58:
+[37m      41 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:44:58:
+[37m      44 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:53:63:
+[37m      53 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:56:63:
+[37m      56 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of SettingsComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/settings/settings.component.ts:28:106:
+[37m      28 │ ...tCardHeader, MatCardActions, MatButton, MatCardContent, [32mDatePipe[37m],
+         ╵                                                            [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:40:4:
+[37m      40 │     [32mDatePipe[37m,
+         ╵     [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DurationPipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:41:4:
+[37m      41 │     [32mDurationPipe[37m,
+         ╵     [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatListItemLine is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:47:4:
+[37m      47 │     [32mMatListItemLine[37m,
+         ╵     [32m~~~~~~~~~~~~~~~[0m
+
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 252.30 kB |
+
+Application bundle generation complete. [0.740 seconds] - 2026-01-22T20:25:01.387Z
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:42:58:
+[37m      42 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:45:58:
+[37m      45 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:54:63:
+[37m      54 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:57:63:
+[37m      57 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:4:45:
+[37m      4 │ ...able [dataSource]="exercise?.[32mseries[37m ?? []" class="mat-elevation-...
+        ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:7:29:
+[37m      7 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Série </th>
+        ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:12:29:
+[37m      12 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Váha </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:17:29:
+[37m      17 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Opakování </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:22:29:
+[37m      22 │         <th mat-header-cell *[32mmatHeaderCellDef[37m></th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:41:58:
+[37m      41 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:44:58:
+[37m      44 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:53:63:
+[37m      53 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:56:63:
+[37m      56 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of SettingsComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/settings/settings.component.ts:28:106:
+[37m      28 │ ...tCardHeader, MatCardActions, MatButton, MatCardContent, [32mDatePipe[37m],
+         ╵                                                            [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:40:4:
+[37m      40 │     [32mDatePipe[37m,
+         ╵     [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DurationPipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:41:4:
+[37m      41 │     [32mDurationPipe[37m,
+         ╵     [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatListItemLine is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:47:4:
+[37m      47 │     [32mMatListItemLine[37m,
+         ╵     [32m~~~~~~~~~~~~~~~[0m
+
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 252.45 kB |
+
+Application bundle generation complete. [0.439 seconds] - 2026-01-22T20:25:13.395Z
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:42:58:
+[37m      42 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:45:58:
+[37m      45 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:54:63:
+[37m      54 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:57:63:
+[37m      57 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:4:45:
+[37m      4 │ ...able [dataSource]="exercise?.[32mseries[37m ?? []" class="mat-elevation-...
+        ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:7:29:
+[37m      7 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Série </th>
+        ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:12:29:
+[37m      12 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Váha </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:17:29:
+[37m      17 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Opakování </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:22:29:
+[37m      22 │         <th mat-header-cell *[32mmatHeaderCellDef[37m></th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:41:58:
+[37m      41 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:44:58:
+[37m      44 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:53:63:
+[37m      53 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:56:63:
+[37m      56 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of SettingsComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/settings/settings.component.ts:28:106:
+[37m      28 │ ...tCardHeader, MatCardActions, MatButton, MatCardContent, [32mDatePipe[37m],
+         ╵                                                            [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:40:4:
+[37m      40 │     [32mDatePipe[37m,
+         ╵     [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DurationPipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:41:4:
+[37m      41 │     [32mDurationPipe[37m,
+         ╵     [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatListItemLine is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:47:4:
+[37m      47 │     [32mMatListItemLine[37m,
+         ╵     [32m~~~~~~~~~~~~~~~[0m
+
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 252.46 kB |
+
+Application bundle generation complete. [1.122 seconds] - 2026-01-22T20:25:20.045Z
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:42:58:
+[37m      42 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:45:58:
+[37m      45 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:54:63:
+[37m      54 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:57:63:
+[37m      57 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:4:45:
+[37m      4 │ ...able [dataSource]="exercise?.[32mseries[37m ?? []" class="mat-elevation-...
+        ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:7:29:
+[37m      7 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Série </th>
+        ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:12:29:
+[37m      12 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Váha </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:17:29:
+[37m      17 │         <th mat-header-cell *[32mmatHeaderCellDef[37m> Opakování </th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8116: A structural directive `matHeaderCellDef` was used in the template without a corresponding import in the component. Make sure that the directive is included in the `@Component.imports` array of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:22:29:
+[37m      22 │         <th mat-header-cell *[32mmatHeaderCellDef[37m></th>
+         ╵                              [32m~~~~~~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:41:58:
+[37m      41 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:44:58:
+[37m      44 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:53:63:
+[37m      53 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.html:56:63:
+[37m      56 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseExecutionDetailComponent.
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:54:17:
+[37m      54 │     templateUrl: [32m'./exercise-execution-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of SettingsComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/settings/settings.component.ts:28:106:
+[37m      28 │ ...tCardHeader, MatCardActions, MatButton, MatCardContent, [32mDatePipe[37m],
+         ╵                                                            [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:40:4:
+[37m      40 │     [32mDatePipe[37m,
+         ╵     [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DurationPipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:41:4:
+[37m      41 │     [32mDurationPipe[37m,
+         ╵     [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatListItemLine is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:47:4:
+[37m      47 │     [32mMatListItemLine[37m,
+         ╵     [32m~~~~~~~~~~~~~~~[0m
+
+
+Component update sent to client(s).

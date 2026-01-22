@@ -5,13 +5,16 @@
        <div class="training-info">
          <h1 class="mat-h2">{{training.name}}</h1>
          @if (training.startDate != null) {
-            <div class="timer">{{ trainingRunningTime() | duration }}</div>
+            <!-- Ensure timer is visible with explicit style -->
+            <div class="timer" style="display: block;">{{ trainingRunningTime() | duration }}</div>
             <div class="start-time">Started: {{ training.startDate | date: 'shortTime' }}</div>
          } @else {
             <div class="timer">00:00:00</div>
          }
        </div>
-       <button mat-icon-button [matMenuTriggerFor]="menu">
+
+       <!-- Menu Button -->
+       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Training options">
           <mat-icon>more_vert</mat-icon>
        </button>
        <mat-menu #menu="matMenu">
@@ -63,22 +66,23 @@
   <div class="controls-container">
     <div class="main-controls">
        @if (training()?.startDate == null || training()?.endDate != null) {
-          <button mat-fab extended color="primary" (click)="start()">
+          <!-- Use standard FAB with text label via span or just icon to avoid 'extended' issues if module missing -->
+           <button mat-fab extended color="primary" (click)="start()">
              <mat-icon>play_arrow</mat-icon>
-             START WORKOUT
+             <span>START</span>
           </button>
 
-          <button mat-fab color="accent" (click)="addExercise()">
+          <button mat-fab (click)="addExercise()" aria-label="Add Exercise">
              <mat-icon>add</mat-icon>
           </button>
        } @else {
           <!-- Add Exercise -->
-          <button mat-fab color="accent" (click)="addExercise()">
+          <button mat-fab (click)="addExercise()" aria-label="Add Exercise">
              <mat-icon>add</mat-icon>
           </button>
 
           <!-- Stop Button -->
-          <button mat-fab color="warn" (click)="stop()">
+          <button mat-fab color="warn" (click)="stop()" aria-label="Stop Workout">
              <mat-icon>stop</mat-icon>
           </button>
        }

@@ -26,22 +26,16 @@
       }
     </mat-selection-list>
   } @else {
-    <div class="exercise-grid">
+    <mat-list class="exercise-list">
       @for (exercise of filteredExercises(); track exercise) {
-        <mat-card class="exercise-card" [routerLink]="['/exercise', exercise.id, 'history']">
-          <div class="card-content">
-            <div class="icon-container">
-               <mat-icon>fitness_center</mat-icon>
-            </div>
-            <div class="text-container">
-              <div class="title">{{exercise.name}}</div>
-              <div class="subtitle">{{ exercise.executionCount }} executions</div>
-            </div>
-            <mat-icon class="arrow-icon">chevron_right</mat-icon>
-          </div>
-        </mat-card>
+        <mat-list-item [routerLink]="['/exercise', exercise.id, 'history']" class="exercise-item">
+          <mat-icon matListItemIcon>fitness_center</mat-icon>
+          <div matListItemTitle>{{exercise.name}}</div>
+          <div matListItemLine>{{ exercise.executionCount }} executions</div>
+          <mat-icon matListItemMeta>chevron_right</mat-icon>
+        </mat-list-item>
       }
-    </div>
+    </mat-list>
   }
 
   <div class="fab-container">

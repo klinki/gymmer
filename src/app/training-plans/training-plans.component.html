@@ -1,40 +1,33 @@
 <div class="container page-content">
   <h1 class="mat-h1">Training Plans</h1>
 
-  <div class="plans-grid">
-    <!-- Free Training Card -->
-    <mat-card class="plan-card free-training" (click)="startFreeTraining()">
-      <mat-card-header>
-        <div mat-card-avatar>
-           <mat-icon class="large-icon">accessibility_new</mat-icon>
-        </div>
-        <mat-card-title>Free Training</mat-card-title>
-        <mat-card-subtitle>Start without a plan</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-actions align="end">
-         <button mat-button>START</button>
-      </mat-card-actions>
-    </mat-card>
+  <mat-list class="plans-list">
+    <!-- Free Training -->
+    <mat-list-item (click)="startFreeTraining()" class="plan-item free-training">
+      <mat-icon matListItemIcon class="large-icon">accessibility_new</mat-icon>
+      <div matListItemTitle>Free Training</div>
+      <div matListItemLine>Start without a plan</div>
+      <button mat-icon-button matListItemMeta (click)="$event.stopPropagation(); startFreeTraining()">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
 
     <!-- Loop through plans -->
     @for (plan of trainingPlans(); track plan) {
-      <mat-card class="plan-card" (click)="startTrainingPlan(plan)">
-        <mat-card-header>
-          <div mat-card-avatar>
-             <mat-icon>fitness_center</mat-icon>
-          </div>
-          <mat-card-title>{{plan.name}}</mat-card-title>
-          <mat-card-subtitle>{{plan.exercises.length}} Exercises</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-actions align="end">
+      <mat-list-item (click)="startTrainingPlan(plan)" class="plan-item">
+        <mat-icon matListItemIcon>fitness_center</mat-icon>
+        <div matListItemTitle>{{plan.name}}</div>
+        <div matListItemLine>{{plan.exercises.length}} Exercises</div>
+        <div matListItemMeta>
           <button mat-icon-button (click)="$event.stopPropagation(); editTrainingPlan(plan)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-button color="primary">START</button>
-        </mat-card-actions>
-      </mat-card>
+        </div>
+      </mat-list-item>
     }
-  </div>
+  </mat-list>
 
   <div class="fab-container">
     <button (click)="newTrainingPlan()" mat-fab color="primary" aria-label="Create new plan">

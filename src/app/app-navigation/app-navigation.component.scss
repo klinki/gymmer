@@ -27,7 +27,6 @@
   justify-content: space-around;
   padding: 0;
   height: 64px;
-  // Use surface color (white/dark gray) with a shadow
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
   box-shadow: 0px -2px 5px 0px rgba(0,0,0,0.1);
@@ -38,9 +37,10 @@
   color: var(--mat-sys-primary);
 }
 
-.fab-nav-item {
-  transform: translateY(-20px); // Floating effect
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+.active-training-btn {
+  // Simple highlight instead of floating FAB
+  background-color: var(--mat-sys-secondary-container);
+  border-radius: 50%;
 }
 
 .main-content {
