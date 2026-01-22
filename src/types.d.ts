@@ -37,32 +37,351 @@ declare module '@garmin/fitsdk' {
         dataOnly?: boolean;
     }
 
+    export interface FileIdMesg {
+        serialNumber?: number;
+        timeCreated?: Date;
+        manufacturer?: string | number;
+        product?: number;
+        type?: string;
+        garminProduct?: string | number;
+        [key: string]: any;
+    }
+
+    export interface FileCreatorMesg {
+        softwareVersion?: number;
+        hardwareVersion?: number;
+        [key: string]: any;
+    }
+
+    export interface ActivityMesg {
+        timestamp?: Date;
+        totalTimerTime?: number;
+        localTimestamp?: number;
+        numSessions?: number;
+        type?: string;
+        event?: string;
+        eventType?: string;
+        [key: string]: any;
+    }
+
+    export interface SessionMesg {
+        timestamp?: Date;
+        startTime?: Date;
+        totalElapsedTime?: number;
+        totalTimerTime?: number;
+        totalDistance?: number;
+        totalCycles?: number;
+        sportProfileName?: string;
+        enhancedAvgSpeed?: number;
+        trainingLoadPeak?: number;
+        messageIndex?: number;
+        totalCalories?: number;
+        avgSpeed?: number;
+        maxSpeed?: number;
+        firstLapIndex?: number;
+        numLaps?: number;
+        enhancedAvgRespirationRate?: number;
+        enhancedMaxRespirationRate?: number;
+        enhancedMinRespirationRate?: number;
+        event?: string;
+        eventType?: string;
+        sport?: string;
+        subSport?: string;
+        avgHeartRate?: number;
+        maxHeartRate?: number;
+        totalTrainingEffect?: number;
+        trigger?: string;
+        totalAnaerobicTrainingEffect?: number;
+        avgRespirationRate?: number;
+        maxRespirationRate?: number;
+        minRespirationRate?: number;
+        [key: string]: any;
+    }
+
+    export interface RecordMesg {
+        timestamp?: Date;
+        distance?: number;
+        heartRate?: number;
+        enhancedRespirationRate?: number;
+        positionLat?: number;
+        positionLong?: number;
+        altitude?: number;
+        speed?: number;
+        power?: number;
+        cadence?: number;
+        [key: string]: any;
+    }
+
+    export interface EventMesg {
+        timestamp?: Date;
+        data?: number;
+        event?: string;
+        eventType?: string;
+        eventGroup?: number;
+        timerTrigger?: string;
+        [key: string]: any;
+    }
+
+    export interface DeviceInfoMesg {
+        timestamp?: Date;
+        serialNumber?: number;
+        manufacturer?: string | number;
+        product?: number;
+        softwareVersion?: number;
+        deviceIndex?: number | string;
+        sourceType?: string;
+        garminProduct?: string | number;
+        batteryVoltage?: number;
+        deviceType?: number;
+        hardwareVersion?: number;
+        batteryStatus?: string;
+        antNetwork?: string;
+        antplusDeviceType?: string;
+        [key: string]: any;
+    }
+
+    export interface UserProfileMesg {
+        wakeTime?: number;
+        sleepTime?: number;
+        weight?: number;
+        gender?: string;
+        height?: number;
+        language?: string;
+        elevSetting?: string;
+        weightSetting?: string;
+        restingHeartRate?: number;
+        hrSetting?: string;
+        speedSetting?: string;
+        distSetting?: string;
+        activityClass?: number;
+        positionSetting?: string;
+        temperatureSetting?: string;
+        heightSetting?: string;
+        [key: string]: any;
+    }
+
+    export interface SetMesg {
+        timestamp?: Date;
+        duration?: number;
+        startTime?: Date;
+        repetitions?: number;
+        weight?: number;
+        category?: string[];
+        categorySubtype?: (number | null)[];
+        messageIndex?: number;
+        setType?: string;
+        [key: string]: any;
+    }
+
+    export interface TimeInZoneMesg {
+        timestamp?: Date;
+        timeInHrZone?: number[];
+        timeInSpeedZone?: number[];
+        timeInCadenceZone?: number[];
+        timeInPowerZone?: number[];
+        referenceMesg?: string;
+        referenceIndex?: number;
+        hrZoneHighBoundary?: number[];
+        speedZoneHighBoundary?: number[];
+        cadenceZoneHighBondary?: number[]; // typo in profile.js? kept as is or checked
+        powerZoneHighBoundary?: number[];
+        hrCalcType?: string;
+        maxHeartRate?: number;
+        restingHeartRate?: number;
+        thresholdHeartRate?: number;
+        pwrCalcType?: string;
+        functionalThresholdPower?: number;
+        [key: string]: any;
+    }
+
+    export interface SportMesg {
+        name?: string;
+        sport?: string;
+        subSport?: string;
+        [key: string]: any;
+    }
+
+    export interface TrainingSettingsMesg {
+        targetDistance?: number;
+        targetSpeed?: number;
+        targetTime?: number;
+        preciseTargetSpeed?: number;
+        [key: string]: any;
+    }
+
+    export interface ZonesTargetMesg {
+        maxHeartRate?: number;
+        thresholdHeartRate?: number;
+        functionalThresholdPower?: number;
+        hrCalcType?: string;
+        pwrCalcType?: string;
+        [key: string]: any;
+    }
+
+    export interface DeviceSettingsMesg {
+        activeTimeZone?: number;
+        utcOffset?: number;
+        timeOffset?: number[];
+        timeMode?: string[];
+        timeZoneOffset?: number[];
+        backlightMode?: string;
+        activityTrackerEnabled?: boolean;
+        clockTime?: Date;
+        pagesEnabled?: number[];
+        moveAlertEnabled?: boolean;
+        dateMode?: string;
+        displayOrientation?: string;
+        mountingSide?: string;
+        defaultPage?: number[];
+        autosyncMinSteps?: number;
+        autosyncMinTime?: number;
+        lactateThresholdAutodetectEnabled?: boolean;
+        bleAutoUploadEnabled?: boolean;
+        autoSyncFrequency?: string;
+        autoActivityDetect?: number;
+        numberOfScreens?: number;
+        smartNotificationDisplayOrientation?: string;
+        tapInterface?: string;
+        tapSensitivity?: string;
+        [key: string]: any;
+    }
+
+    export interface TimestampCorrelationMesg {
+        timestamp?: Date;
+        fractionalTimestamp?: number;
+        systemTimestamp?: Date;
+        fractionalSystemTimestamp?: number;
+        localTimestamp?: number;
+        timestampMs?: number;
+        systemTimestampMs?: number;
+        [key: string]: any;
+    }
+
     export interface DecoderReadResult {
         messages: {
-            fileIdMesgs?: any[];
-            fileCreatorMesgs?: any[];
+            fileIdMesgs?: FileIdMesg[];
+            fileCreatorMesgs?: FileCreatorMesg[];
+            timestampCorrelationMesgs?: TimestampCorrelationMesg[];
             softwareMesgs?: any[];
             slaveDeviceMesgs?: any[];
             capabilitiesMesgs?: any[];
             fileCapabilitiesMesgs?: any[];
             mesgCapabilitiesMesgs?: any[];
             fieldCapabilitiesMesgs?: any[];
-            
-            // Common Data Messages
-            recordMesgs?: any[];
-            sessionMesgs?: any[];
+            deviceSettingsMesgs?: DeviceSettingsMesg[];
+            userProfileMesgs?: UserProfileMesg[];
+            hrmProfileMesgs?: any[];
+            sdmProfileMesgs?: any[];
+            bikeProfileMesgs?: any[];
+            connectivityMesgs?: any[];
+            watchfaceSettingsMesgs?: any[];
+            ohrSettingsMesgs?: any[];
+            timeInZoneMesgs?: TimeInZoneMesg[];
+            zonesTargetMesgs?: ZonesTargetMesg[];
+            sportMesgs?: SportMesg[];
+            hrZoneMesgs?: any[];
+            speedZoneMesgs?: any[];
+            cadenceZoneMesgs?: any[];
+            powerZoneMesgs?: any[];
+            metZoneMesgs?: any[];
+            trainingSettingsMesgs?: TrainingSettingsMesg[];
+            diveSettingsMesgs?: any[];
+            diveAlarmMesgs?: any[];
+            diveApneaAlarmMesgs?: any[];
+            diveGasMesgs?: any[];
+            goalMesgs?: any[];
+            activityMesgs?: ActivityMesg[];
+            sessionMesgs?: SessionMesg[];
             lapMesgs?: any[];
-            deviceInfoMesgs?: any[];
-            sportMesgs?: any[];
-            activityMesgs?: any[];
-            setMesgs?: any[]; // Strength training sets
-            timeInZoneMesgs?: any[];
-            timestampCorrelationMesgs?: any[];
-            eventMesgs?: any[];
-            deviceSettingsMesgs?: any[];
-            userProfileMesgs?: any[];
-            trainingSettingsMesgs?: any[];
-            zonesTargetMesgs?: any[];
+            lengthMesgs?: any[];
+            recordMesgs?: RecordMesg[];
+            eventMesgs?: EventMesg[];
+            deviceInfoMesgs?: DeviceInfoMesg[];
+            deviceAuxBatteryInfoMesgs?: any[];
+            trainingFileMesgs?: any[];
+            weatherConditionsMesgs?: any[];
+            weatherAlertMesgs?: any[];
+            gpsMetadataMesgs?: any[];
+            cameraEventMesgs?: any[];
+            gyroscopeDataMesgs?: any[];
+            accelerometerDataMesgs?: any[];
+            magnetometerDataMesgs?: any[];
+            barometerDataMesgs?: any[];
+            threeDSensorCalibrationMesgs?: any[];
+            oneDSensorCalibrationMesgs?: any[];
+            videoFrameMesgs?: any[];
+            obdiiDataMesgs?: any[];
+            nmeaSentenceMesgs?: any[];
+            aviationAttitudeMesgs?: any[];
+            videoMesgs?: any[];
+            videoTitleMesgs?: any[];
+            videoDescriptionMesgs?: any[];
+            videoClipMesgs?: any[];
+            setMesgs?: SetMesg[];
+            jumpMesgs?: any[];
+            splitMesgs?: any[];
+            splitSummaryMesgs?: any[];
+            climbProMesgs?: any[];
+            fieldDescriptionMesgs?: any[];
+            developerDataIdMesgs?: any[];
+            courseMesgs?: any[];
+            coursePointMesgs?: any[];
+            segmentIdMesgs?: any[];
+            segmentLeaderboardEntryMesgs?: any[];
+            segmentPointMesgs?: any[];
+            segmentLapMesgs?: any[];
+            segmentFileMesgs?: any[];
+            workoutMesgs?: any[];
+            workoutSessionMesgs?: any[];
+            workoutStepMesgs?: any[];
+            exerciseTitleMesgs?: any[];
+            scheduleMesgs?: any[];
+            totalsMesgs?: any[];
+            weightScaleMesgs?: any[];
+            bloodPressureMesgs?: any[];
+            monitoringInfoMesgs?: any[];
+            monitoringMesgs?: any[];
+            monitoringHrDataMesgs?: any[];
+            spo2DataMesgs?: any[];
+            hrMesgs?: any[];
+            stressLevelMesgs?: any[];
+            maxMetDataMesgs?: any[];
+            hsaBodyBatteryDataMesgs?: any[];
+            hsaEventMesgs?: any[];
+            hsaAccelerometerDataMesgs?: any[];
+            hsaGyroscopeDataMesgs?: any[];
+            hsaStepDataMesgs?: any[];
+            hsaSpo2DataMesgs?: any[];
+            hsaStressDataMesgs?: any[];
+            hsaRespirationDataMesgs?: any[];
+            hsaHeartRateDataMesgs?: any[];
+            hsaConfigurationDataMesgs?: any[];
+            hsaWristTemperatureDataMesgs?: any[];
+            memoGlobMesgs?: any[];
+            sleepLevelMesgs?: any[];
+            antChannelIdMesgs?: any[];
+            antRxMesgs?: any[];
+            antTxMesgs?: any[];
+            exdScreenConfigurationMesgs?: any[];
+            exdDataFieldConfigurationMesgs?: any[];
+            exdDataConceptConfigurationMesgs?: any[];
+            diveSummaryMesgs?: any[];
+            aadAccelFeaturesMesgs?: any[];
+            hrvMesgs?: any[];
+            beatIntervalsMesgs?: any[];
+            hrvStatusSummaryMesgs?: any[];
+            hrvValueMesgs?: any[];
+            rawBbiMesgs?: any[];
+            respirationRateMesgs?: any[];
+            chronoShotSessionMesgs?: any[];
+            chronoShotDataMesgs?: any[];
+            tankUpdateMesgs?: any[];
+            tankSummaryMesgs?: any[];
+            sleepAssessmentMesgs?: any[];
+            sleepDisruptionSeverityPeriodMesgs?: any[];
+            sleepDisruptionOvernightSeverityMesgs?: any[];
+            skinTempOvernightMesgs?: any[];
+            padMesgs?: any[];
             
             // Catch-all
             [key: string]: any[];
@@ -93,9 +412,25 @@ declare module '@garmin/fitsdk' {
     }
 
     export const Profile: {
+        version: {
+            major: number;
+            minor: number;
+            patch: number;
+            type: string;
+        };
+        CommonFields: {
+            PartIndex: number;
+            Timestamp: number;
+            MessageIndex: number;
+        };
         MesgNum: Record<string, number>;
-        messages: Record<number, any>;
-        types: Record<number, any>;
+        messages: Record<number, {
+            num: number;
+            name: string;
+            messagesKey: string;
+            fields: Record<number, any>;
+        }>;
+        types: Record<number, Record<number | string, string | number>>;
         [key: string]: any;
     };
 
