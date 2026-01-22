@@ -11,7 +11,9 @@
     "postinstall": "patch-package",
     "getversion": "node ./git-version.mjs",
     "prebuild": "npm run getversion .",
-    "prestart": "npm run getversion ."
+    "prestart": "npm run getversion .",
+    "test:e2e": "playwright test --project=Mobile && playwright test --project=Desktop",
+    "test:e2e-visible": "playwright test --project=Mobile --headed --workers=1 && playwright test --project=Desktop --headed --workers=1"
   },
   "private": true,
   "dependencies": {
@@ -42,6 +44,7 @@
     "@angular/build": "^21.1.1",
     "@angular/cli": "^21.1.1",
     "@angular/compiler-cli": "^21.1.1",
+    "@playwright/test": "^1.57.0",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
