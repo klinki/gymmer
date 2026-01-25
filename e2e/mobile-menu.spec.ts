@@ -50,7 +50,8 @@ test.describe('Mobile Menu', () => {
         // Inspecting typical Angular Material Sidenav: .mat-drawer-backdrop.mat-drawer-shown
         const backdrop = page.locator('.mat-drawer-backdrop');
         await expect(backdrop).toBeVisible();
-        await backdrop.click();
+        // Click outside the menu (menu width is 250px)
+        await page.mouse.click(350, 300);
 
         // 6. Verify drawer is closed
         await expect(drawer).not.toHaveClass(/mat-drawer-opened/);
