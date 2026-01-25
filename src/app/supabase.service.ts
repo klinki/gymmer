@@ -14,8 +14,11 @@ export class SupabaseService {
   }
 
   constructor() {
+    const isKarma = !!(window as any)['__karma__'];
+    const options = isKarma ? { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } } : {};
+    
     this._supabase = this.ngZone.runOutsideAngular(() =>
-      createClient(environment.supabaseUrl, environment.supabaseKey)
+      createClient(environment.supabaseUrl, environment.supabaseKey, options)
     );
   }
 }
