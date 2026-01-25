@@ -1,44 +1,67 @@
-<mat-form-field class="search">
-  <mat-label>Search</mat-label>
-  <input [(ngModel)]="searchText" matInput type="text" />
-  <button
-    mat-icon-button
-    matPrefix
-  >
-    <mat-icon>search</mat-icon>
-  </button>
-  <button (click)="searchText.set('')" [hidden]="searchText().length == 0"
-    mat-icon-button
-    matSuffix
-  >
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>
-@if (showSelection()) {
-  <mat-selection-list [(ngModel)]="selectedItems">
-    <div mat-subheader>Exercises</div>
-    @for (exercise of filteredExercises(); track exercise) {
-      <mat-list-option [value]="exercise">
-        <mat-icon matListItemIcon>folder</mat-icon>
-        <div matListItemTitle>{{exercise.name}}</div>
-        <div matListItemLine>{{exercise.name}} - {{ exercise.executionCount }}</div>
-      </mat-list-option>
-    }
-  </mat-selection-list>
-} @else {
-  <mat-list>
-    <div mat-subheader>Exercises</div>
-    @for (exercise of filteredExercises(); track exercise) {
-      <mat-list-item [routerLink]="['/exercise', exercise.id, 'history']">
-        <mat-icon matListItemIcon>folder</mat-icon>
-        <div matListItemTitle>{{exercise.name}}</div>
-        <div matListItemLine>{{exercise.name}} - {{ exercise.executionCount }}</div>
-      </mat-list-item>
-    }
-  </mat-list>
-}
-<div class="fab-container">
-  <button (click)="newExercise()" mat-fab>
-    <mat-icon>add</mat-icon>
-  </button>
+<div class="container page-content">
+  <!-- Sticky Search Bar -->
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search Exercises</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input [(ngModel)]="searchText" matInput type="text" placeholder="e.g. Bench Press"/>
+      @if (searchText().length > 0) {
+        <button (click)="searchText.set('')" mat-icon-button matSuffix>
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+  </div>
+
+  <!-- Content -->
+  @if (showSelection()) {
+    <mat-selection-list [(ngModel)]="selectedItems" class="exercise-list">
+      <div mat-subheader>Select Exercises</div>
+      @for (exercise of filteredExercises(); track exercise) {
+        <mat-list-option [value]="exercise" class="exercise-item">
+          <mat-icon matListItemIcon>fitness_center</mat-icon>
+          <div matListItemTitle>{{ exercise.name }}</div>
+          <div matListItemLine>{{ exercise.executionCount }} executions</div>
+        </mat-list-option>
+      }
+    </mat-selection-list>
+
+    <!-- Confirm Button for Selection Mode (Dialog) -->
+      <!-- Note: mat-dialog-close is directive in MatDialogModule, but sometimes requires manual closing if in a component not fully aware of its dialog state or if strict template checking fails.
+           However, since this IS displayed via MatDialog, we can use the directive if imported.
+           Error says: Can't bind to 'mat-dialog-close' since it isn't a known property of 'button'.
+           This suggests MatDialogModule is NOT imported in the module that declares ExerciseListComponent OR it's a standalone issue (but component is not standalone).
+           ExerciseListComponent is declared in AppModule. AppModule imports MatDialogModule.
+           Wait, `[mat-dialog-close]` expects a value. If the directive is not recognized, it's an import issue.
+           AppModule DOES import MatDialogModule.
+           Maybe I need to restart the server/build to pick up the new module import?
+           Or maybe I should just use a method to close it to be safe.
+      -->
+    <div class="fab-container">
+      <button (click)="closeDialog()" mat-fab extended color="primary">
+        <mat-icon>check</mat-icon>
+        <span>DONE</span>
+      </button>
+    </div>
+
+  } @else {
+    <mat-list class="exercise-list">
+      @for (exercise of filteredExercises(); track exercise) {
+        <mat-list-item [routerLink]="['/exercise', exercise.id, 'history']" class="exercise-item">
+          <mat-icon matListItemIcon>fitness_center</mat-icon>
+          <div matListItemTitle>{{ exercise.name }}</div>
+          <div matListItemLine>{{ exercise.executionCount }} executions</div>
+          <div  matListItemMeta>
+            <mat-icon>chevron_right</mat-icon>
+          </div>
+        </mat-list-item>
+      }
+    </mat-list>
+
+    <div class="fab-container">
+      <button (click)="newExercise()" mat-fab color="primary">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  }
 </div>

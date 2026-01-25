@@ -1,10 +1,9 @@
-import {Component, computed, inject, input, signal, TemplateRef, ViewChild} from '@angular/core';
+import {Component, computed, inject, input, Optional, signal} from '@angular/core';
 import {DatabaseService} from "../database.service";
 import {Exercise, Training} from "../models";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";
-import {createComputed} from "@angular/core/primitives/signals";
-import {MatSelectionList} from "@angular/material/list";
+import {MatDialogRef} from "@angular/material/dialog";
 
 /**
  * Component for managing the exercise library and exercise selection.
@@ -30,6 +29,8 @@ import {MatSelectionList} from "@angular/material/list";
 })
 export class ExerciseListComponent {
   db = inject(DatabaseService);
+  // Inject DialogRef optionally to close the dialog if opened as one
+  constructor(@Optional() public dialogRef: MatDialogRef<ExerciseListComponent>) {}
 
   showSelection = input();
   selectedItems = signal<Training[]>([]);
@@ -83,5 +84,11 @@ export class ExerciseListComponent {
 
   editExercise(updatedExercise: Exercise) {
     this.db.updateExercise(updatedExercise);
+  }
+
+  closeDialog() {
+    if (this.dialogRef) {
+      this.dialogRef.close(this.selectedItems());
+    }
   }
 }
