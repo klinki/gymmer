@@ -37,9 +37,11 @@ test.describe('Mobile Menu', () => {
         await expect(drawer).toHaveClass(/mat-drawer-opened/);
 
         // 4. Verify links exist
-        await expect(page.getByRole('link', { name: 'Training Plans' })).toBeVisible();
-        await expect(page.getByRole('link', { name: 'Exercise List' })).toBeVisible();
-        await expect(page.getByRole('link', { name: 'History' })).toBeVisible();
+        // 4. Verify links exist
+        const sidenav = page.locator('mat-sidenav');
+        await expect(sidenav.locator('a[href="/settings"]')).toBeVisible();
+        await expect(sidenav.locator('a[href="/synchronize"]')).toBeVisible();
+        await expect(sidenav.locator('a[href="/account/profile"]')).toBeVisible();
 
         await takeScreenshot(page, 'mobile-menu-open');
 
@@ -54,5 +56,22 @@ test.describe('Mobile Menu', () => {
         await expect(drawer).not.toHaveClass(/mat-drawer-opened/);
 
         await takeScreenshot(page, 'mobile-menu-closed');
+    });
+
+    test('Bottom navigation is visible', async ({ page }) => {
+        const bottomNav = page.locator('.bottom-nav');
+        await expect(bottomNav).toBeVisible();
+
+        // Verify links in bottom nav
+        // Dashboard / Training Plans
+        await expect(bottomNav.locator('a[href="/"]')).toBeVisible();
+        // Exercise List
+        await expect(bottomNav.locator('a[href="/exercise-list"]')).toBeVisible();
+        // Active Training or Start Training
+        await expect(bottomNav.locator('a[href="/training"]')).toBeVisible();
+        // History
+        await expect(bottomNav.locator('a[href="/training/history"]')).toBeVisible();
+
+        await takeScreenshot(page, 'mobile-bottom-nav');
     });
 });
