@@ -1,10 +1,8 @@
-import {Component, computed, inject, input, signal, TemplateRef, ViewChild} from '@angular/core';
+import {Component, computed, inject, input, Optional, signal} from '@angular/core';
 import {DatabaseService} from "../database.service";
 import {Exercise, Training} from "../models";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";
-import {createComputed} from "@angular/core/primitives/signals";
-import {MatSelectionList} from "@angular/material/list";
 import {MatDialogRef} from "@angular/material/dialog";
 
 /**
