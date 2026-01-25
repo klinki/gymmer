@@ -7,50 +7,15 @@ import {SupabaseService} from "./supabase.service";
 import {SupabaseAuthService} from "./supabase-auth.service";
 import {map, switchMap} from "rxjs/operators";
 
-type ExerciseId = string;
-type TrainingPlanId = string;
-type TrainingId = string;
-
-export interface Exercise {
-  id: ExerciseId;
-  name: string;
-  hidden?: boolean;
-}
-
-export interface ExerciseSeries {
-  weight?: number;
-  repetitions?: number;
-  note?: string;
-  variant?: string;
-}
-
-export interface ExerciseExecution extends Exercise {
-  exerciseId?: ExerciseId;
-  series: ExerciseSeries[];
-  date?: Date|null;
-}
-
-export interface Training {
-  id: TrainingId;
-  name: string;
-  startDate: Date|null;
-  endDate: Date|null;
-  exercises: ExerciseExecution[];
-  trainingPlanId?: TrainingPlanId;
-}
-
-export interface TrainingPlan {
-  id: TrainingPlanId;
-  name: string;
-  exercises: Exercise[];
-}
-
-export interface TrainingPlanExercise {
-  trainingPlanId: string;
-  exerciseId: string;
-}
-
-export interface Routine {}
+import {
+  Exercise,
+  ExerciseExecution,
+  Profile,
+  Training,
+  TrainingPlan,
+  TrainingPlanExercise,
+  ExerciseId
+} from './models';
 
 Dexie.Observable.createUUID = () => ulid();
 

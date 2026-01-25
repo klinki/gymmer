@@ -10,13 +10,7 @@ import {
 import { environment } from 'src/environments/environment';
 import {BehaviorSubject, Observable, skipWhile} from "rxjs";
 import {SupabaseService} from "./supabase.service";
-
-export interface Profile {
-  id?: string
-  username: string
-  website: string
-  avatar_url: string
-}
+import { Profile } from './models';
 
 @Injectable({
   providedIn: 'root',
