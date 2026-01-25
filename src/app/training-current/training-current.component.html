@@ -5,7 +5,6 @@
        <div class="training-info">
          <h1 class="mat-h2">{{training.name}}</h1>
          @if (training.startDate != null) {
-            <!-- Ensure timer is visible with explicit style -->
             <div class="timer" style="display: block;">{{ trainingRunningTime() | duration }}</div>
             <div class="start-time">Started: {{ training.startDate | date: 'shortTime' }}</div>
          } @else {
@@ -66,8 +65,8 @@
   <div class="controls-container">
     <div class="main-controls">
        @if (training()?.startDate == null || training()?.endDate != null) {
-          <!-- Use standard FAB with text label via span or just icon to avoid 'extended' issues if module missing -->
-           <button mat-fab extended color="primary" (click)="start()">
+          <!-- Not Started State -->
+          <button mat-fab extended color="primary" (click)="start()">
              <mat-icon>play_arrow</mat-icon>
              <span>START</span>
           </button>
@@ -76,14 +75,17 @@
              <mat-icon>add</mat-icon>
           </button>
        } @else {
-          <!-- Add Exercise -->
-          <button mat-fab (click)="addExercise()" aria-label="Add Exercise">
-             <mat-icon>add</mat-icon>
+          <!-- Started State: Keep order consistent (Main Action Left, Secondary Right or vice versa) -->
+          <!-- User asked to NOT switch positions. Previously: Start (Left), Add (Right). -->
+          <!-- Now: Stop (Left - replaces Start), Add (Right - stays same). -->
+
+          <button mat-fab extended color="warn" (click)="stop()">
+             <mat-icon>stop</mat-icon>
+             <span>STOP</span>
           </button>
 
-          <!-- Stop Button -->
-          <button mat-fab color="warn" (click)="stop()" aria-label="Stop Workout">
-             <mat-icon>stop</mat-icon>
+          <button mat-fab (click)="addExercise()" aria-label="Add Exercise">
+             <mat-icon>add</mat-icon>
           </button>
        }
     </div>

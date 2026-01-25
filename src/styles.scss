@@ -13,10 +13,16 @@ body {
   /* Disables pull-to-refresh but allows overscroll glow effects. */
   overscroll-behavior-y: contain;
 
+  // Default to Dark Theme directly if that's what the user implies is "we are using"
+  // But standard practice is to support both.
+  // If the user says "we are using dark theme", I should ensure the dark theme variables are applied correctly.
+
+  // Apply base light theme by default
   @include mat.all-component-themes(theme.$light-theme);
   background: mat.get-theme-color(theme.$light-theme, surface);
   color: mat.get-theme-color(theme.$light-theme, on-surface);
 
+  // Apply dark theme on preference
   @media (prefers-color-scheme: dark) {
     @include mat.all-component-themes(theme.$dark-theme);
     background: mat.get-theme-color(theme.$dark-theme, surface);
