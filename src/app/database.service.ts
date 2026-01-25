@@ -61,8 +61,7 @@ export class DatabaseService extends Dexie {
   }
 
   addTraining(training: Omit<Training, 'id'>): Observable<Training> {
-    const allExercises = training.exercises.map(x => this.exerciseExecutions.put(x as ExerciseExecution));
-    const finalPromise = Promise.all(allExercises).then(_ => this.trainings.put(training as Training));
+    const finalPromise = this.exerciseExecutions.bulkPut(training.exercises).then(_ => this.trainings.put(training as Training));
     return from(finalPromise);
   }
 
