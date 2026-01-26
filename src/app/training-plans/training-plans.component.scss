@@ -13,7 +13,13 @@
   // transition: background-color 0.2s;
 
   &:hover {
-    background-color: var(--mat-sys-state-hover, rgba(0,0,0,0.04));
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
   }
 }
 
@@ -29,6 +35,4 @@
   z-index: 100;
 }
 
-mat-list-item:active {
-  background-color: grey;
-}
+

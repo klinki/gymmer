@@ -50,7 +50,17 @@
 
   &.done {
     border-left-color: var(--mat-sys-primary, #1976d2);
-    background-color: rgba(0, 0, 0, 0.02);
+    // Background color for done items is handled by opacity or already set generally if needed
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
   }
 
   .exercise-content {
