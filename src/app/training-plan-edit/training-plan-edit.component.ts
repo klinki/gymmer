@@ -1,7 +1,6 @@
 import {Component, effect, inject, input, signal} from '@angular/core';
 import {Router} from "@angular/router";
-import {DatabaseService} from "../database.service";
-import {Exercise, TrainingPlan} from "../models";
+import {DatabaseService, Exercise, TrainingPlan} from "../database.service";
 import {first} from "rxjs";
 import { DatePipe } from "@angular/common";
 import {DurationPipe} from "../duration-pipe.pipe";

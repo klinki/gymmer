@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {DatabaseService} from "../database.service";
-import {Training, TrainingPlan} from "../models";
+import {DatabaseService, Training, TrainingPlan} from "../database.service";
 import {Router} from "@angular/router";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";

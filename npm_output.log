@@ -3473,3 +3473,161 @@ Application bundle generation complete. [0.991 seconds] - 2026-01-25T19:22:25.41
 
 
 Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 260.15 kB |
+
+Application bundle generation complete. [4.530 seconds] - 2026-01-26T07:23:21.257Z
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:42:58:
+[37m      42 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) + 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:45:58:
+[37m      45 │ ...alue.weight = (currentValue?.[32mweight[37m ?? 0) - 1" color="primary" ...
+         ╵                                 [32m~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:54:63:
+[37m      54 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) + 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-detail/exercise-detail.component.html:57:63:
+[37m      57 │ ...etitions = (currentValue?.[32mrepetitions[37m ?? 0) - 1" color="primary...
+         ╵                              [32m~~~~~~~~~~~[0m
+
+  Warning occurs in the template of component ExerciseDetailComponent.
+
+    src/app/exercise-detail/exercise-detail.component.ts:24:17:
+[37m      24 │     templateUrl: [32m'./exercise-detail.component.html'[37m,
+         ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatCell is not used within the template of ExerciseExecutionDetailComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:37:4:
+[37m      37 │     [32mMatCell[37m,
+         ╵     [32m~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatCellDef is not used within the template of ExerciseExecutionDetailComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:38:4:
+[37m      38 │     [32mMatCellDef[37m,
+         ╵     [32m~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatColumnDef is not used within the template of ExerciseExecutionDetailComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:39:4:
+[37m      39 │     [32mMatColumnDef[37m,
+         ╵     [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatHeaderCell is not used within the template of ExerciseExecutionDetailComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:41:4:
+[37m      41 │     [32mMatHeaderCell[37m,
+         ╵     [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatHeaderRow is not used within the template of ExerciseExecutionDetailComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:42:4:
+[37m      42 │     [32mMatHeaderRow[37m,
+         ╵     [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatHeaderRowDef is not used within the template of ExerciseExecutionDetailComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:43:4:
+[37m      43 │     [32mMatHeaderRowDef[37m,
+         ╵     [32m~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatRow is not used within the template of ExerciseExecutionDetailComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:48:4:
+[37m      48 │     [32mMatRow[37m,
+         ╵     [32m~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatRowDef is not used within the template of ExerciseExecutionDetailComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:49:4:
+[37m      49 │     [32mMatRowDef[37m,
+         ╵     [32m~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatSuffix is not used within the template of ExerciseExecutionDetailComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:50:4:
+[37m      50 │     [32mMatSuffix[37m,
+         ╵     [32m~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatTable is not used within the template of ExerciseExecutionDetailComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/exercise-execution-detail/exercise-execution-detail.component.ts:51:4:
+[37m      51 │     [32mMatTable[37m,
+         ╵     [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of SettingsComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/settings/settings.component.ts:28:106:
+[37m      28 │ ...tCardHeader, MatCardActions, MatButton, MatCardContent, [32mDatePipe[37m],
+         ╵                                                            [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DatePipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:40:4:
+[37m      40 │     [32mDatePipe[37m,
+         ╵     [32m~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: DurationPipe is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:41:4:
+[37m      41 │     [32mDurationPipe[37m,
+         ╵     [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: MatListItemLine is not used within the template of TrainingPlanEditComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/training-plan-edit/training-plan-edit.component.ts:47:4:
+[37m      47 │     [32mMatListItemLine[37m,
+         ╵     [32m~~~~~~~~~~~~~~~[0m
+
+
+Component update sent to client(s).

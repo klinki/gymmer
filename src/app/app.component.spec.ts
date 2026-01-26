@@ -1,20 +1,11 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { SupabaseAuthService } from './supabase-auth.service';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [RouterTestingModule],
-    declarations: [AppComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [
-      {
-        provide: SupabaseAuthService,
-        useValue: { setSession: () => Promise.resolve() }
-      }
-    ]
+    declarations: [AppComponent]
   }));
 
   it('should create the app', () => {
@@ -27,5 +18,12 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('gymmer');
+  });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.content span')?.textContent).toContain('gymmer app is running!');
   });
 });
