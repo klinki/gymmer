@@ -1,8 +1,39 @@
-.search {
+.page-content {
+  padding-bottom: 96px; // Space for FAB and bottom nav
+}
+
+.search-container {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  // Make sure background matches theme surface to hide scrolling content
+  background: var(--mat-sys-background, #fff);
+  padding: 16px 16px 0 16px;
+  margin: -16px -16px 0 -16px; // Counteract container padding to go full width
+}
+
+// Dark mode support if var not available
+@media (prefers-color-scheme: dark) {
+  .search-container {
+     background: var(--mat-sys-background, #303030);
+  }
+}
+
+.search-field {
   width: 100%;
 }
 
-mat-selection-list, mat-list {
-  overflow: auto;
-  height: 100%;
+.exercise-list {
+  margin-top: 8px;
+}
+
+.exercise-item {
+  cursor: pointer;
+}
+
+.fab-container {
+  position: fixed;
+  right: 16px;
+  bottom: 80px;
+  z-index: 100;
 }

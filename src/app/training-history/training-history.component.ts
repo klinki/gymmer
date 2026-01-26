@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {DatabaseService} from "../database.service";
-import {Training} from "../models";
+import {DatabaseService, Training} from "../database.service";
 import {from} from "rxjs";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {Router} from "@angular/router";

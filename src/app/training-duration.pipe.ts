@@ -1,5 +1,5 @@
 import {inject, Pipe, PipeTransform} from '@angular/core';
-import {Training} from "./models";
+import {Training} from "./database.service";
 import {DurationPipe} from "./duration-pipe.pipe";
 
 @Pipe({

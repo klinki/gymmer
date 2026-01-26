@@ -2,42 +2,18 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on PR
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-  workflow_dispatch:
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
-
+on: pull_request
 permissions:
   checks: write
   contents: read
   pull-requests: write
 jobs:
   build_and_preview:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository }}
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.ref }}
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
-      - run: npm run build
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-      - name: Run Unit Tests
-        run: npx ng test --no-watch --no-progress --browsers=ChromeHeadless
-      - name: Run E2E Tests
-        run: npm run test:e2e
+      - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}

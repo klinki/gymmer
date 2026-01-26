@@ -1,21 +1,117 @@
-.grid-container {
-  margin: 20px;
+.page-content {
+  padding-bottom: 120px; // Space for controls + nav
 }
 
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
+.training-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  background: var(--mat-sys-surface-variant, #f5f5f5);
+  padding: 16px;
+  border-radius: 16px;
+
+  .training-info {
+    flex: 1; // Take available space
+    h1 { margin: 0; font-size: 1.2rem; word-break: break-word;}
+
+    .timer {
+      font-size: 3rem;
+      font-weight: 300;
+      font-family: 'Roboto Mono', monospace;
+      margin: 8px 0;
+      color: var(--mat-sys-primary, #1976d2);
+      line-height: 1;
+    }
+
+    .start-time {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+  }
 }
 
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
+// Dark mode fallback
+@media (prefers-color-scheme: dark) {
+  .training-header {
+    background: var(--mat-sys-surface-variant, #424242);
+  }
 }
 
-.dashboard-card-content {
-  text-align: center;
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.exercise-card {
+  border-left: 4px solid transparent;
+  cursor: pointer;
+
+  &.done {
+    border-left-color: var(--mat-sys-primary, #1976d2);
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  .exercise-content {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .exercise-icon {
+    margin-right: 16px;
+    color: var(--mat-sys-secondary, #757575);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .done-icon {
+      color: var(--mat-sys-primary, #1976d2);
+    }
+  }
+
+  .exercise-details {
+    flex: 1;
+
+    .exercise-name {
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .exercise-stats {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+  }
+}
+
+.controls-container {
+  position: fixed;
+  bottom: 80px; // Above nav
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+
+  .main-controls {
+    pointer-events: auto;
+    display: flex;
+    gap: 24px;
+    // Ensure sufficient contrast and visibility
+    background: var(--mat-sys-surface-container-high, rgba(255,255,255,0.95));
+    padding: 12px 24px;
+    border-radius: 32px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    align-items: center;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .controls-container .main-controls {
+    background: var(--mat-sys-surface-container-high, rgba(66, 66, 66, 0.95));
+  }
 }

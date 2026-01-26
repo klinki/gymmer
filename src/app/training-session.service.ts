@@ -1,5 +1,5 @@
 import {Injectable, signal} from '@angular/core';
-import {Exercise, ExerciseExecution, Training} from "./models";
+import {Exercise, ExerciseExecution, Training} from "./database.service";
 
 /**
  * Service for managing the current active training session.

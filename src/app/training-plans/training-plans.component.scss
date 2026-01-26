@@ -1,31 +1,47 @@
-.grid-container {
-  margin: 20px;
+.page-content {
+  padding-bottom: 96px; // Space for FAB and bottom nav
 }
 
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
+.plans-list {
+  background: var(--mat-sys-surface, #fff);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
+.plan-item {
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--mat-sys-state-hover, rgba(0,0,0,0.04));
+  }
 }
 
-.dashboard-card-content {
-  text-align: center;
+.free-training {
+  // Distinction for free training
+  background-color: var(--mat-sys-secondary-container, rgba(230, 240, 255, 0.5));
+}
+
+// Dark mode overrides
+@media (prefers-color-scheme: dark) {
+  .plans-list {
+    background: var(--mat-sys-surface, #303030); // Dark background
+    color: var(--mat-sys-on-surface, #fff);
+  }
+
+  .free-training {
+    background-color: var(--mat-sys-secondary-container, #4a4a4a); // Darker container for free training
+    color: var(--mat-sys-on-secondary-container, #fff);
+  }
+
+  .plan-item:hover {
+     background-color: rgba(255, 255, 255, 0.04);
+  }
 }
 
 .fab-container {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-
-mat-list-item:active {
-  background-color: grey;
+  position: fixed;
+  right: 16px;
+  bottom: 80px;
+  z-index: 100;
 }

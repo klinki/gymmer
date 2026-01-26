@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, effect, inject, input, signal} from '@angular/core';
 import { Location } from "@angular/common";
-import {DatabaseService} from "../database.service";
-import {ExerciseExecution, ExerciseSeries, Training, TrainingPlan} from "../models";
+import {DatabaseService, ExerciseExecution, ExerciseSeries, Training, TrainingPlan} from "../database.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
   MatCell,

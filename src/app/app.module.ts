@@ -38,6 +38,7 @@ import { TrainingHistoryComponent } from './training-history/training-history.co
 import {TrainingDurationPipe} from "./training-duration.pipe";
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSelectModule,
     MatRadioModule,
     ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [
     provideAnimationsAsync(),
