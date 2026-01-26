@@ -1,24 +1,36 @@
-<mat-list>
-  <div mat-subheader>Training Plans</div>
-  <mat-list-item (click)="startFreeTraining()">
-    <mat-icon matListItemIcon>accessibility_new</mat-icon>
-    <div matListItemTitle>Free Training</div>
-  </mat-list-item>
-  @for (plan of trainingPlans(); track plan) {
-    <mat-list-item (click)="startTrainingPlan(plan)">
-      <mat-icon matListItemIcon>fitness_center</mat-icon>
-      <div matListItemTitle>{{plan.name}}</div>
-<!--      <div matListItemLine>{{folder}}</div> -->
-      <div matListItemMeta>
-        <button mat-icon-button (click)="editTrainingPlan(plan)">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </div>
+<div class="container page-content">
+  <h1 class="mat-h1">Training Plans</h1>
+
+  <mat-list class="plans-list">
+    <!-- Free Training -->
+    <mat-list-item (click)="startFreeTraining()" class="plan-item free-training">
+      <mat-icon matListItemIcon class="large-icon">accessibility_new</mat-icon>
+      <div matListItemTitle>Free Training</div>
+      <div matListItemLine>Start without a plan</div>
+      <button mat-icon-button matListItemMeta (click)="$event.stopPropagation(); startFreeTraining()">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
     </mat-list-item>
-  }
-</mat-list>
-<div class="fab-container">
-  <button (click)="newTrainingPlan()" mat-fab>
-    <mat-icon>add</mat-icon>
-  </button>
+
+    <mat-divider></mat-divider>
+
+    <!-- Loop through plans -->
+    @for (plan of trainingPlans(); track plan) {
+      <mat-list-item (click)="startTrainingPlan(plan)" class="plan-item">
+        <mat-icon matListItemIcon>fitness_center</mat-icon>
+        <div matListItemTitle>{{plan.name}}</div>
+        <div matListItemLine>{{plan.exercises.length}} Exercises</div>
+        <div matListItemMeta>
+          <button mat-icon-button (click)="$event.stopPropagation(); editTrainingPlan(plan)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    }
+  </mat-list>
+  <div class="fab-container">
+    <button (click)="newTrainingPlan()" mat-fab color="primary" aria-label="Create new plan">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>

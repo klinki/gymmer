@@ -1,29 +1,32 @@
-.grid-container {
-  margin: 20px;
+.page-content {
+  padding-bottom: 96px; // Space for FAB and bottom nav
 }
 
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
+.plans-list {
+  background: var(--mat-sys-surface, #fff);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
+.plan-item {
+  cursor: pointer;
+  // transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--mat-sys-state-hover, rgba(0,0,0,0.04));
+  }
 }
 
-.dashboard-card-content {
-  text-align: center;
+.free-training {
+  // Distinction for free training
+  background-color: var(--mat-sys-secondary-container, rgba(230, 240, 255, 0.5));
 }
 
 .fab-container {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  position: fixed;
+  right: 16px;
+  bottom: 80px;
+  z-index: 100;
 }
 
 mat-list-item:active {
