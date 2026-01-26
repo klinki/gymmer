@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://github.com/klinki/gymmer/compare/gymmer-v0.1.0...gymmer-v0.2.0) (2026-01-26)
+
+
+### Features
+
+* Redesign the active training page ([0c37e09](https://github.com/klinki/gymmer/commit/0c37e0988a0e31220cd164cedfafb16b8038c161))
+* Update exercise list styles ([6af8e35](https://github.com/klinki/gymmer/commit/6af8e354895ab729e7f68dc48ce36537b5758164))
+* Update hover styles ([a55d995](https://github.com/klinki/gymmer/commit/a55d995a91f4cf6d5c191afbda7ceff6c2992caa))
+* Update styles ([ec80e78](https://github.com/klinki/gymmer/commit/ec80e78a7fa3f80c20c2491ec66d368517ef1a37))
+* Update styles of training plan component ([c8d8253](https://github.com/klinki/gymmer/commit/c8d8253aaacd19e145339d3f83f0f234060497b1))
+
 ## [0.1.0](https://github.com/klinki/gymmer/compare/gymmer-v0.0.1...gymmer-v0.1.0) (2025-09-17)
 
 
