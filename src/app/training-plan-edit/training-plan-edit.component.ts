@@ -3,15 +3,12 @@ import {Router} from "@angular/router";
 import {DatabaseService} from "../database.service";
 import {Exercise, TrainingPlan} from "../models";
 import {first} from "rxjs";
-import { DatePipe } from "@angular/common";
-import {DurationPipe} from "../duration-pipe.pipe";
 import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {
   MatList,
   MatListItem,
   MatListItemIcon,
-  MatListItemLine,
   MatListItemTitle,
   MatListSubheaderCssMatStyler
 } from "@angular/material/list";
@@ -38,14 +35,11 @@ import {liveQuery} from "dexie";
 @Component({
     selector: 'app-training-plan-edit',
     imports: [
-    DatePipe,
-    DurationPipe,
     MatFabButton,
     MatIcon,
     MatList,
     MatListItem,
     MatListItemIcon,
-    MatListItemLine,
     MatListItemTitle,
     MatListSubheaderCssMatStyler
 ],

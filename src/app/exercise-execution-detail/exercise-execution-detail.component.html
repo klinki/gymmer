@@ -1,7 +1,7 @@
 <h2>Cvik {{exercise?.name}}</h2>
 @if (!loading()) {
   @if (exercise != null) {
-    <table mat-table [dataSource]="exercise?.series ?? []" class="mat-elevation-z8">
+    <table mat-table [dataSource]="exercise.series" class="mat-elevation-z8">
       <!-- series Column -->
       <ng-container matColumnDef="series">
         <th mat-header-cell *matHeaderCellDef> Série </th>
@@ -38,10 +38,10 @@
       <input name="weight" type="number" matInput [(ngModel)]="currentValue.weight">
       <span matTextSuffix>kg</span>
     </mat-form-field>
-    <button (click)="currentValue.weight = (currentValue?.weight ?? 0) + 1" color="primary" mat-icon-button aria-label="Add weight">
+    <button (click)="currentValue.weight = (currentValue.weight ?? 0) + 1" color="primary" mat-icon-button aria-label="Add weight">
       <mat-icon>add</mat-icon>
     </button>
-    <button (click)="currentValue.weight = (currentValue?.weight ?? 0) - 1" color="primary" mat-icon-button aria-label="Remove weight">
+    <button (click)="currentValue.weight = (currentValue.weight ?? 0) - 1" color="primary" mat-icon-button aria-label="Remove weight">
       <mat-icon>remove</mat-icon>
     </button>
 
@@ -50,10 +50,10 @@
       <input name="repetitions" type="number" matInput  [(ngModel)]="currentValue.repetitions">
       <span matTextSuffix>x</span>
     </mat-form-field>
-    <button (click)="currentValue.repetitions = (currentValue?.repetitions ?? 0) + 1" color="primary" mat-icon-button>
+    <button (click)="currentValue.repetitions = (currentValue.repetitions ?? 0) + 1" color="primary" mat-icon-button>
       <mat-icon>add</mat-icon>
     </button>
-    <button (click)="currentValue.repetitions = (currentValue?.repetitions ?? 0) - 1" color="primary" mat-icon-button>
+    <button (click)="currentValue.repetitions = (currentValue.repetitions ?? 0) - 1" color="primary" mat-icon-button>
       <mat-icon>remove</mat-icon>
     </button>
 

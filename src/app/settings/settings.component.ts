@@ -25,7 +25,7 @@ import {BehaviorSubject, filter, skipUntil, take, tap} from "rxjs";
  */
 @Component({
     selector: 'app-settings',
-    imports: [AsyncPipe, MatCard, MatCardTitle, MatCardHeader, MatCardActions, MatButton, MatCardContent, DatePipe],
+    imports: [AsyncPipe, MatCard, MatCardTitle, MatCardHeader, MatCardActions, MatButton, MatCardContent],
     templateUrl: './settings.component.html',
     styleUrl: './settings.component.scss'
 })
