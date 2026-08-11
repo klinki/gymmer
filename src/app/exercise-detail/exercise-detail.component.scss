@@ -1,5 +1,14 @@
 table {
+  width: 100%;
   min-height: 150px;
+  table-layout: fixed;
+}
+
+.mat-column-actions {
+  width: 72px;
+  padding-right: 8px;
+  padding-left: 8px;
+  text-align: center;
 }
 
 
