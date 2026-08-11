@@ -21,7 +21,7 @@ describe('ExerciseDetailComponent', () => {
 
   beforeEach(async () => {
     database = jasmine.createSpyObj<DatabaseService>('DatabaseService', ['getExercise', 'getLastExerciseExecution']);
-    session = jasmine.createSpyObj<TrainingSessionService>('TrainingSessionService', ['getExercise']);
+    session = jasmine.createSpyObj<TrainingSessionService>('TrainingSessionService', ['getExercise', 'startCurrentTrainingIfNeeded']);
     database.getExercise.and.returnValue(of(undefined));
     database.getLastExerciseExecution.and.returnValue(of(null));
     session.getExercise.and.returnValue(undefined);
@@ -134,5 +134,19 @@ describe('ExerciseDetailComponent', () => {
 
     expect(component.currentValue.weight).toBe(45);
     expect(component.currentValue.repetitions).toBe(10);
+  });
+
+  it('starts an unstarted training when adding a set', () => {
+    component.exercise = {
+      id: 'current-execution',
+      exerciseId: 'exercise-1',
+      name: 'Exercise one',
+      series: [],
+    };
+
+    component.add();
+
+    expect(session.startCurrentTrainingIfNeeded).toHaveBeenCalledTimes(1);
+    expect(component.exercise.series).toEqual([{ weight: 30, repetitions: 10, note: '' }]);
   });
 });

@@ -77,13 +77,9 @@ export class TrainingCurrentComponent implements OnInit {
 
   start() {
     console.log('▶️ Starting new training session');
-    const training = {
-      ...this.training() as any,
-      startDate: new Date()
-    };
-
-    this.session.updateTraining(training);
-    this.startTimer();
+    if (this.session.startCurrentTrainingIfNeeded()) {
+      this.startTimer();
+    }
   }
 
   stop() {

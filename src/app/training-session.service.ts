@@ -47,6 +47,19 @@ export class TrainingSessionService {
     localStorage.setItem('currentSession', JSON.stringify(this.currentSession()));
   }
 
+  startCurrentTrainingIfNeeded(startDate = new Date()): boolean {
+    const training = this.currentSession();
+    if (training == null || training.startDate != null || training.endDate != null) {
+      return false;
+    }
+
+    this.updateTraining({
+      ...training,
+      startDate,
+    });
+    return true;
+  }
+
   stopTraining() {
     this.currentSession.set(null);
     localStorage.setItem('currentSession', "null");

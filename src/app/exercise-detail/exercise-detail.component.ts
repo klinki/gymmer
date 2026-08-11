@@ -89,6 +89,7 @@ export class ExerciseDetailComponent {
   }
 
   add() {
+    this.session.startCurrentTrainingIfNeeded();
     this.exercise!.series = [ ...this.exercise!.series, this.currentValue ];
     this.currentValue = { ...this.currentValue };
   }
