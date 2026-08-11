@@ -5,7 +5,7 @@ import {ExerciseExecution, Training} from "../models";
 import {TrainingSessionService} from "../training-session.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
-import {first, interval, Subscription} from "rxjs";
+import {finalize, first, interval} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 /**
@@ -39,6 +39,8 @@ export class TrainingCurrentComponent implements OnInit {
 
   training = this.session.currentSession;
   trainingRunningTime = signal(0);
+  saving = signal(false);
+  saveError = signal<string|null>(null);
 
   constructor() {
     // Constructor should only handle dependency injection
@@ -83,17 +85,40 @@ export class TrainingCurrentComponent implements OnInit {
   }
 
   stop() {
+    if (this.saving()) {
+      return;
+    }
+
     if (window.confirm('Finish the training?')) {
       console.log('⏹️ Stopping training session');
+      const currentTraining = this.training();
+      if (currentTraining == null) {
+        return;
+      }
+
       const training = {
-        ...this.training() as any,
+        ...currentTraining,
         endDate: new Date()
       };
 
-      this.session.updateTraining(training);
-      this.session.stopTraining();
-      this.db.addTraining(training);
-      this.router.navigate(['/']);
+      this.saving.set(true);
+      this.saveError.set(null);
+      this.db.addTraining(training)
+        .pipe(
+          first(),
+          finalize(() => this.saving.set(false)),
+          takeUntilDestroyed(this.destroyRef),
+        )
+        .subscribe({
+          next: () => {
+            this.session.stopTraining();
+            this.router.navigate(['/']);
+          },
+          error: error => {
+            console.error('❌ Failed to save training', error);
+            this.saveError.set('Training could not be saved. Please try again.');
+          },
+        });
     }
   }
 

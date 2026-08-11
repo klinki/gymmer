@@ -78,9 +78,9 @@
           <mat-icon>add</mat-icon>
         </button>
       } @else {
-        <button mat-fab extended color="warn" (click)="stop()">
-          <mat-icon>stop</mat-icon>
-          <span>STOP</span>
+        <button mat-fab extended color="warn" (click)="stop()" [disabled]="saving()">
+          <mat-icon>{{ saving() ? 'hourglass_top' : 'stop' }}</mat-icon>
+          <span>{{ saving() ? 'SAVING…' : 'STOP' }}</span>
         </button>
 
         <button mat-fab (click)="addExercise()" aria-label="Add Exercise">
@@ -88,5 +88,8 @@
         </button>
       }
     </div>
+    @if (saveError(); as error) {
+      <div class="save-error" role="alert">{{ error }}</div>
+    }
   </div>
 </div>
