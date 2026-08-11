@@ -98,7 +98,11 @@ export class TrainingCurrentComponent implements OnInit {
   }
 
   addExercise() {
-    const dialogRef = this.dialog.open(ExerciseListComponent, { height: '100%' });
+    const dialogRef = this.dialog.open(ExerciseListComponent, {
+      width: '480px',
+      maxWidth: 'calc(100vw - 32px)',
+      height: '100%',
+    });
     dialogRef.beforeClosed().pipe(first()).subscribe(_ => {
       const selection = dialogRef.componentInstance.selectedItems();
       this.session.addExercisesToCurrentTraining(selection);
