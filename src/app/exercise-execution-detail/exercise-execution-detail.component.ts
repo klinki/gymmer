@@ -3,6 +3,7 @@ import { Location } from "@angular/common";
 import {DatabaseService} from "../database.service";
 import {ExerciseExecution, ExerciseSeries, Training, TrainingPlan} from "../models";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {first} from "rxjs";
 import {
   MatCell,
   MatCellDef,
@@ -109,7 +110,11 @@ export class ExerciseExecutionDetailComponent {
   }
 
   add() {
-    this.exercise!.series = [ ...this.exercise!.series, this.currentValue ];
+    if (this.exercise == null) {
+      return;
+    }
+
+    this.saveSeries([ ...this.exercise.series, { ...this.currentValue } ]);
     this.currentValue = { ...this.currentValue };
   }
 
@@ -121,10 +126,29 @@ export class ExerciseExecutionDetailComponent {
     const idx = this.exercise.series.indexOf(element);
     if (idx === -1) { return; }
 
-    this.exercise.series = [
+    this.saveSeries([
       ...this.exercise.series.slice(0, idx),
       ...this.exercise.series.slice(idx + 1)
-    ];
+    ]);
+  }
+
+  private saveSeries(series: ExerciseSeries[]) {
+    const training = this.training();
+    const exercise = this.exercise;
+    if (training == null || exercise == null) {
+      return;
+    }
+
+    const updatedExercise = { ...exercise, series };
+    const updatedTraining = {
+      ...training,
+      exercises: training.exercises.map(item => item.id === exercise.id ? updatedExercise : item),
+    };
+
+    this.db.updateTraining(updatedTraining).pipe(first()).subscribe(savedTraining => {
+      this.training.set(savedTraining);
+      this.exercise = savedTraining.exercises.find(item => item.id === exercise.id) ?? null;
+    });
   }
 
   back() {
