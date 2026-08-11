@@ -147,6 +147,77 @@ describe('DatabaseService', () => {
     expect(canonicalExecution.date).toBeUndefined();
   });
 
+  it('updates a canonical training and rebuilds its derived execution history', async () => {
+    const service = TestBed.inject(DatabaseService);
+    const training: Training = {
+      id: 'training-1',
+      name: 'Training',
+      startDate: new Date('2026-03-01T10:00:00.000Z'),
+      endDate: new Date('2026-03-01T11:00:00.000Z'),
+      exercises: [{
+        id: 'canonical-execution-1',
+        exerciseId: 'exercise-1',
+        name: 'Exercise one',
+        series: [{ weight: 42, repetitions: 6 }],
+      }],
+    };
+    await firstValueFrom(service.updateTraining(training));
+
+    const updatedTraining: Training = {
+      ...training,
+      exercises: [{
+        ...training.exercises[0],
+        series: [{ weight: 45, repetitions: 5 }],
+      }],
+    };
+    await firstValueFrom(service.updateTraining(updatedTraining));
+
+    const storedTraining = await service.trainings.get(training.id);
+    const derivedExecutions = await service.exerciseExecutions
+      .where('exerciseId')
+      .equals('exercise-1')
+      .toArray();
+
+    expect(storedTraining).toEqual(updatedTraining);
+    expect(storedTraining?.exercises[0].id).toBe('canonical-execution-1');
+    expect(derivedExecutions.length).toBe(1);
+    expect(derivedExecutions[0].id).not.toBe('canonical-execution-1');
+    expect(derivedExecutions[0].series).toEqual([{ weight: 45, repetitions: 5 }]);
+  });
+
+  it('rolls back the canonical update when rebuilding derived history fails', async () => {
+    const service = TestBed.inject(DatabaseService);
+    const originalTraining: Training = {
+      id: 'training-1',
+      name: 'Training',
+      startDate: new Date('2026-03-01T10:00:00.000Z'),
+      endDate: new Date('2026-03-01T11:00:00.000Z'),
+      exercises: [{
+        id: 'canonical-execution-1',
+        exerciseId: 'exercise-1',
+        name: 'Exercise one',
+        series: [{ weight: 42, repetitions: 6 }],
+      }],
+    };
+    await firstValueFrom(service.updateTraining(originalTraining));
+    const originalDerivedExecution = await service.exerciseExecutions
+      .where('exerciseId')
+      .equals('exercise-1')
+      .first();
+    spyOn<any>(service, 'createDerivedExerciseExecutions').and.throwError('Cannot rebuild history');
+
+    await expectAsync(firstValueFrom(service.updateTraining({
+      ...originalTraining,
+      exercises: [{
+        ...originalTraining.exercises[0],
+        series: [{ weight: 50, repetitions: 3 }],
+      }],
+    }))).toBeRejectedWithError('Cannot rebuild history');
+
+    expect(await service.trainings.get(originalTraining.id)).toEqual(originalTraining);
+    expect(await service.exerciseExecutions.toArray()).toEqual([originalDerivedExecution!]);
+  });
+
   it('clears derived executions with the rest of the database', async () => {
     const service = TestBed.inject(DatabaseService);
     await service.exerciseExecutions.add({

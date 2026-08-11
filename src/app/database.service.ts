@@ -75,10 +75,11 @@ export class DatabaseService extends Dexie {
   }
 
   addTraining(training: Omit<Training, 'id'>): Observable<Training> {
-    const exerciseExecutions = this.createDerivedExerciseExecutions([training as Training]);
-    const allExercises = exerciseExecutions.map(exercise => this.exerciseExecutions.put(exercise));
-    const finalPromise = Promise.all(allExercises).then(_ => this.trainings.put(training as Training));
-    return from(finalPromise);
+    return from(this.persistTraining(training));
+  }
+
+  updateTraining(training: Training): Observable<Training> {
+    return from(this.persistTraining(training));
   }
 
   getTraining(trainingId: string) {
@@ -120,6 +121,33 @@ export class DatabaseService extends Dexie {
         date,
       };
     }));
+  }
+
+  private async persistTraining(training: Training|Omit<Training, 'id'>): Promise<Training> {
+    return this.transaction('rw', this.trainings, this.exerciseExecutions, async () => {
+      const trainingId = await this.trainings.put(training as Training);
+      const storedTraining = await this.trainings.get(trainingId);
+
+      if (storedTraining == null) {
+        throw new Error(`Training ${String(trainingId)} could not be read after it was saved.`);
+      }
+
+      const trainings = await this.trainings.toArray();
+      await this.rebuildDerivedExerciseExecutions(this.exerciseExecutions, trainings);
+      return storedTraining;
+    });
+  }
+
+  private async rebuildDerivedExerciseExecutions(
+    table: Table<ExerciseExecution>,
+    trainings: Training[]
+  ): Promise<void> {
+    await table.clear();
+    const exerciseExecutions = this.createDerivedExerciseExecutions(trainings);
+
+    if (exerciseExecutions.length > 0) {
+      await table.bulkPut(exerciseExecutions);
+    }
   }
 
   private toDate(value: Date|string|null|undefined): Date|undefined {
