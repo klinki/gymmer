@@ -218,6 +218,69 @@ describe('DatabaseService', () => {
     expect(await service.exerciseExecutions.toArray()).toEqual([originalDerivedExecution!]);
   });
 
+  it('imports a backup atomically and rebuilds derived execution history', async () => {
+    const service = TestBed.inject(DatabaseService);
+    const json = JSON.stringify({
+      exercises: [{ id: 'exercise-1', name: 'Exercise one' }],
+      trainingPlans: [{ id: 'plan-1', name: 'Plan one', exercises: [] }],
+      trainingPlanExercises: [{ trainingPlanId: 'plan-1', exerciseId: 'exercise-1' }],
+      trainings: [{
+        id: 'training-1',
+        name: 'Imported training',
+        startDate: '2026-04-01T10:00:00.000Z',
+        endDate: '2026-04-01T11:00:00.000Z',
+        exercises: [{
+          id: 'canonical-execution-1',
+          exerciseId: 'exercise-1',
+          name: 'Exercise one',
+          date: '2026-04-01T10:00:00.000Z',
+          series: [{ weight: 50, repetitions: 5 }],
+        }],
+      }],
+    });
+
+    await service.importFromJson(json);
+
+    const training = await service.trainings.get('training-1');
+    const derivedExecution = await service.exerciseExecutions
+      .where('exerciseId')
+      .equals('exercise-1')
+      .first();
+    expect(await service.exercises.get('exercise-1')).toEqual({ id: 'exercise-1', name: 'Exercise one' });
+    expect(await service.trainingPlans.get('plan-1')).toEqual({ id: 'plan-1', name: 'Plan one', exercises: [] });
+    expect(await service.trainingPlanExercises.count()).toBe(1);
+    expect(training?.startDate).toEqual(new Date('2026-04-01T10:00:00.000Z'));
+    expect(training?.exercises[0].id).toBe('canonical-execution-1');
+    expect(training?.exercises[0].date).toEqual(new Date('2026-04-01T10:00:00.000Z'));
+    expect(derivedExecution?.id).not.toBe('canonical-execution-1');
+    expect(derivedExecution?.series).toEqual([{ weight: 50, repetitions: 5 }]);
+  });
+
+  it('rolls back every imported table when derived history cannot be rebuilt', async () => {
+    const service = TestBed.inject(DatabaseService);
+    spyOn<any>(service, 'rebuildDerivedExerciseExecutions').and.throwError('Cannot rebuild history');
+    const json = JSON.stringify({
+      exercises: [{ id: 'exercise-1', name: 'Exercise one' }],
+      trainingPlans: [{ id: 'plan-1', name: 'Plan one', exercises: [] }],
+      trainingPlanExercises: [{ trainingPlanId: 'plan-1', exerciseId: 'exercise-1' }],
+      trainings: [{
+        id: 'training-1',
+        name: 'Imported training',
+        startDate: '2026-04-01T10:00:00.000Z',
+        endDate: '2026-04-01T11:00:00.000Z',
+        exercises: [],
+      }],
+    });
+
+    await expectAsync(service.importFromJson(json)).toBeRejectedWithError('Cannot rebuild history');
+
+    expect(await service.exercises.count()).toBe(0);
+    expect(await service.trainingPlans.count()).toBe(0);
+    expect(await service.trainingPlanExercises.count()).toBe(0);
+    expect(await service.trainings.count()).toBe(0);
+    expect(await service.exerciseExecutions.count()).toBe(0);
+  });
+
   it('clears derived executions with the rest of the database', async () => {
     const service = TestBed.inject(DatabaseService);
     await service.exerciseExecutions.add({

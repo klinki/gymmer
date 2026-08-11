@@ -187,36 +187,54 @@ export class DatabaseService extends Dexie {
     await this.exercises.clear();
   }
 
-  importFromJson(json: string) {
+  async importFromJson(json: string): Promise<void> {
     const data = JSON.parse(json, (key, value) => {
-      if (value != null && (key == 'startDate' || key == 'endDate')) {
+      if (value != null && (key == 'startDate' || key == 'endDate' || key == 'date')) {
         return new Date(value);
       }
 
       return value;
     });
-    const { exercises, trainingPlans, trainings } = data;
+    const exercises: Exercise[] = data.exercises ?? [];
+    const trainingPlans: TrainingPlan[] = data.trainingPlans ?? [];
+    const trainingPlanExercises: TrainingPlanExercise[] = data.trainingPlanExercises ?? [];
+    const trainings: Training[] = (data.trainings ?? [])
+      .map((training: Training) => this.fixTraining(training, trainingPlans));
 
-    for (const exercise of exercises) {
-      this.addExercise(exercise);
-    }
+    await this.transaction(
+      'rw',
+      [
+        this.exercises,
+        this.trainingPlans,
+        this.trainingPlanExercises,
+        this.trainings,
+        this.exerciseExecutions,
+      ],
+      async () => {
+        if (exercises.length > 0) {
+          await this.exercises.bulkPut(exercises);
+        }
+        if (trainingPlans.length > 0) {
+          await this.trainingPlans.bulkPut(trainingPlans);
+        }
+        if (trainingPlanExercises.length > 0) {
+          await this.trainingPlanExercises.bulkPut(trainingPlanExercises);
+        }
+        if (trainings.length > 0) {
+          await this.trainings.bulkPut(trainings);
+        }
 
-    for (const plan of trainingPlans) {
-      this.addTrainingPlan(plan);
-    }
-
-    for (const training of trainings) {
-      const fixedTraining = this.fixTraining(training, trainingPlans);
-      this.addTraining(fixedTraining);
-    }
+        const allTrainings = await this.trainings.toArray();
+        await this.rebuildDerivedExerciseExecutions(this.exerciseExecutions, allTrainings);
+      }
+    );
   }
 
   fixTraining(training: Training, trainingPlans: Array<TrainingPlan>) {
-    const fixedTraining = { ...training };
-
-    if (training.startDate != null) {
-      console.log(training);
-    }
+    const fixedTraining = {
+      ...training,
+      exercises: training.exercises.map(execution => ({ ...execution })),
+    };
 
     fixedTraining.exercises.forEach(exec => {
       if (exec.id == null || exec.id == exec.exerciseId) {

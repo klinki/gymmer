@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {DatabaseService} from "../database.service";
 import {SupabaseAuthService} from "../supabase-auth.service";
 import {AsyncPipe, DatePipe} from "@angular/common";
@@ -6,7 +6,7 @@ import {versions} from "../../environments/version";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
 import {Router} from "@angular/router";
-import {BehaviorSubject, filter, skipUntil, take, tap} from "rxjs";
+import {MatProgressBar} from "@angular/material/progress-bar";
 
 /**
  * Component for application settings and data management.
@@ -25,7 +25,7 @@ import {BehaviorSubject, filter, skipUntil, take, tap} from "rxjs";
  */
 @Component({
     selector: 'app-settings',
-    imports: [AsyncPipe, MatCard, MatCardTitle, MatCardHeader, MatCardActions, MatButton, MatCardContent],
+    imports: [AsyncPipe, MatCard, MatCardTitle, MatCardHeader, MatCardActions, MatButton, MatCardContent, MatProgressBar],
     templateUrl: './settings.component.html',
     styleUrl: './settings.component.scss'
 })
@@ -50,34 +50,32 @@ export class SettingsComponent {
     }
   }
 
-  fileContent$ = new BehaviorSubject<string|null>(null);
+  importing = signal(false);
+  importStatus = signal<string|null>(null);
+  importError = signal<string|null>(null);
 
-  public onChange(event: Event): void {
-    this.fileContent$.next(null);
-
-    const fileList = (event.target as any)?.files ?? [];
-
-    if (fileList.lenght == 0) {
+  public async onChange(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (file == null) {
       return;
     }
 
-    let file = fileList[0];
-    let fileReader: FileReader = new FileReader();
-    let self = this;
-    fileReader.onloadend = function(x) {
-      self.fileContent$.next(fileReader.result as string);
+    this.importing.set(true);
+    this.importStatus.set(null);
+    this.importError.set(null);
+
+    try {
+      const json = await file.text();
+      await this.db.importFromJson(json);
+      this.importStatus.set('Import completed successfully.');
+    } catch (error) {
+      console.error('Database import failed', error);
+      this.importError.set('Import failed. No database changes were saved.');
+    } finally {
+      this.importing.set(false);
+      input.value = '';
     }
-    fileReader.readAsText(file);
-
-    this.import();
-  }
-
-  import() {
-    this.fileContent$.pipe(
-      filter(x => x != null),
-      take(1),
-      tap(x => console.log(x)),
-    ).subscribe(value => this.db.importFromJson(value!));
   }
 
   async clear() {
