@@ -83,6 +83,9 @@ export class ExerciseDetailComponent {
     if (lastSeries?.weight != null) {
       this.currentValue.weight = lastSeries.weight;
     }
+    if (lastSeries?.repetitions != null) {
+      this.currentValue.repetitions = lastSeries.repetitions;
+    }
   }
 
   add() {
