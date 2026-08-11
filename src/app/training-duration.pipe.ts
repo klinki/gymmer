@@ -10,7 +10,7 @@ export class TrainingDurationPipe implements PipeTransform {
   durationPipe = inject(DurationPipe);
 
   transform(training: Training): string {
-    const seconds = (training.endDate?.getTime() ?? 0) - (training.startDate?.getTime() ?? 0);
+    const seconds = ((training.endDate?.getTime() ?? 0) - (training.startDate?.getTime() ?? 0)) / 1000;
     return this.durationPipe.transform(seconds);
   }
 
