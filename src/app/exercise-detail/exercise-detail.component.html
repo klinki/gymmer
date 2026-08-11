@@ -1,9 +1,10 @@
-<h2>Cvik {{exercise?.name}}</h2>
-@if (lastExecution != null) {
-  Last time: {{ lastExecution.date | date }}
-}
-@if (exercise != null) {
-  <table mat-table [dataSource]="exercise.series" class="mat-elevation-z8">
+<div class="container page-content">
+  <h2>Cvik {{exercise?.name}}</h2>
+  @if (lastExecution != null) {
+    Last time: {{ lastExecution.date | date }}
+  }
+  @if (exercise != null) {
+    <table mat-table [dataSource]="exercise.series" class="mat-elevation-z8">
     <!-- series Column -->
     <ng-container matColumnDef="series">
       <th mat-header-cell *matHeaderCellDef> Série </th>
@@ -30,10 +31,10 @@
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-}
-<form class="exercise-detail-form">
-  <div class="form-body">
+    </table>
+  }
+  <form class="exercise-detail-form">
+    <div class="form-body">
     <mat-form-field>
       <mat-label>Váha</mat-label>
       <input name="weight" type="number" matInput [(ngModel)]="currentValue.weight">
@@ -62,13 +63,14 @@
       <mat-label>Pozn.</mat-label>
       <input name="note" type="text" matInput  [(ngModel)]="currentValue.note">
     </mat-form-field>
-  </div>
+    </div>
 
-  <button (click)="add()" color="primary" mat-icon-button>
-    <mat-icon>check</mat-icon>
-  </button>
+    <button (click)="add()" color="primary" mat-icon-button>
+      <mat-icon>check</mat-icon>
+    </button>
 
-  <button (click)="next()" color="primary" mat-icon-button>
-    <mat-icon>chevron_right</mat-icon>
-  </button>
-</form>
+    <button (click)="next()" color="primary" mat-icon-button>
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </form>
+</div>
