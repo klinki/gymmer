@@ -39,7 +39,7 @@ export class TrainingSessionService {
   }
 
   startTraining(training: Training) {
-    this.currentSession.set(training);
+    this.updateTraining(training);
   }
 
   updateTraining(training: Training) {
@@ -61,8 +61,7 @@ export class TrainingSessionService {
   }
 
   stopTraining() {
-    this.currentSession.set(null);
-    localStorage.setItem('currentSession', "null");
+    this.clear();
   }
 
   addExercisesToCurrentTraining(exercises: Exercise[]|Exercise): void {
@@ -98,5 +97,6 @@ export class TrainingSessionService {
 
   clear() {
     this.currentSession.set(null);
+    localStorage.removeItem('currentSession');
   }
 }

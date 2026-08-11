@@ -20,6 +20,21 @@ describe('TrainingSessionService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('persists a draft as soon as training starts', () => {
+    const training: Training = {
+      id: 'training-1',
+      name: 'Training',
+      startDate: null,
+      endDate: null,
+      exercises: [],
+    };
+
+    service.startTraining(training);
+
+    expect(JSON.parse(localStorage.getItem('currentSession')!)).toEqual(training);
+    expect(new TrainingSessionService().currentSession()).toEqual(training);
+  });
+
   it('starts and persists an unstarted current training', () => {
     const startDate = new Date('2026-08-12T08:00:00.000Z');
     const training: Training = {
@@ -58,5 +73,22 @@ describe('TrainingSessionService', () => {
   it('does nothing when there is no current training', () => {
     expect(service.startCurrentTrainingIfNeeded()).toBeFalse();
     expect(localStorage.getItem('currentSession')).toBeNull();
+  });
+
+  it('removes a discarded training from persistent storage', () => {
+    const training: Training = {
+      id: 'training-1',
+      name: 'Training',
+      startDate: null,
+      endDate: null,
+      exercises: [],
+    };
+    service.startTraining(training);
+
+    service.clear();
+
+    expect(service.currentSession()).toBeNull();
+    expect(localStorage.getItem('currentSession')).toBeNull();
+    expect(new TrainingSessionService().currentSession()).toBeNull();
   });
 });
