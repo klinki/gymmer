@@ -59,6 +59,39 @@ test.describe('Gymmer E2E Scenarios', () => {
     await takeScreenshot(page, 'exercises-list');
   });
 
+  test('Exercises List uses a single vertical scroll container', async ({ page }) => {
+    await page.goto('/exercise-list');
+    await expect(page.getByText('Exercise 50', { exact: true })).toBeAttached();
+
+    const dimensions = await page.evaluate(() => {
+      const measure = (selector: string) => {
+        const element = document.querySelector(selector);
+        if (element == null) {
+          throw new Error(`Missing element: ${selector}`);
+        }
+
+        return {
+          clientHeight: element.clientHeight,
+          scrollHeight: element.scrollHeight,
+          overflowY: getComputedStyle(element).overflowY,
+        };
+      };
+
+      return {
+        document: measure('html'),
+        sidenavContent: measure('mat-sidenav-content'),
+        routeContent: measure('.route-content'),
+        exercisePage: measure('app-exercise-list'),
+      };
+    });
+
+    expect(dimensions.document.scrollHeight).toBe(dimensions.document.clientHeight);
+    expect(dimensions.sidenavContent.scrollHeight).toBe(dimensions.sidenavContent.clientHeight);
+    expect(dimensions.exercisePage.scrollHeight).toBe(dimensions.exercisePage.clientHeight);
+    expect(dimensions.routeContent.overflowY).toBe('auto');
+    expect(dimensions.routeContent.scrollHeight).toBeGreaterThan(dimensions.routeContent.clientHeight);
+  });
+
   test('Training History displays 50 trainings (Scrolling) and Details', async ({ page }) => {
     await page.goto('/training/history');
 

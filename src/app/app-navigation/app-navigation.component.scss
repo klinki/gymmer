@@ -11,9 +11,23 @@
 }
 
 .mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
+  flex: 0 0 auto;
   z-index: 1;
+}
+
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.route-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
 }
 
 
