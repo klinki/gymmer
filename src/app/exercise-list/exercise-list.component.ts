@@ -1,6 +1,6 @@
 import {Component, computed, inject, input, Optional, signal} from '@angular/core';
 import {DatabaseService} from "../database.service";
-import {Exercise, Training} from "../models";
+import {Exercise} from "../models";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {liveQuery} from "dexie";
 import {MatDialogRef} from "@angular/material/dialog";
@@ -33,7 +33,7 @@ export class ExerciseListComponent {
   constructor(@Optional() public dialogRef: MatDialogRef<ExerciseListComponent>) {}
 
   showSelection = input();
-  selectedItems = signal<Training[]>([]);
+  selectedItems = signal<Exercise[]>([]);
 
   searchText = signal<string>('');
   exercises = toSignal<(Exercise & { executionCount: number })[]>(liveQuery(async () => {

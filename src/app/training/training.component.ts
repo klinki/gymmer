@@ -1,9 +1,11 @@
 import {Component, effect, inject, input, signal} from '@angular/core';
 import {DatabaseService} from "../database.service";
-import {ExerciseExecution, Training} from "../models";
+import {Exercise, ExerciseExecution, Training} from "../models";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ExerciseListComponent} from "../exercise-list/exercise-list.component";
+import {first} from "rxjs";
+import {ulid} from "ulidx";
 
 /**
  * Component for viewing completed training sessions and their exercise executions.
@@ -46,7 +48,7 @@ export class TrainingComponent {
       const subscription = this.db.getTraining(id).subscribe(training => {
         if (training == null) { return; }
         this.training.set(training);
-        const totalTime = (training.endDate ?? new Date()).getTime() - (training.startDate ?? new Date()).getTime();
+        const totalTime = ((training.endDate ?? new Date()).getTime() - (training.startDate ?? new Date()).getTime()) / 1000;
         this.trainingRunningTime.set(totalTime);
         this.loading.set(false);
       });
@@ -57,9 +59,28 @@ export class TrainingComponent {
 
   addExercise() {
     const dialogRef = this.dialog.open(ExerciseListComponent, { height: '100%' });
-    this.dialog.afterOpened.subscribe(_ => {
-      dialogRef.componentRef?.setInput('showSelection', true);
+    dialogRef.afterClosed().pipe(first()).subscribe((selection: Exercise[]|undefined) => {
+      const training = this.training();
+      if (training == null || selection == null || selection.length === 0) {
+        return;
+      }
+
+      const executions = selection.map(exercise => ({
+        id: ulid(),
+        exerciseId: exercise.id,
+        name: exercise.name,
+        series: [],
+      }));
+      const updatedTraining = {
+        ...training,
+        exercises: [ ...training.exercises, ...executions ],
+      };
+
+      this.db.updateTraining(updatedTraining).pipe(first()).subscribe(savedTraining => {
+        this.training.set(savedTraining);
+      });
     });
+    dialogRef.componentRef?.setInput('showSelection', true);
   }
 
   showExercise(exercise: ExerciseExecution) {
