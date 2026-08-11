@@ -61,13 +61,7 @@ export class ExerciseDetailComponent {
             return;
           }
 
-          if (execution != null) {
-            if (execution.series.length > 0) {
-              this.currentValue.weight = execution.series[0].weight;
-            }
-          }
-
-          this.lastExecution = execution;
+          this.applyLastExecution(execution);
           this.exercise = ({...exercise, exerciseId: exercise.id, series: []});
           this.loading.set(false);
         });
@@ -76,13 +70,19 @@ export class ExerciseDetailComponent {
       }
 
       const subscription = this.db.getLastExerciseExecution(id).subscribe(execution => {
-        if (execution != null) {
-          this.lastExecution = execution;
-          this.currentValue.weight = execution.series[0].weight;
-        }
+        this.applyLastExecution(execution);
       });
       return () => subscription.unsubscribe();
     });
+  }
+
+  private applyLastExecution(execution: ExerciseExecution|null) {
+    this.lastExecution = execution;
+
+    const lastSeries = execution?.series[execution.series.length - 1];
+    if (lastSeries?.weight != null) {
+      this.currentValue.weight = lastSeries.weight;
+    }
   }
 
   add() {

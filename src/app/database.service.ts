@@ -5,7 +5,7 @@ import 'dexie-observable';
 import {ulid} from "ulidx";
 import {SupabaseService} from "./supabase.service";
 import {SupabaseAuthService} from "./supabase-auth.service";
-import {map, switchMap} from "rxjs/operators";
+import {map} from "rxjs/operators";
 
 import {
   Exercise,
@@ -58,10 +58,25 @@ export class DatabaseService extends Dexie {
       trainingPlanExercises: '[trainingPlanId+exerciseId]',
       exerciseExecutions: '$$id,exerciseId,date'
     });
+    this.version(2).stores({
+      exercises: '$$id',
+      trainingPlans: '$$id',
+      trainings: '$$id',
+      trainingPlanExercises: '[trainingPlanId+exerciseId]',
+      exerciseExecutions: '$$id,exerciseId,date,[exerciseId+date]'
+    }).upgrade(async transaction => {
+      const trainings = await transaction.table<Training>('trainings').toArray();
+      const exerciseExecutions = this.createDerivedExerciseExecutions(trainings);
+      const exerciseExecutionsTable = transaction.table<ExerciseExecution>('exerciseExecutions');
+
+      await exerciseExecutionsTable.clear();
+      await exerciseExecutionsTable.bulkPut(exerciseExecutions);
+    });
   }
 
   addTraining(training: Omit<Training, 'id'>): Observable<Training> {
-    const allExercises = training.exercises.map(x => this.exerciseExecutions.put(x as ExerciseExecution));
+    const exerciseExecutions = this.createDerivedExerciseExecutions([training as Training]);
+    const allExercises = exerciseExecutions.map(exercise => this.exerciseExecutions.put(exercise));
     const finalPromise = Promise.all(allExercises).then(_ => this.trainings.put(training as Training));
     return from(finalPromise);
   }
@@ -87,69 +102,33 @@ export class DatabaseService extends Dexie {
   }
 
   getLastExerciseExecution(id: ExerciseId) {
-    return from(this.ensureExerciseExecutions()).pipe(
-      switchMap(() => {
-        const queryPromise = this.exerciseExecutions
-        .orderBy('date')
-        .reverse()
-        .filter(x => x.exerciseId == id)
-        .limit(1)
-    // .where({
-    //   exerciseId: id
-    // })
-       .toArray();
-
-        return from(queryPromise).pipe(map(x => x.length > 0 ? x[0] : null));
-      })
-    );
-
     const queryPromise = this.exerciseExecutions
-      .orderBy('date')
-      .reverse()
-      .filter(x => x.exerciseId == id)
-      .limit(1)
-  // .where({
-  //   exerciseId: id
-  // })
-     .toArray();
+      .where('[exerciseId+date]')
+      .between([id, Dexie.minKey], [id, Dexie.maxKey], true, true)
+      .last();
 
-    return from(queryPromise).pipe(map(x => x.length > 0 ? x[0] : null));
+    return from(queryPromise).pipe(map(execution => execution ?? null));
   }
 
-  private async ensureExerciseExecutions(): Promise<void> {
-    if (await this.exerciseExecutions.count() === 0) {
-      await this.fillExerciseExecutions();
-    }
+  private createDerivedExerciseExecutions(trainings: Training[]): ExerciseExecution[] {
+    return trainings.flatMap(training => training.exercises.map(exercise => {
+      const date = this.toDate(exercise.date) ?? this.toDate(training.startDate) ?? this.toDate(training.endDate);
+
+      return {
+        ...exercise,
+        id: ulid(date?.getTime()),
+        date,
+      };
+    }));
   }
 
-  async fillExerciseExecutions(): Promise<void> {
-    // Get all trainings
-    const trainings = await this.trainings.toArray();
-
-    // Prepare an array to hold all exercise executions
-    const exerciseExecutions: ExerciseExecution[] = [];
-
-    // Iterate through each training
-    for (const training of trainings) {
-      // Iterate through each exercise in the training
-      for (const exercise of training.exercises) {
-        // Create a new ExerciseExecution object
-        const exerciseExecution: ExerciseExecution = {
-          id: ulid(), // Generate a new ID for this execution
-          exerciseId: exercise.id,
-          name: exercise.name,
-          series: exercise.series,
-          date: exercise.date || training.startDate // Use exercise date if available, otherwise use training start date
-        };
-
-        exerciseExecutions.push(exerciseExecution);
-      }
+  private toDate(value: Date|string|null|undefined): Date|undefined {
+    if (value == null) {
+      return undefined;
     }
 
-    // Bulk add all exercise executions to the table
-    await this.exerciseExecutions.bulkAdd(exerciseExecutions);
-
-    console.log(`Added ${exerciseExecutions.length} exercise executions.`);
+    const date = value instanceof Date ? value : new Date(value);
+    return Number.isNaN(date.getTime()) ? undefined : date;
   }
 
   updateExercise(exercise: Exercise) {
@@ -174,6 +153,7 @@ export class DatabaseService extends Dexie {
 
   async clear() {
     await this.trainings.clear();
+    await this.exerciseExecutions.clear();
     await this.trainingPlanExercises.clear();
     await this.trainingPlans.clear();
     await this.exercises.clear();
