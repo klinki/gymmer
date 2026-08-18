@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.2.0](https://github.com/klinki/gymmer/compare/gymmer-v0.1.0...gymmer-v0.2.0) (2026-08-18)
+
+
+### Features
+
+* auto-start workout on first set ([b0cf858](https://github.com/klinki/gymmer/commit/b0cf8588a2e66ec64affff8ee0f8a3ea6f6b6f64))
+* prefill repetitions from last set ([2f08423](https://github.com/klinki/gymmer/commit/2f084230cad3810b3a5c91c37959f664bed1432d))
+* Redesign the active training page ([0c37e09](https://github.com/klinki/gymmer/commit/0c37e0988a0e31220cd164cedfafb16b8038c161))
+* Update exercise list styles ([6af8e35](https://github.com/klinki/gymmer/commit/6af8e354895ab729e7f68dc48ce36537b5758164))
+* Update hover styles ([a55d995](https://github.com/klinki/gymmer/commit/a55d995a91f4cf6d5c191afbda7ceff6c2992caa))
+* Update styles ([ec80e78](https://github.com/klinki/gymmer/commit/ec80e78a7fa3f80c20c2491ec66d368517ef1a37))
+* Update styles of training plan component ([c8d8253](https://github.com/klinki/gymmer/commit/c8d8253aaacd19e145339d3f83f0f234060497b1))
+
+
+### Bug Fixes
+
+* align active exercise detail content ([ac98f81](https://github.com/klinki/gymmer/commit/ac98f81ff8bea6046c6eb6fbb5fdfcf7af9a221f))
+* format workout durations in seconds ([3d43804](https://github.com/klinki/gymmer/commit/3d4380441b52a541ca7cfa56200261fa0f0c400e))
+* keep exercise dialog width stable ([1fd0dfe](https://github.com/klinki/gymmer/commit/1fd0dfe62c6973c4be67bdf1ef7527bc0107aa57))
+* make database imports atomic and visible ([5b6269b](https://github.com/klinki/gymmer/commit/5b6269b26d55f3333830333afa5e4796ad50c914))
+* persist active training lifecycle ([ef6e747](https://github.com/klinki/gymmer/commit/ef6e7479045ed32a1ecd9640f28348995756a02f))
+* persist completed workout set edits ([b64efbf](https://github.com/klinki/gymmer/commit/b64efbf1dd34b6aac39cfff32a905e17f78963b8))
+* persist exercises in completed workouts ([bece2c1](https://github.com/klinki/gymmer/commit/bece2c150a378e9b47f27ebbcd663cdddaf47824))
+* persist training history atomically ([5460492](https://github.com/klinki/gymmer/commit/5460492d40ee3933edc7fab151274bdd78c4c8c0))
+* prevent mobile exercise dialog overflow ([3653460](https://github.com/klinki/gymmer/commit/36534609a9b5a09abf49fc5e28dc8217e001472e))
+* repair exercise execution history ([5b6c66c](https://github.com/klinki/gymmer/commit/5b6c66c1cf1ae65261c9ff5ff27638e92682de74))
+* stabilize exercise set table columns ([2981a7b](https://github.com/klinki/gymmer/commit/2981a7b6507133d3f874d43c573a00ba062103af))
+* use a single responsive page scroller ([b952bc6](https://github.com/klinki/gymmer/commit/b952bc6fdaf653745b4e2a54b5361e4f0e41b195))
+* wait for workout save before clearing ([daf2db8](https://github.com/klinki/gymmer/commit/daf2db8e9bffc3a4f8b7d6b7a27caadedc4ec0ab))
+
 ## [0.1.0](https://github.com/klinki/gymmer/compare/gymmer-v0.0.1...gymmer-v0.1.0) (2025-09-17)
 
 
